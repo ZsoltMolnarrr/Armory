@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "armory_rpgs",
+  "version": "${version}",
+  "name": "Armory (RPG Series)",
+  "description": "Legendary weapons from the past - not crafted, but conquered.",
+  "authors": [ "Daedelus" ],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/armory_rpgs/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "net.armory_rpgs.client.ArmoryClient"
+    ],
+    "main": [
+      "net.armory_rpgs.ArmoryMod"
+    ],
+    "fabric-datagen": [
+      "net.armory_rpgs.datagen.ArmoryDataGen"
+    ]
+  },
+  "mixins": [
+    "armory_rpgs.mixins.json"
+  ],
+  "depends": {
+    "minecraft": ">=${minecraft_compat_version}",
+    "fabricloader": ">=${fabric_loader_version}",
+    "spell_engine": ">=${spell_engine_version}",
+    "ranged_weapon_api": ">=${ranged_weapon_api_version}"
+  }
+}
