@@ -1,6 +1,6 @@
 ![Title](.github/title.png)
 
-### 🗡️ Wield legendary weapons of the past, conquer the battlefield!
+### 🦾 Legendary armor sets
 
 This is a content mod for Spell Engine.
 

@@ -1,0 +1,9 @@
+{
+  "plate_equip": {
+    "sounds": [
+      "armory_rpgs:plate_equip_1",
+      "armory_rpgs:plate_equip_2",
+      "armory_rpgs:plate_equip_3"
+    ]
+  }
+}

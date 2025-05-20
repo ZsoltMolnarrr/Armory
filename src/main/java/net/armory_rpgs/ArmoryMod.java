@@ -1,5 +1,6 @@
 package net.armory_rpgs;
 
+import net.armory_rpgs.item.ArmorSets;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.registry.Registries;
@@ -41,8 +42,7 @@ public class ArmoryMod implements ModInitializer {
                 .build();
         Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.GROUP);
 
-        // TODO: Add Armory Registration here
-
+        ArmorSets.register(itemConfig.value.armor_sets);
         itemConfig.save();
     }
 }

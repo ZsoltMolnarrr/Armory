@@ -9,8 +9,8 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
+import net.minecraft.data.client.Models;
 import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
@@ -23,7 +23,11 @@ import net.spell_engine.api.datagen.SpellGenerator;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.registry.SpellRegistry;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
+import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class ArmoryDataGen implements DataGeneratorEntrypoint {
@@ -38,6 +42,16 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         pack.addProvider(SoundGen::new);
     }
 
+    private static List<Item> allArmorPieces() {
+        var items = new ArrayList<Item>();
+        for (var entry: ArmorSets.entries) {
+            entry.armorSet().pieces().forEach(item -> {
+                items.add((Item)item);
+            });
+        }
+        return items;
+    }
+
     public static class ItemTagGenerator extends RPGSeriesDataGen.ItemTagGenerator {
         public ItemTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
             super(output, registriesFuture);
@@ -45,19 +59,18 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
 
         @Override
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-            var all = getOrCreateTagBuilder(ArmoryItemTags.ALL);
-            ArmoryWeapons.entries.forEach(entry -> all.addOptional(entry.id()));
-            generateWeaponTags(ArmoryWeapons.entries);
-
-            var bowEntries = ArmoryBows.entries.stream().map(entry ->
-                    new RPGSeriesDataGen.BowEntry(entry.id(), entry.weaponType, entry.lootProperties)
-            ).toList();
-            generateBowTags(bowEntries);
-
-            var shieldEntries = ArmoryShields.entries.stream().map(entry ->
-                    new RPGSeriesDataGen.ShieldEntry(entry.id(), entry.lootProperties)
-            ).toList();
-            generateShieldTags(shieldEntries);
+            generateArmorTags(
+                    ArmorSets.entries.stream().filter(entry -> entry.name().contains("archer")).toList(),
+                    RPGSeriesItemTags.ArmorMetaType.MELEE
+            );
+            generateArmorTags(
+                    ArmorSets.entries.stream().filter(entry -> entry.name().contains("armor")).toList(),
+                    RPGSeriesItemTags.ArmorMetaType.MELEE
+            );
+            generateArmorTags(
+                    ArmorSets.entries.stream().filter(entry -> entry.name().contains("robe")).toList(),
+                    RPGSeriesItemTags.ArmorMetaType.MAGIC
+            );
         }
     }
 
@@ -86,15 +99,18 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         @Override
         public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
             translationBuilder.add(Group.translationKey, "Armory");
-//            ArmoryWeapons.entries.forEach(entry ->
-//                translationBuilder.add(entry.item().getTranslationKey(), entry.translatedName())
-//            );
-//            ArmoryBows.entries.forEach(entry ->
-//                translationBuilder.add(entry.item().getTranslationKey(), entry.translatedName())
-//            );
-//            ArmoryShields.entries.forEach(entry ->
-//                translationBuilder.add(entry.translationKey(), entry.translatedName())
-//            );
+
+            ArmorSets.entries.forEach(entry -> {
+                var translations = new LinkedHashMap<String, String>();
+                translations.put(((Item)entry.armorSet().head).getTranslationKey(), entry.armorSet().headTranslation);
+                translations.put(((Item)entry.armorSet().chest).getTranslationKey(), entry.armorSet().chestTranslation);
+                translations.put(((Item)entry.armorSet().legs).getTranslationKey(), entry.armorSet().legsTranslation);
+                translations.put(((Item)entry.armorSet().feet).getTranslationKey(), entry.armorSet().feetTranslation);
+                for (var armorEntry: translations.entrySet()) {
+                    translationBuilder.add(armorEntry.getKey(), armorEntry.getValue());
+                }
+            });
+
             ArmorySpells.all.forEach(entry -> {
                 var id = entry.id();
                 translationBuilder.add("spell." + id.getNamespace() + "." + id.getPath() + ".name" , entry.title());
@@ -119,9 +135,11 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
 
         @Override
         public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-//            RelicItems.entries.forEach(entry -> {
-//                itemModelGenerator.register(entry.item().get(), Models.GENERATED);
-//            });
+            ArmorSets.entries.forEach(entry -> {
+                for (var piece: entry.armorSet().pieces()) {
+                    itemModelGenerator.register((Item) piece, Models.GENERATED);
+                }
+            });
         }
     }
 
