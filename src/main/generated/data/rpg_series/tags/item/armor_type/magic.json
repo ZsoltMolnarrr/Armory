@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "armory_rpgs:avatar_robe_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:avatar_robe_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:avatar_robe_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:avatar_robe_feet",
+      "required": false
+    }
+  ]
+}

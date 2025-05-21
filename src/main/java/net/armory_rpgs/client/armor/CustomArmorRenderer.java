@@ -24,6 +24,10 @@ public class CustomArmorRenderer extends AzArmorRenderer {
         return new CustomArmorRenderer("deathmantle_armor", "deathmantle_armor");
     }
 
+    public static CustomArmorRenderer avatar_robe() {
+        return new CustomArmorRenderer("avatar_robe", "avatar_robe");
+    }
+
     public CustomArmorRenderer(String modelName, String textureName) {
         super(AzArmorRendererConfig.builder(
                 Identifier.of(ArmoryMod.NAMESPACE, "geo/" + modelName + ".geo.json"),

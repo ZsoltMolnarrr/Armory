@@ -150,6 +150,26 @@ public class ArmorSets {
             }))
             .translatedName("Deathmantle Hood", "Deathmantle Tunic", "Deathmantle Leggings", "Deathmantle Boots");
 
+    public static final Armor.Entry avatar = create(
+            netherite_crusader_armor,
+            Identifier.of(ArmoryMod.NAMESPACE, "avatar_robe"),
+            15,
+            5,
+            Armor.CustomItem::new,
+            ArmorSetConfig.with(
+                    new ArmorSetConfig.Piece(2)
+                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t3_spell_power)),
+                    new ArmorSetConfig.Piece(6)
+                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t3_spell_power)),
+                    new ArmorSetConfig.Piece(5)
+                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t3_spell_power)),
+                    new ArmorSetConfig.Piece(2)
+                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t3_spell_power))
+            ), Armor.ItemSettingsTweaker.standard(itemSettings -> {
+                // itemSettings.component() ??
+            }))
+            .translatedName("Avatar Cowl", "Avatar Vestment", "Avatar Breeches", "Avatar Boots");
+
 
     public static void register(Map<String, ArmorSetConfig> configs) {
         Armor.register(configs, entries, Group.KEY);
