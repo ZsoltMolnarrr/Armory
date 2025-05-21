@@ -1,0 +1,34 @@
+{
+  "bonuses": [
+    {
+      "attributes": {
+        "modifiers": [
+          {
+            "type": "spell_power:healing",
+            "amount": 2.0,
+            "id": "armory_rpgs:justicar",
+            "operation": "add_value",
+            "slot": "armor"
+          }
+        ]
+      },
+      "required_piece_count": 2
+    },
+    {
+      "required_piece_count": 4,
+      "spells": {
+        "content": "ANY",
+        "spell_ids": [
+          "armory_rpgs:improved_judgement"
+        ]
+      }
+    }
+  ],
+  "items": [
+    "armory_rpgs:justicar_armor_head",
+    "armory_rpgs:justicar_armor_chest",
+    "armory_rpgs:justicar_armor_legs",
+    "armory_rpgs:justicar_armor_feet"
+  ],
+  "name": "justicar"
+}

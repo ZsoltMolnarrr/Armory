@@ -2,6 +2,7 @@ package net.armory_rpgs.item;
 
 import net.armory_rpgs.ArmoryMod;
 import net.armory_rpgs.spell.ArmorySounds;
+import net.armory_rpgs.spell.SetBonuses;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
@@ -16,6 +17,7 @@ import net.spell_engine.api.config.ArmorSetConfig;
 import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.item.Equipment;
 import net.spell_engine.api.item.armor.Armor;
+import net.spell_engine.api.spell.SpellDataComponents;
 import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
@@ -33,7 +35,8 @@ public class ArmorSets {
                 durability,
                 factory,
                 defaults,
-                Equipment.LootProperties.of(tier)
+                Equipment.LootProperties.of(tier),
+                settings
         );
         entries.add(entry);
         return entry;
@@ -106,7 +109,7 @@ public class ArmorSets {
                     new ArmorSetConfig.Piece(2)
                             .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t1_spell_power))
             ), Armor.ItemSettingsTweaker.standard(itemSettings -> {
-                // itemSettings.component() ??
+                itemSettings.component(SpellDataComponents.EQUIPMENT_SET, SetBonuses.justicar.id());
             }))
             .translatedName("Justicar Faceguard", "Justicar Chestplate", "Justicar Legguards", "Justicar Boots");
 

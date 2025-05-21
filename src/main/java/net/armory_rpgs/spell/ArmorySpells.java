@@ -1,19 +1,14 @@
 package net.armory_rpgs.spell;
 
 import net.armory_rpgs.ArmoryMod;
-import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.spell.ExternalSpellSchools;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.fx.ParticleBatch;
-import net.spell_engine.api.spell.fx.Sound;
 import net.spell_engine.client.gui.SpellTooltip;
-import net.spell_engine.client.util.Color;
 import net.spell_engine.fx.SpellEngineParticles;
-import net.spell_engine.fx.SpellEngineSounds;
 import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
 
@@ -72,6 +67,25 @@ public class ArmorySpells {
 
         return spell;
     }
+
+    private static Spell modifierSpellBase() {
+        var spell = new Spell();
+        spell.range = 0;
+        spell.tier = 1;
+
+        spell.type = Spell.Type.MODIFIER;
+
+        spell.tooltip = new Spell.Tooltip();
+        spell.tooltip.name = new Spell.Tooltip.LineOptions(false, true);
+        spell.tooltip.description.color = Formatting.GRAY.asString();
+        spell.tooltip.description.show_in_compact = true;
+        spell.tooltip.name.show_in_compact = false;
+        spell.tooltip.name.show_in_details = false;
+        spell.tooltip.show_header = false;
+
+        return spell;
+    }
+
 
     private static Spell.Impact createEffectImpact(String effectIdString, float duration) {
         var buff = new Spell.Impact();
@@ -193,28 +207,18 @@ public class ArmorySpells {
         return damage;
     }
 
-    private static long HOLY_COLOR = Color.HOLY.toRGBA();
-    public static Entry radiance_melee = add(radiance_melee());
-    private static Entry radiance_melee() {
-        var id = Identifier.of(ArmoryMod.NAMESPACE, "radiance_melee");
-        var title = "Radiance";
-        var description = "On melee hit: {trigger_chance} chance to heal yourself and nearby allies by {heal}.";
-        var spell = passiveSpellBase();
+    public static Entry improved_judgement = add(improved_judgement());
+    private static Entry improved_judgement() {
+        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_judgement");
+        var title = "Improved Judgement";
+        var description = "Reduces cooldown of Judgement by {cooldown_duration_deduct} sec";
+        var spell = modifierSpellBase();
         spell.school = SpellSchools.HEALING;
-        spell.range = 2F;
 
-        var trigger = new Spell.Trigger();
-        trigger.chance = 0.25F;
-        trigger.chance_batching = true;
-        trigger.equipment_condition = EquipmentSlot.MAINHAND;
-        trigger.type = Spell.Trigger.Type.MELEE_IMPACT;
-        trigger.target_override = Spell.Trigger.TargetSelector.CASTER;
-        trigger.aoe_source_override = Spell.Trigger.TargetSelector.CASTER;
-        spell.passive.triggers = List.of(trigger);
-
-        // radianceTargetAndImpact(spell, EntityAttributes.GENERIC_ATTACK_DAMAGE.getIdAsString());
-        configureCooldown(spell, 3F);
-        spell.cost.cooldown.hosting_item = false;
+        var modifier = new Spell.Modifier();
+        modifier.spell_pattern = "paladins:judgement";
+        modifier.cooldown_duration_deduct = 2;
+        spell.modifiers = List.of(modifier);
 
         return new Entry(id, spell, title, description, null, Category.MELEE);
     }

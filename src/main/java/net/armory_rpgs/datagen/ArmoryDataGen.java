@@ -1,9 +1,11 @@
 package net.armory_rpgs.datagen;
 
 import net.armory_rpgs.item.*;
+import net.armory_rpgs.spell.SetBonuses;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
@@ -11,7 +13,11 @@ import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
 import net.minecraft.item.Item;
+import net.minecraft.registry.RegistryEntryLookup;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.armory_rpgs.ArmoryMod;
@@ -20,6 +26,8 @@ import net.armory_rpgs.spell.ArmorySounds;
 import net.armory_rpgs.spell.ArmorySpells;
 import net.spell_engine.api.datagen.SimpleSoundGeneratorV2;
 import net.spell_engine.api.datagen.SpellGenerator;
+import net.spell_engine.api.item.set.EquipmentSet;
+import net.spell_engine.api.item.set.EquipmentSetRegistry;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.registry.SpellRegistry;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
@@ -40,6 +48,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         pack.addProvider(ModelProvider::new);
         pack.addProvider(SpellGen::new);
         pack.addProvider(SoundGen::new);
+        pack.addProvider(EquipmentSetGenerator::new);
     }
 
     private static List<Item> allArmorPieces() {
@@ -110,7 +119,9 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
                     translationBuilder.add(armorEntry.getKey(), armorEntry.getValue());
                 }
             });
-
+            SetBonuses.all.forEach(entry -> {
+                translationBuilder.add(EquipmentSet.translationKey(entry.id()), entry.title());
+            });
             ArmorySpells.all.forEach(entry -> {
                 var id = entry.id();
                 translationBuilder.add("spell." + id.getNamespace() + "." + id.getPath() + ".name" , entry.title());
@@ -169,6 +180,38 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
                                     .toList()
                     )
             );
+        }
+    }
+
+    public static class EquipmentSetGenerator extends FabricDynamicRegistryProvider {
+
+        public EquipmentSetGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+            super(output, registriesFuture);
+        }
+
+        @Override
+        protected void configure(RegistryWrapper.WrapperLookup registries, Entries entries) {
+            RegistryEntryLookup<Item> itemLookup = registries.createRegistryLookup().getOrThrow(RegistryKeys.ITEM);
+            for (var set: SetBonuses.all) {
+                var items = RegistryEntryList.of(
+                        set.itemSupplier().get().stream()
+                        .map(id -> itemLookup.getOrThrow(RegistryKey.of(RegistryKeys.ITEM, id)))
+                        .toList()
+                );
+                entries.add(
+                        RegistryKey.of(EquipmentSetRegistry.KEY, set.id()),
+                        new EquipmentSet.Definition(
+                                set.id().getPath(),
+                                items,
+                                set.bonuses()
+                        )
+                );
+            }
+        }
+
+        @Override
+        public String getName() {
+            return "Equipment Set Generator";
         }
     }
 }
