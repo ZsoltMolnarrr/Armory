@@ -1,4 +1,5 @@
 {
+  "equipment_set.armory_rpgs.deathmantle": "Deathmantle",
   "equipment_set.armory_rpgs.justicar": "Justicar Regalia",
   "item.armory_rpgs.avatar_robe_chest": "Avatar Vestment",
   "item.armory_rpgs.avatar_robe_feet": "Avatar Boots",
@@ -18,5 +19,7 @@
   "item.armory_rpgs.justicar_armor_legs": "Justicar Legguards",
   "itemGroup.armory_rpgs.generic": "Armory",
   "spell.armory_rpgs.improved_judgement.description": "Reduces cooldown of Judgement by {cooldown_duration_deduct} sec",
-  "spell.armory_rpgs.improved_judgement.name": "Improved Judgement"
+  "spell.armory_rpgs.improved_judgement.name": "Improved Judgement",
+  "spell.armory_rpgs.improved_slice_and_dice.description": "Increases duration of Slice and Dice by {effect_duration_add} sec",
+  "spell.armory_rpgs.improved_slice_and_dice.name": "Improved Slice and Dice"
 }

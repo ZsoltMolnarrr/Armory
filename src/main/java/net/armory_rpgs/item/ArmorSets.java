@@ -3,6 +3,7 @@ package net.armory_rpgs.item;
 import net.armory_rpgs.ArmoryMod;
 import net.armory_rpgs.spell.ArmorySounds;
 import net.armory_rpgs.spell.SetBonuses;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
@@ -13,6 +14,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.spell_engine.api.config.ArmorSetConfig;
 import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.item.Equipment;
@@ -93,6 +95,14 @@ public class ArmorSets {
     private static final float paladin_t3_spell_power = 1F;
     private static final float paladin_t3_toughness = 1F;
 
+    private static Armor.ItemSettingsTweaker commonSettings(Identifier equipmentSetId) {
+        return Armor.ItemSettingsTweaker.standard(itemSettings -> {
+            itemSettings
+                    .component(SpellDataComponents.EQUIPMENT_SET, equipmentSetId)
+                    .component(DataComponentTypes.RARITY, Rarity.RARE);
+        });
+    }
+
     public static final Armor.Entry justicar = create(
             netherite_crusader_armor,
             Identifier.of(ArmoryMod.NAMESPACE, "justicar_armor"),
@@ -108,9 +118,8 @@ public class ArmorSets {
                             .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t1_spell_power)),
                     new ArmorSetConfig.Piece(2)
                             .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t1_spell_power))
-            ), Armor.ItemSettingsTweaker.standard(itemSettings -> {
-                itemSettings.component(SpellDataComponents.EQUIPMENT_SET, SetBonuses.justicar.id());
-            }))
+            ),
+            commonSettings(SetBonuses.justicar.id()) )
             .translatedName("Justicar Faceguard", "Justicar Chestplate", "Justicar Legguards", "Justicar Boots");
 
     public static final Armor.Entry destroyer = create(
@@ -148,9 +157,8 @@ public class ArmorSets {
                             .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t3_spell_power)),
                     new ArmorSetConfig.Piece(2)
                             .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t3_spell_power))
-            ), Armor.ItemSettingsTweaker.standard(itemSettings -> {
-                // itemSettings.component() ??
-            }))
+            ),
+            commonSettings(SetBonuses.deathmantle.id()) )
             .translatedName("Deathmantle Hood", "Deathmantle Tunic", "Deathmantle Leggings", "Deathmantle Boots");
 
     public static final Armor.Entry avatar = create(

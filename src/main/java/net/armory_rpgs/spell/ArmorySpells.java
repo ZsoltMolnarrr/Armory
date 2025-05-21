@@ -222,4 +222,20 @@ public class ArmorySpells {
 
         return new Entry(id, spell, title, description, null, Category.MELEE);
     }
+
+    public static Entry improved_slice_and_dice = add(improved_slice_and_dice());
+    private static Entry improved_slice_and_dice() {
+        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_slice_and_dice");
+        var title = "Improved Slice and Dice";
+        var description = "Increases duration of Slice and Dice by {effect_duration_add} sec";
+        var spell = modifierSpellBase();
+        spell.school = ExternalSpellSchools.PHYSICAL_MELEE;
+
+        var modifier = new Spell.Modifier();
+        modifier.spell_pattern = "rogues:slice_and_dice";
+        modifier.effect_duration_add = 2;
+        spell.modifiers = List.of(modifier);
+
+        return new Entry(id, spell, title, description, null, Category.MELEE);
+    }
 }

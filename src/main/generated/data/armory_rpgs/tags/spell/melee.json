@@ -3,6 +3,10 @@
     {
       "id": "armory_rpgs:improved_judgement",
       "required": false
+    },
+    {
+      "id": "armory_rpgs:improved_slice_and_dice",
+      "required": false
     }
   ]
 }

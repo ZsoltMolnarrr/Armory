@@ -6,6 +6,7 @@ import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.item.set.EquipmentSet;
@@ -55,6 +56,24 @@ public class SetBonuses {
                            id)
                        ),
                         EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_judgement.id()))
+                )
+        );
+    }
+
+    public static Entry deathmantle = add(deathmantle());
+    private static Entry deathmantle() {
+        var id = Identifier.of(NAMESPACE, "deathmantle");
+        return new Entry(id,
+                "Deathmantle",
+                () -> { return ArmorSets.deathmantle.armorSet().pieceIds(); },
+                List.of(
+                        EquipmentSet.Bonus.withAttributes(2, attribute(
+                                EntityAttributes.GENERIC_ATTACK_DAMAGE,
+                                0.1,
+                                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
+                                id)
+                        ),
+                        EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_slice_and_dice.id()))
                 )
         );
     }
