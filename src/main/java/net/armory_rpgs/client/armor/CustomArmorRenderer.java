@@ -16,9 +16,13 @@ public class CustomArmorRenderer extends AzArmorRenderer {
         return new CustomArmorRenderer("justicar_armor", "justicar_armor");
     }
 
+    public static CustomArmorRenderer destroyer_armor() {
+        return new CustomArmorRenderer("destroyer_armor", "destroyer_armor");
+    }
+
     public CustomArmorRenderer(String modelName, String textureName) {
         super(AzArmorRendererConfig.builder(
-                Identifier.of(ArmoryMod.NAMESPACE, "geo/" + modelName + "geo.json"),
+                Identifier.of(ArmoryMod.NAMESPACE, "geo/" + modelName + ".geo.json"),
                 Identifier.of(ArmoryMod.NAMESPACE, "textures/armor/" + textureName + ".png")
         ).build());
     }

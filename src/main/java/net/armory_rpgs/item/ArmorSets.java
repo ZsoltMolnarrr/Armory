@@ -90,7 +90,7 @@ public class ArmorSets {
     private static final float paladin_t3_spell_power = 1F;
     private static final float paladin_t3_toughness = 1F;
 
-    public static final Armor.Entry paladinArmorSet_t1 = create(
+    public static final Armor.Entry justicar = create(
             netherite_crusader_armor,
             Identifier.of(ArmoryMod.NAMESPACE, "justicar_armor"),
             15,
@@ -109,6 +109,26 @@ public class ArmorSets {
                 // itemSettings.component() ??
             }))
             .translatedName("Justicar Faceguard", "Justicar Chestplate", "Justicar Legguards", "Justicar Boots");
+
+    public static final Armor.Entry destroyer = create(
+            netherite_crusader_armor,
+            Identifier.of(ArmoryMod.NAMESPACE, "destroyer_armor"),
+            15,
+            5,
+            Armor.CustomItem::new,
+            ArmorSetConfig.with(
+                    new ArmorSetConfig.Piece(2)
+                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t2_spell_power)),
+                    new ArmorSetConfig.Piece(6)
+                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t2_spell_power)),
+                    new ArmorSetConfig.Piece(5)
+                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t2_spell_power)),
+                    new ArmorSetConfig.Piece(2)
+                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t2_spell_power))
+            ), Armor.ItemSettingsTweaker.standard(itemSettings -> {
+                // itemSettings.component() ??
+            }))
+            .translatedName("Destroyer Greathelm", "Destroyer Chestplate", "Destroyer Greaves", "Destroyer Boots");
 
 
 

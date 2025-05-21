@@ -21,7 +21,8 @@ public class ArmoryClient implements ClientModInitializer {
             }
         }
 
-        registerArmorRenderer(ArmorSets.paladinArmorSet_t1.armorSet(), CustomArmorRenderer::justicar_armor);
+        registerArmorRenderer(ArmorSets.justicar.armorSet(), CustomArmorRenderer::justicar_armor);
+        registerArmorRenderer(ArmorSets.destroyer.armorSet(), CustomArmorRenderer::destroyer_armor);
     }
 
     private static void registerArmorRenderer(Armor.Set set, Supplier<AzArmorRenderer> armorRendererSupplier) {
