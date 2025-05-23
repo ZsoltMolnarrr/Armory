@@ -6,7 +6,7 @@
           {
             "type": "minecraft:generic.attack_damage",
             "amount": 0.1,
-            "id": "armory_rpgs:deathmantle",
+            "id": "armory_rpgs:destroyer",
             "operation": "add_multiplied_base",
             "slot": "armor"
           }
@@ -19,16 +19,16 @@
       "spells": {
         "content": "ANY",
         "spell_ids": [
-          "armory_rpgs:improved_shadow_step"
+          "armory_rpgs:improved_charge"
         ]
       }
     }
   ],
   "items": [
-    "armory_rpgs:deathmantle_armor_head",
-    "armory_rpgs:deathmantle_armor_chest",
-    "armory_rpgs:deathmantle_armor_legs",
-    "armory_rpgs:deathmantle_armor_feet"
+    "armory_rpgs:destroyer_armor_head",
+    "armory_rpgs:destroyer_armor_chest",
+    "armory_rpgs:destroyer_armor_legs",
+    "armory_rpgs:destroyer_armor_feet"
   ],
-  "name": "deathmantle"
+  "name": "destroyer"
 }

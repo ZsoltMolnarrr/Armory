@@ -1,8 +1,9 @@
 {
   "values": [
+    "armory_rpgs:archer_head",
     "armory_rpgs:justicar_armor_head",
-    "armory_rpgs:destroyer_armor_head",
     "armory_rpgs:deathmantle_armor_head",
+    "armory_rpgs:destroyer_armor_head",
     "armory_rpgs:avatar_robe_head"
   ]
 }

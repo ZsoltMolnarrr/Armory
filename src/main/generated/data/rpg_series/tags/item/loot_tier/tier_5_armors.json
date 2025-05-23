@@ -1,6 +1,22 @@
 {
   "values": [
     {
+      "id": "armory_rpgs:archer_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:archer_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:archer_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:archer_feet",
+      "required": false
+    },
+    {
       "id": "armory_rpgs:justicar_armor_head",
       "required": false
     },
@@ -17,22 +33,6 @@
       "required": false
     },
     {
-      "id": "armory_rpgs:destroyer_armor_head",
-      "required": false
-    },
-    {
-      "id": "armory_rpgs:destroyer_armor_chest",
-      "required": false
-    },
-    {
-      "id": "armory_rpgs:destroyer_armor_legs",
-      "required": false
-    },
-    {
-      "id": "armory_rpgs:destroyer_armor_feet",
-      "required": false
-    },
-    {
       "id": "armory_rpgs:deathmantle_armor_head",
       "required": false
     },
@@ -46,6 +46,22 @@
     },
     {
       "id": "armory_rpgs:deathmantle_armor_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:destroyer_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:destroyer_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:destroyer_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:destroyer_armor_feet",
       "required": false
     },
     {

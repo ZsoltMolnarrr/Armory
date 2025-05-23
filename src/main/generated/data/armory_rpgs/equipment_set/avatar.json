@@ -1,0 +1,34 @@
+{
+  "bonuses": [
+    {
+      "attributes": {
+        "modifiers": [
+          {
+            "type": "spell_power:healing",
+            "amount": 1.0,
+            "id": "armory_rpgs:avatar",
+            "operation": "add_value",
+            "slot": "armor"
+          }
+        ]
+      },
+      "required_piece_count": 2
+    },
+    {
+      "required_piece_count": 4,
+      "spells": {
+        "content": "ANY",
+        "spell_ids": [
+          "armory_rpgs:improved_circle_of_healing"
+        ]
+      }
+    }
+  ],
+  "items": [
+    "armory_rpgs:avatar_robe_head",
+    "armory_rpgs:avatar_robe_chest",
+    "armory_rpgs:avatar_robe_legs",
+    "armory_rpgs:avatar_robe_feet"
+  ],
+  "name": "avatar"
+}

@@ -20,6 +20,7 @@ import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.item.Equipment;
 import net.spell_engine.api.item.armor.Armor;
 import net.spell_engine.api.spell.SpellDataComponents;
+import net.spell_power.api.SpellPowerMechanics;
 import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
@@ -63,10 +64,35 @@ public class ArmorSets {
 
 
     private static final Identifier ATTACK_DAMAGE_ID = Identifier.ofVanilla("generic.attack_damage");
+    private static final Identifier ATTACK_SPEED_ID = Identifier.ofVanilla("generic.attack_speed");
+    private static final Identifier KNOCKBACK_ID = Identifier.ofVanilla("generic.knockback_resistance");
+    private static final Identifier MOVEMENT_SPEED_ID = Identifier.ofVanilla("generic.movement_speed");
     private static final Identifier ARMOR_TOUGHNESS_ID = Identifier.ofVanilla("generic.armor_toughness");
+
     private static AttributeModifier damageMultiplier(float value) {
         return new AttributeModifier(
                 ATTACK_DAMAGE_ID.toString(),
+                value,
+                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+    }
+
+    private static AttributeModifier hasteMultiplier(float value) {
+        return new AttributeModifier(
+                ATTACK_SPEED_ID.toString(),
+                value,
+                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+    }
+
+    private static AttributeModifier knockbackBonus(float value) {
+        return new AttributeModifier(
+                KNOCKBACK_ID.toString(),
+                value,
+                EntityAttributeModifier.Operation.ADD_VALUE);
+    }
+
+    private static AttributeModifier movementSpeed(float value) {
+        return new AttributeModifier(
+                MOVEMENT_SPEED_ID.toString(),
                 value,
                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
     }
@@ -78,22 +104,60 @@ public class ArmorSets {
                 EntityAttributeModifier.Operation.ADD_VALUE);
     }
 
-    public static RegistryEntry<ArmorMaterial> netherite_crusader_armor = material(
-            "netherite_crusader_armor",
-            3, 8, 6, 3,
-            15,
-            ArmorySounds.plate_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
 
-    public static RegistryEntry<ArmorMaterial> netherite_prior_robe = material(
-            "netherite_prior_robe",
+    public static final int enchantability = 18;
+
+    public static RegistryEntry<ArmorMaterial> wizard_robe = material(
+            "wizard_robe",
             1, 3, 2, 1,
-            15,
+            enchantability,
+            ArmorySounds.plate_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+    public static RegistryEntry<ArmorMaterial> priest_robe = material(
+            "priest_robe",
+            1, 3, 2, 1,
+            enchantability,
             ArmorySounds.plate_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
 
-    private static final float paladin_t1_spell_power = 0.5F;
-    private static final float paladin_t2_spell_power = 1F;
-    private static final float paladin_t3_spell_power = 1F;
-    private static final float paladin_t3_toughness = 1F;
+    public static RegistryEntry<ArmorMaterial> archer_armor = material(
+            "archer_armor",
+            2, 4, 4, 2,
+            enchantability,
+            ArmorySounds.plate_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+
+    public static RegistryEntry<ArmorMaterial> rogue_armor = material(
+            "rogue_armor",
+            2, 4, 4, 2,
+            enchantability,
+            ArmorySounds.plate_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+
+    public static RegistryEntry<ArmorMaterial> paladin_armor = material(
+            "paladin_armor",
+            3, 8, 6, 3,
+            enchantability,
+            ArmorySounds.plate_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+    public static RegistryEntry<ArmorMaterial> warrior_armor = material(
+            "warrior_armor",
+            3, 8, 6, 2,
+            enchantability,
+            ArmorySounds.plate_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+
+    private static final float plate_toughness = 1F;
+
+    private static final float caster_spell_power = 0.3F;
+    private static final float priest_haste = 0.05F;
+    private static final float paladin_spell_power = 1.5F;
+
+    public static final float rogue_speed = 0.05F;
+    public static final float rogue_haste = 0.05F;
+    public static final float rogue_damage = 0.05F;
+
+    public static final float warrior_damage = 0.05F;
+    public static final float warrior_knockback = 0.1F;
+
+    public static final float arrow_haste = 0.05F;
+    public static final float arrow_damage = 0.1F;
+
+    public static final int durability = 40;
 
     private static Armor.ItemSettingsTweaker commonSettings(Identifier equipmentSetId) {
         return Armor.ItemSettingsTweaker.standard(itemSettings -> {
@@ -104,83 +168,137 @@ public class ArmorSets {
     }
 
     public static final Armor.Entry justicar = create(
-            netherite_crusader_armor,
+            paladin_armor,
             Identifier.of(ArmoryMod.NAMESPACE, "justicar_armor"),
-            15,
+            durability,
             5,
             Armor.CustomItem::new,
             ArmorSetConfig.with(
-                    new ArmorSetConfig.Piece(2)
-                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t1_spell_power)),
+                    new ArmorSetConfig.Piece(3)
+                            .add(toughnessBonus(plate_toughness))
+                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_spell_power)),
+                    new ArmorSetConfig.Piece(8)
+                            .add(toughnessBonus(plate_toughness))
+                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_spell_power)),
                     new ArmorSetConfig.Piece(6)
-                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t1_spell_power)),
-                    new ArmorSetConfig.Piece(5)
-                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t1_spell_power)),
-                    new ArmorSetConfig.Piece(2)
-                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t1_spell_power))
+                            .add(toughnessBonus(plate_toughness))
+                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_spell_power)),
+                    new ArmorSetConfig.Piece(3)
+                            .add(toughnessBonus(plate_toughness))
+                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_spell_power))
             ),
             commonSettings(SetBonuses.justicar.id()) )
             .translatedName("Justicar Faceguard", "Justicar Chestplate", "Justicar Legguards", "Justicar Boots");
 
-    public static final Armor.Entry destroyer = create(
-            netherite_crusader_armor,
-            Identifier.of(ArmoryMod.NAMESPACE, "destroyer_armor"),
-            15,
+
+    public static final Armor.Entry avatar = create(
+            priest_robe,
+            Identifier.of(ArmoryMod.NAMESPACE, "avatar_robe"),
+            durability,
             5,
             Armor.CustomItem::new,
             ArmorSetConfig.with(
+                    new ArmorSetConfig.Piece(1)
+                            .addAll(List.of(
+                                    AttributeModifier.multiply(SpellSchools.HEALING.id, caster_spell_power),
+                                    AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, priest_haste)
+                            )),
+                    new ArmorSetConfig.Piece(3)
+                            .addAll(List.of(
+                                    AttributeModifier.multiply(SpellSchools.HEALING.id, caster_spell_power),
+                                    AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, priest_haste)
+                            )),
                     new ArmorSetConfig.Piece(2)
-                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t2_spell_power)),
-                    new ArmorSetConfig.Piece(6)
-                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t2_spell_power)),
-                    new ArmorSetConfig.Piece(5)
-                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t2_spell_power)),
-                    new ArmorSetConfig.Piece(2)
-                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t2_spell_power))
-            ), Armor.ItemSettingsTweaker.standard(itemSettings -> {
-                // itemSettings.component() ??
-            }))
-            .translatedName("Destroyer Greathelm", "Destroyer Chestplate", "Destroyer Greaves", "Destroyer Boots");
+                            .addAll(List.of(
+                                    AttributeModifier.multiply(SpellSchools.HEALING.id, caster_spell_power),
+                                    AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, priest_haste)
+                            )),
+                    new ArmorSetConfig.Piece(1)
+                            .addAll(List.of(
+                                    AttributeModifier.multiply(SpellSchools.HEALING.id, caster_spell_power),
+                                    AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, priest_haste)
+                            ))
+            ),
+            commonSettings(SetBonuses.avatar.id()) )
+            .translatedName("Avatar Cowl", "Avatar Vestment", "Avatar Breeches", "Avatar Boots");
+
 
     public static final Armor.Entry deathmantle = create(
-            netherite_crusader_armor,
+            rogue_armor,
             Identifier.of(ArmoryMod.NAMESPACE, "deathmantle_armor"),
-            15,
+            durability,
             5,
             Armor.CustomItem::new,
             ArmorSetConfig.with(
                     new ArmorSetConfig.Piece(2)
-                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t3_spell_power)),
-                    new ArmorSetConfig.Piece(6)
-                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t3_spell_power)),
-                    new ArmorSetConfig.Piece(5)
-                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t3_spell_power)),
+                            .add(movementSpeed(rogue_speed))
+                            .add(hasteMultiplier(rogue_haste))
+                            .add(damageMultiplier(rogue_damage)),
+                    new ArmorSetConfig.Piece(4)
+                            .add(movementSpeed(rogue_speed))
+                            .add(hasteMultiplier(rogue_haste))
+                            .add(damageMultiplier(rogue_damage)),
+                    new ArmorSetConfig.Piece(4)
+                            .add(movementSpeed(rogue_speed))
+                            .add(hasteMultiplier(rogue_haste))
+                            .add(damageMultiplier(rogue_damage)),
                     new ArmorSetConfig.Piece(2)
-                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t3_spell_power))
+                            .add(movementSpeed(rogue_speed))
+                            .add(hasteMultiplier(rogue_haste))
+                            .add(damageMultiplier(rogue_damage))
             ),
             commonSettings(SetBonuses.deathmantle.id()) )
             .translatedName("Deathmantle Hood", "Deathmantle Tunic", "Deathmantle Leggings", "Deathmantle Boots");
 
-    public static final Armor.Entry avatar = create(
-            netherite_crusader_armor,
-            Identifier.of(ArmoryMod.NAMESPACE, "avatar_robe"),
-            15,
+    public static final Armor.Entry destroyer = create(
+            warrior_armor,
+            Identifier.of(ArmoryMod.NAMESPACE, "destroyer_armor"),
+            durability,
+            5,
+            Armor.CustomItem::new,
+            ArmorSetConfig.with(
+                    new ArmorSetConfig.Piece(3)
+                            .add(damageMultiplier(warrior_damage))
+                            .add(toughnessBonus(plate_toughness))
+                            .add(knockbackBonus(warrior_knockback)),
+                    new ArmorSetConfig.Piece(8)
+                            .add(damageMultiplier(warrior_damage))
+                            .add(toughnessBonus(plate_toughness))
+                            .add(knockbackBonus(warrior_knockback)),
+                    new ArmorSetConfig.Piece(6)
+                            .add(damageMultiplier(warrior_damage))
+                            .add(toughnessBonus(plate_toughness))
+                            .add(knockbackBonus(warrior_knockback)),
+                    new ArmorSetConfig.Piece(3)
+                            .add(damageMultiplier(warrior_damage))
+                            .add(toughnessBonus(plate_toughness))
+                            .add(knockbackBonus(warrior_knockback))
+            ),
+            commonSettings(SetBonuses.destroyer.id()) )
+            .translatedName("Destroyer Greathelm", "Destroyer Chestplate", "Destroyer Greaves", "Destroyer Boots");
+
+    public static final Armor.Entry archer = create(
+            archer_armor,
+            Identifier.of(ArmoryMod.NAMESPACE, "archer"),
+            durability,
             5,
             Armor.CustomItem::new,
             ArmorSetConfig.with(
                     new ArmorSetConfig.Piece(2)
-                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t3_spell_power)),
-                    new ArmorSetConfig.Piece(6)
-                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t3_spell_power)),
-                    new ArmorSetConfig.Piece(5)
-                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t3_spell_power)),
+                            .add(damageMultiplier(arrow_damage))
+                            .add(hasteMultiplier(arrow_haste)),
+                    new ArmorSetConfig.Piece(4)
+                            .add(damageMultiplier(arrow_damage))
+                            .add(hasteMultiplier(arrow_haste)),
+                    new ArmorSetConfig.Piece(4)
+                            .add(damageMultiplier(arrow_damage))
+                            .add(hasteMultiplier(arrow_haste)),
                     new ArmorSetConfig.Piece(2)
-                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_t3_spell_power))
-            ), Armor.ItemSettingsTweaker.standard(itemSettings -> {
-                // itemSettings.component() ??
-            }))
-            .translatedName("Avatar Cowl", "Avatar Vestment", "Avatar Breeches", "Avatar Boots");
-
+                            .add(damageMultiplier(arrow_damage))
+                            .add(hasteMultiplier(arrow_haste))
+            ),
+            commonSettings(SetBonuses.archer.id()) )
+            .translatedName("Archer Helm", "Archer Chestplate", "Archer Leggings", "Archer Boots");
 
     public static void register(Map<String, ArmorSetConfig> configs) {
         Armor.register(configs, entries, Group.KEY);

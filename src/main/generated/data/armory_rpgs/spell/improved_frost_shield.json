@@ -1,5 +1,5 @@
 {
-  "school": "spell_power:healing",
+  "school": "spell_power:arcane",
   "range": 0.0,
   "tier": 1,
   "tooltip": {
@@ -15,8 +15,8 @@
   "type": "MODIFIER",
   "modifiers": [
     {
-      "spell_pattern": "paladins:judgement",
-      "cooldown_duration_deduct": 3.0
+      "spell_pattern": "wizards:frost_shield",
+      "effect_duration_add": 2.0
     }
   ]
 }

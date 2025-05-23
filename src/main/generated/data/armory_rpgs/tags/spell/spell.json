@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "armory_rpgs:improved_arcane_beam",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:improved_meteor",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:improved_frost_shield",
+      "required": false
+    }
+  ]
+}

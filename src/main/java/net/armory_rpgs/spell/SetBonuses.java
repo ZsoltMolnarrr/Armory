@@ -60,6 +60,42 @@ public class SetBonuses {
         );
     }
 
+    public static Entry avatar = add(avatar());
+    private static Entry avatar() {
+        var id = Identifier.of(NAMESPACE, "avatar");
+        return new Entry(id,
+                "Avatar Raiment",
+                () -> { return ArmorSets.avatar.armorSet().pieceIds(); },
+                List.of(
+                        EquipmentSet.Bonus.withAttributes(2, attribute(
+                                SpellSchools.HEALING.attributeEntry,
+                                1,
+                                EntityAttributeModifier.Operation.ADD_VALUE,
+                                id)
+                        ),
+                        EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_circle_of_healing.id()))
+                )
+        );
+    }
+
+    public static Entry destroyer = add(destroyer());
+    private static Entry destroyer() {
+        var id = Identifier.of(NAMESPACE, "destroyer");
+        return new Entry(id,
+                "Destroyer Armor",
+                () -> { return ArmorSets.destroyer.armorSet().pieceIds(); },
+                List.of(
+                        EquipmentSet.Bonus.withAttributes(2, attribute(
+                                EntityAttributes.GENERIC_ATTACK_DAMAGE,
+                                0.1,
+                                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
+                                id)
+                        ),
+                        EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_charge.id()))
+                )
+        );
+    }
+
     public static Entry deathmantle = add(deathmantle());
     private static Entry deathmantle() {
         var id = Identifier.of(NAMESPACE, "deathmantle");
@@ -73,7 +109,25 @@ public class SetBonuses {
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id)
                         ),
-                        EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_slice_and_dice.id()))
+                        EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_shadow_step.id()))
+                )
+        );
+    }
+
+    public static Entry archer = add(archer());
+    private static Entry archer() {
+        var id = Identifier.of(NAMESPACE, "archer");
+        return new Entry(id,
+                "Archer Armor",
+                () -> { return ArmorSets.archer.armorSet().pieceIds(); },
+                List.of(
+                        EquipmentSet.Bonus.withAttributes(2, attribute(
+                                EntityAttributes.GENERIC_ATTACK_DAMAGE,
+                                0.1,
+                                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
+                                id)
+                        ),
+                        EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_entangling_roots.id()))
                 )
         );
     }

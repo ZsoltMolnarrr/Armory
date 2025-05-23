@@ -207,6 +207,104 @@ public class ArmorySpells {
         return damage;
     }
 
+    public static Entry improved_arcane_beam = add(improved_arcane_beam());
+    private static Entry improved_arcane_beam() {
+        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_arcane_beam");
+        var title = "Improved Arcane Beam";
+        var description = "Increases critical chance of Arcane Beam by {critical_chance_bonus}";
+        var spell = modifierSpellBase();
+        spell.school = SpellSchools.ARCANE;
+
+        var modifier = new Spell.Modifier();
+        modifier.spell_pattern = "wizards:arcane_beam";
+        modifier.power_modifier = new Spell.Impact.Modifier();
+        modifier.power_modifier.critical_chance_bonus = 0.05F;
+        spell.modifiers = List.of(modifier);
+
+        return new Entry(id, spell, title, description, null, Category.SPELL);
+    }
+
+    public static Entry improved_meteor = add(improved_meteor());
+    private static Entry improved_meteor() {
+        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_meteor");
+        var title = "Improved Meteor";
+        var description = "Meteor launches {critical_chance_bonus} extra projectile";
+        var spell = modifierSpellBase();
+        spell.school = SpellSchools.ARCANE;
+
+        var modifier = new Spell.Modifier();
+        modifier.spell_pattern = "wizards:fire_meteor";
+        modifier.projectile_launch = Spell.LaunchProperties.EMPTY();
+        modifier.projectile_launch.extra_launch_count = 1;
+        spell.modifiers = List.of(modifier);
+
+        return new Entry(id, spell, title, description, null, Category.SPELL);
+    }
+
+    public static Entry improved_frost_shield = add(improved_frost_shield());
+    private static Entry improved_frost_shield() {
+        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_frost_shield");
+        var title = "Improved Frost Shield";
+        var description = "Increases duration of Frost Shield by {effect_duration_add} sec";
+        var spell = modifierSpellBase();
+        spell.school = SpellSchools.ARCANE;
+
+        var modifier = new Spell.Modifier();
+        modifier.spell_pattern = "wizards:frost_shield";
+        modifier.effect_duration_add = 2;
+        spell.modifiers = List.of(modifier);
+
+        return new Entry(id, spell, title, description, null, Category.SPELL);
+    }
+
+    public static Entry improved_entangling_roots = add(improved_entangling_roots());
+    private static Entry improved_entangling_roots() {
+        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_entangling_roots");
+        var title = "Improved Entangling Roots";
+        var description = "Increases duration of Entangling Roots by {effect_duration_add} sec";
+        var spell = modifierSpellBase();
+        spell.school = ExternalSpellSchools.PHYSICAL_MELEE;
+
+        var modifier = new Spell.Modifier();
+        modifier.spell_pattern = "archers:entangling_roots";
+        modifier.effect_duration_add = 2;
+        spell.modifiers = List.of(modifier);
+
+        return new Entry(id, spell, title, description, null, Category.RANGED);
+    }
+
+    public static Entry improved_barrier = add(improved_barrier());
+    private static Entry improved_barrier() {
+        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_barrier");
+        var title = "Improved Barrier";
+        var description = "Increases duration of Barrier by {effect_duration_add} sec";
+        var spell = modifierSpellBase();
+        spell.school = SpellSchools.HEALING;
+
+        var modifier = new Spell.Modifier();
+        modifier.spell_pattern = "paladins:barrier";
+        modifier.effect_duration_add = 2;
+        spell.modifiers = List.of(modifier);
+
+        return new Entry(id, spell, title, description, null, Category.HEAL);
+    }
+
+    public static Entry improved_circle_of_healing = add(improved_circle_of_healing());
+    private static Entry improved_circle_of_healing() {
+        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_circle_of_healing");
+        var title = "Improved Circle of Healing";
+        var description = "Increases duration of Circle of Healing Absorption by {effect_duration_add} sec";
+        var spell = modifierSpellBase();
+        spell.school = SpellSchools.HEALING;
+
+        var modifier = new Spell.Modifier();
+        modifier.spell_pattern = "paladins:circle_of_healing";
+        modifier.effect_duration_add = 2;
+        spell.modifiers = List.of(modifier);
+
+        return new Entry(id, spell, title, description, null, Category.HEAL);
+    }
+
     public static Entry improved_judgement = add(improved_judgement());
     private static Entry improved_judgement() {
         var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_judgement");
@@ -217,23 +315,55 @@ public class ArmorySpells {
 
         var modifier = new Spell.Modifier();
         modifier.spell_pattern = "paladins:judgement";
+        modifier.cooldown_duration_deduct = 3;
+        spell.modifiers = List.of(modifier);
+
+        return new Entry(id, spell, title, description, null, Category.MELEE);
+    }
+
+    public static Entry improved_whirlwind = add(improved_whirlwind());
+    private static Entry improved_whirlwind() {
+        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_whirlwind");
+        var title = "Improved Whirlwind";
+        var description = "Reduces cooldown of Whirlwind by {cooldown_duration_deduct} sec";
+        var spell = modifierSpellBase();
+        spell.school = ExternalSpellSchools.PHYSICAL_MELEE;
+
+        var modifier = new Spell.Modifier();
+        modifier.spell_pattern = "rogues:whirlwind";
+        modifier.cooldown_duration_deduct = 4;
+        spell.modifiers = List.of(modifier);
+
+        return new Entry(id, spell, title, description, null, Category.MELEE);
+    }
+
+    public static Entry improved_charge = add(improved_charge());
+    private static Entry improved_charge() {
+        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_charge");
+        var title = "Improved Charge";
+        var description = "Reduces cooldown of Charge by {cooldown_duration_deduct} sec";
+        var spell = modifierSpellBase();
+        spell.school = ExternalSpellSchools.PHYSICAL_MELEE;
+
+        var modifier = new Spell.Modifier();
+        modifier.spell_pattern = "rogues:charge";
         modifier.cooldown_duration_deduct = 2;
         spell.modifiers = List.of(modifier);
 
         return new Entry(id, spell, title, description, null, Category.MELEE);
     }
 
-    public static Entry improved_slice_and_dice = add(improved_slice_and_dice());
-    private static Entry improved_slice_and_dice() {
-        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_slice_and_dice");
-        var title = "Improved Slice and Dice";
-        var description = "Increases duration of Slice and Dice by {effect_duration_add} sec";
+    public static Entry improved_shadow_step = add(improved_shadow_step());
+    private static Entry improved_shadow_step() {
+        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_shadow_step");
+        var title = "Improved Shadowstep";
+        var description = "Reduces cooldown of Shadowstep by {cooldown_duration_deduct} sec";
         var spell = modifierSpellBase();
         spell.school = ExternalSpellSchools.PHYSICAL_MELEE;
 
         var modifier = new Spell.Modifier();
-        modifier.spell_pattern = "rogues:slice_and_dice";
-        modifier.effect_duration_add = 2;
+        modifier.spell_pattern = "rogues:shadow_step";
+        modifier.cooldown_duration_deduct = 4;
         spell.modifiers = List.of(modifier);
 
         return new Entry(id, spell, title, description, null, Category.MELEE);

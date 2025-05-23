@@ -1,5 +1,5 @@
 {
-  "school": "spell_power:healing",
+  "school": "spell_power:arcane",
   "range": 0.0,
   "tier": 1,
   "tooltip": {
@@ -15,8 +15,12 @@
   "type": "MODIFIER",
   "modifiers": [
     {
-      "spell_pattern": "paladins:judgement",
-      "cooldown_duration_deduct": 3.0
+      "spell_pattern": "wizards:fire_meteor",
+      "projectile_launch": {
+        "velocity": 0.0,
+        "extra_launch_count": 1,
+        "extra_launch_delay": 0
+      }
     }
   ]
 }

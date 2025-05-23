@@ -1,8 +1,9 @@
 {
   "values": [
+    "armory_rpgs:archer_feet",
     "armory_rpgs:justicar_armor_feet",
-    "armory_rpgs:destroyer_armor_feet",
     "armory_rpgs:deathmantle_armor_feet",
+    "armory_rpgs:destroyer_armor_feet",
     "armory_rpgs:avatar_robe_feet"
   ]
 }

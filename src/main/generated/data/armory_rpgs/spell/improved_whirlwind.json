@@ -1,5 +1,5 @@
 {
-  "school": "spell_power:healing",
+  "school": "spell_power:physical_melee",
   "range": 0.0,
   "tier": 1,
   "tooltip": {
@@ -15,8 +15,8 @@
   "type": "MODIFIER",
   "modifiers": [
     {
-      "spell_pattern": "paladins:judgement",
-      "cooldown_duration_deduct": 3.0
+      "spell_pattern": "rogues:whirlwind",
+      "cooldown_duration_deduct": 4.0
     }
   ]
 }

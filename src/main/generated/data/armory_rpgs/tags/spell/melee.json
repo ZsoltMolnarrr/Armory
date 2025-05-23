@@ -5,7 +5,15 @@
       "required": false
     },
     {
-      "id": "armory_rpgs:improved_slice_and_dice",
+      "id": "armory_rpgs:improved_whirlwind",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:improved_charge",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:improved_shadow_step",
       "required": false
     }
   ]
