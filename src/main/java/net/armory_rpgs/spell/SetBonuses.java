@@ -2,6 +2,7 @@ package net.armory_rpgs.spell;
 
 import net.armory_rpgs.ArmoryMod;
 import net.armory_rpgs.item.ArmorSets;
+import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -69,8 +70,8 @@ public class SetBonuses {
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
                                 SpellSchools.HEALING.attributeEntry,
-                                1,
-                                EntityAttributeModifier.Operation.ADD_VALUE,
+                                0.1,
+                                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id)
                         ),
                         EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_circle_of_healing.id()))
@@ -118,16 +119,70 @@ public class SetBonuses {
     private static Entry archer() {
         var id = Identifier.of(NAMESPACE, "archer");
         return new Entry(id,
-                "Archer Armor",
+                "Thornmantle Armor",
                 () -> { return ArmorSets.archer.armorSet().pieceIds(); },
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
-                                EntityAttributes.GENERIC_ATTACK_DAMAGE,
+                                EntityAttributes_RangedWeapon.HASTE.entry,
                                 0.1,
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id)
                         ),
                         EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_entangling_roots.id()))
+                )
+        );
+    }
+
+    public static Entry tempest = add(tempest());
+    private static Entry tempest() {
+        var id = Identifier.of(NAMESPACE, "tempest");
+        return new Entry(id,
+                "Tempest Regalia",
+                () -> { return ArmorSets.tempest.armorSet().pieceIds(); },
+                List.of(
+                        EquipmentSet.Bonus.withAttributes(2, attribute(
+                                SpellSchools.ARCANE.attributeEntry,
+                                0.1,
+                                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
+                                id)
+                        ),
+                        EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_arcane_beam.id()))
+                )
+        );
+    }
+
+    public static Entry smoldering = add(smoldering());
+    private static Entry smoldering() {
+        var id = Identifier.of(NAMESPACE, "smoldering");
+        return new Entry(id,
+                "Smoldering Raiment",
+                () -> { return ArmorSets.smoldering.armorSet().pieceIds(); },
+                List.of(
+                        EquipmentSet.Bonus.withAttributes(2, attribute(
+                                SpellSchools.FIRE.attributeEntry,
+                                0.1,
+                                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
+                                id)
+                        ),
+                        EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_meteor.id()))
+                )
+        );
+    }
+
+    public static Entry glacier = add(glacier());
+    private static Entry glacier() {
+        var id = Identifier.of(NAMESPACE, "glacier");
+        return new Entry(id,
+                "Glacier Mantle",
+                () -> { return ArmorSets.glacier.armorSet().pieceIds(); },
+                List.of(
+                        EquipmentSet.Bonus.withAttributes(2, attribute(
+                                SpellSchools.FROST.attributeEntry,
+                                0.1,
+                                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
+                                id)
+                        ),
+                        EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_frost_shield.id()))
                 )
         );
     }

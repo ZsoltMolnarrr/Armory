@@ -157,6 +157,10 @@ public class ArmorSets {
     public static final float arrow_haste = 0.05F;
     public static final float arrow_damage = 0.1F;
 
+    private static final float crit_damage_t3 = 0.1F;
+    private static final float crit_chance_t3 = 0.02F;
+    private static final float haste_t3 = 0.03F;
+
     public static final int durability = 40;
 
     private static Armor.ItemSettingsTweaker commonSettings(Identifier equipmentSetId) {
@@ -299,6 +303,75 @@ public class ArmorSets {
             ),
             commonSettings(SetBonuses.archer.id()) )
             .translatedName("Archer Helm", "Archer Chestplate", "Archer Leggings", "Archer Boots");
+
+    public static final Armor.Entry tempest = create(
+            wizard_robe,
+            Identifier.of(ArmoryMod.NAMESPACE, "tempest_robe"),
+            durability,
+            5,
+            Armor.CustomItem::new,
+            ArmorSetConfig.with(
+                    new ArmorSetConfig.Piece(1)
+                            .add(AttributeModifier.multiply(SpellSchools.ARCANE.id, caster_spell_power))
+                            .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, haste_t3)),
+                    new ArmorSetConfig.Piece(3)
+                            .add(AttributeModifier.multiply(SpellSchools.ARCANE.id, caster_spell_power))
+                            .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, haste_t3)),
+                    new ArmorSetConfig.Piece(2)
+                            .add(AttributeModifier.multiply(SpellSchools.ARCANE.id, caster_spell_power))
+                            .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, haste_t3)),
+                    new ArmorSetConfig.Piece(1)
+                            .add(AttributeModifier.multiply(SpellSchools.ARCANE.id, caster_spell_power))
+                            .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, haste_t3))
+            ),
+            commonSettings(SetBonuses.tempest.id()) )
+            .translatedName("Tempest Cowl", "Tempest Robe", "Tempest Breeches", "Tempest Boots");
+
+    public static final Armor.Entry smoldering = create(
+            wizard_robe,
+            Identifier.of(ArmoryMod.NAMESPACE, "smoldering_robe"),
+            durability,
+            5,
+            Armor.CustomItem::new,
+            ArmorSetConfig.with(
+                    new ArmorSetConfig.Piece(1)
+                            .add(AttributeModifier.multiply(SpellSchools.FIRE.id, caster_spell_power))
+                            .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, crit_chance_t3)),
+                    new ArmorSetConfig.Piece(3)
+                            .add(AttributeModifier.multiply(SpellSchools.FIRE.id, caster_spell_power))
+                            .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, crit_chance_t3)),
+                    new ArmorSetConfig.Piece(2)
+                            .add(AttributeModifier.multiply(SpellSchools.FIRE.id, caster_spell_power))
+                            .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, crit_chance_t3)),
+                    new ArmorSetConfig.Piece(1)
+                            .add(AttributeModifier.multiply(SpellSchools.FIRE.id, caster_spell_power))
+                            .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, crit_chance_t3))
+            ),
+            commonSettings(SetBonuses.smoldering.id()) )
+            .translatedName("Smoldering Cowl", "Smoldering Robe", "Smoldering Breeches", "Smoldering Boots");
+
+    public static final Armor.Entry glacier = create(
+            wizard_robe,
+            Identifier.of(ArmoryMod.NAMESPACE, "glacier_robe"),
+            durability,
+            5,
+            Armor.CustomItem::new,
+            ArmorSetConfig.with(
+                    new ArmorSetConfig.Piece(1)
+                            .add(AttributeModifier.multiply(SpellSchools.FROST.id, caster_spell_power))
+                            .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, crit_damage_t3)),
+                    new ArmorSetConfig.Piece(3)
+                            .add(AttributeModifier.multiply(SpellSchools.FROST.id, caster_spell_power))
+                            .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, crit_damage_t3)),
+                    new ArmorSetConfig.Piece(2)
+                            .add(AttributeModifier.multiply(SpellSchools.FROST.id, caster_spell_power))
+                            .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, crit_damage_t3)),
+                    new ArmorSetConfig.Piece(1)
+                            .add(AttributeModifier.multiply(SpellSchools.FROST.id, caster_spell_power))
+                            .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, crit_damage_t3))
+            ),
+            commonSettings(SetBonuses.glacier.id()) )
+            .translatedName("Glacier Cowl", "Glacier Robe", "Glacier Breeches", "Glacier Boots");
 
     public static void register(Map<String, ArmorSetConfig> configs) {
         Armor.register(configs, entries, Group.KEY);

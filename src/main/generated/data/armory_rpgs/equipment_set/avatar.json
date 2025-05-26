@@ -5,9 +5,9 @@
         "modifiers": [
           {
             "type": "spell_power:healing",
-            "amount": 1.0,
+            "amount": 0.1,
             "id": "armory_rpgs:avatar",
-            "operation": "add_value",
+            "operation": "add_multiplied_base",
             "slot": "armor"
           }
         ]

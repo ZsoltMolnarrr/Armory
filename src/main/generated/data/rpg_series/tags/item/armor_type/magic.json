@@ -15,6 +15,54 @@
     {
       "id": "armory_rpgs:avatar_robe_feet",
       "required": false
+    },
+    {
+      "id": "armory_rpgs:tempest_robe_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:tempest_robe_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:tempest_robe_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:tempest_robe_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:smoldering_robe_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:smoldering_robe_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:smoldering_robe_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:smoldering_robe_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:glacier_robe_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:glacier_robe_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:glacier_robe_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:glacier_robe_feet",
+      "required": false
     }
   ]
 }

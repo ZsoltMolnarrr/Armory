@@ -4,9 +4,9 @@
       "attributes": {
         "modifiers": [
           {
-            "type": "ranged_weapon:haste",
+            "type": "spell_power:fire",
             "amount": 0.1,
-            "id": "armory_rpgs:archer",
+            "id": "armory_rpgs:smoldering",
             "operation": "add_multiplied_base",
             "slot": "armor"
           }
@@ -19,16 +19,16 @@
       "spells": {
         "content": "ANY",
         "spell_ids": [
-          "armory_rpgs:improved_entangling_roots"
+          "armory_rpgs:improved_meteor"
         ]
       }
     }
   ],
   "items": [
-    "armory_rpgs:archer_head",
-    "armory_rpgs:archer_chest",
-    "armory_rpgs:archer_legs",
-    "armory_rpgs:archer_feet"
+    "armory_rpgs:smoldering_robe_head",
+    "armory_rpgs:smoldering_robe_chest",
+    "armory_rpgs:smoldering_robe_legs",
+    "armory_rpgs:smoldering_robe_feet"
   ],
-  "name": "archer"
+  "name": "smoldering"
 }
