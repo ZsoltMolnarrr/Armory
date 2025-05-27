@@ -228,7 +228,7 @@ public class ArmorySpells {
     private static Entry improved_meteor() {
         var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_meteor");
         var title = "Improved Meteor";
-        var description = "Meteor launches {critical_chance_bonus} extra projectile";
+        var description = "Meteor launches {extra_launch} extra projectile";
         var spell = modifierSpellBase();
         spell.school = SpellSchools.ARCANE;
 
