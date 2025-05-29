@@ -111,24 +111,24 @@ public class ArmorSets {
             "wizard_robe",
             1, 3, 2, 1,
             enchantability,
-            ArmorySounds.plate_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+            ArmorySounds.cloth_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
     public static RegistryEntry<ArmorMaterial> priest_robe = material(
             "priest_robe",
             1, 3, 2, 1,
             enchantability,
-            ArmorySounds.plate_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+            ArmorySounds.cloth_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
 
     public static RegistryEntry<ArmorMaterial> archer_armor = material(
             "archer_armor",
             2, 4, 4, 2,
             enchantability,
-            ArmorySounds.plate_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+            ArmorySounds.leather_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
 
     public static RegistryEntry<ArmorMaterial> rogue_armor = material(
             "rogue_armor",
             2, 4, 4, 2,
             enchantability,
-            ArmorySounds.plate_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+            ArmorySounds.leather_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
 
     public static RegistryEntry<ArmorMaterial> paladin_armor = material(
             "paladin_armor",

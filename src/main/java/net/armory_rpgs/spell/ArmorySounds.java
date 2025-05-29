@@ -17,6 +17,8 @@ public class ArmorySounds {
         return new SpellEngineSounds.Entry(Identifier.of(ArmoryMod.NAMESPACE, name));
     }
 
+    public static final SpellEngineSounds.Entry cloth_equip = add(entry("cloth_equip").variants(3));
+    public static final SpellEngineSounds.Entry leather_equip = add(entry("leather_equip").variants(3));
     public static final SpellEngineSounds.Entry plate_equip = add(entry("plate_equip").variants(3));
 
     public static void register() {
