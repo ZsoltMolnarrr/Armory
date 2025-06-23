@@ -304,6 +304,8 @@ public class ArmorSets {
             commonSettings(SetBonuses.archer.id()) )
             .translatedName("Archer Helm", "Archer Chestplate", "Archer Leggings", "Archer Boots");
 
+    // Other name options: Scarlet, Crimson, Azure
+
     public static final Armor.Entry tempest = create(
             wizard_robe,
             Identifier.of(ArmoryMod.NAMESPACE, "tempest_robe"),
@@ -326,6 +328,7 @@ public class ArmorSets {
             ),
             commonSettings(SetBonuses.tempest.id()) )
             .translatedName("Tempest Cowl", "Tempest Robe", "Tempest Breeches", "Tempest Boots");
+
 
     public static final Armor.Entry smoldering = create(
             wizard_robe,

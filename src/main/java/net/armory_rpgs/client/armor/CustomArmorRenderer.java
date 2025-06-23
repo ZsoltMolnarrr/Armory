@@ -28,6 +28,14 @@ public class CustomArmorRenderer extends AzArmorRenderer {
         return new CustomArmorRenderer("avatar_robe", "avatar_robe");
     }
 
+    public static CustomArmorRenderer smoldering_robe() {
+        return trisifal("smoldering_robe");
+    }
+
+    private static CustomArmorRenderer trisifal(String texture) {
+        return new CustomArmorRenderer("tirisfal_robe", texture);
+    }
+
     public CustomArmorRenderer(String modelName, String textureName) {
         super(AzArmorRendererConfig.builder(
                 Identifier.of(ArmoryMod.NAMESPACE, "geo/" + modelName + ".geo.json"),
