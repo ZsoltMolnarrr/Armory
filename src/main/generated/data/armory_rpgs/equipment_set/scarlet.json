@@ -6,7 +6,7 @@
           {
             "type": "spell_power:fire",
             "amount": 0.1,
-            "id": "armory_rpgs:smoldering",
+            "id": "armory_rpgs:scarlet",
             "operation": "add_multiplied_base",
             "slot": "armor"
           }
@@ -25,10 +25,10 @@
     }
   ],
   "items": [
-    "armory_rpgs:smoldering_robe_head",
-    "armory_rpgs:smoldering_robe_chest",
-    "armory_rpgs:smoldering_robe_legs",
-    "armory_rpgs:smoldering_robe_feet"
+    "armory_rpgs:scarlet_robe_head",
+    "armory_rpgs:scarlet_robe_chest",
+    "armory_rpgs:scarlet_robe_legs",
+    "armory_rpgs:scarlet_robe_feet"
   ],
-  "name": "smoldering"
+  "name": "scarlet"
 }

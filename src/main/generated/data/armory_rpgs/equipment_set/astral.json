@@ -6,7 +6,7 @@
           {
             "type": "spell_power:arcane",
             "amount": 0.1,
-            "id": "armory_rpgs:tempest",
+            "id": "armory_rpgs:astral",
             "operation": "add_multiplied_base",
             "slot": "armor"
           }
@@ -25,10 +25,10 @@
     }
   ],
   "items": [
-    "armory_rpgs:tempest_robe_head",
-    "armory_rpgs:tempest_robe_chest",
-    "armory_rpgs:tempest_robe_legs",
-    "armory_rpgs:tempest_robe_feet"
+    "armory_rpgs:astral_robe_head",
+    "armory_rpgs:astral_robe_chest",
+    "armory_rpgs:astral_robe_legs",
+    "armory_rpgs:astral_robe_feet"
   ],
-  "name": "tempest"
+  "name": "astral"
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "armory_rpgs:item/smoldering_robe_legs"
+    "layer0": "armory_rpgs:item/azure_robe_feet"
   }
 }

@@ -17,51 +17,51 @@
       "required": false
     },
     {
-      "id": "armory_rpgs:tempest_robe_head",
+      "id": "armory_rpgs:astral_robe_head",
       "required": false
     },
     {
-      "id": "armory_rpgs:tempest_robe_chest",
+      "id": "armory_rpgs:astral_robe_chest",
       "required": false
     },
     {
-      "id": "armory_rpgs:tempest_robe_legs",
+      "id": "armory_rpgs:astral_robe_legs",
       "required": false
     },
     {
-      "id": "armory_rpgs:tempest_robe_feet",
+      "id": "armory_rpgs:astral_robe_feet",
       "required": false
     },
     {
-      "id": "armory_rpgs:smoldering_robe_head",
+      "id": "armory_rpgs:scarlet_robe_head",
       "required": false
     },
     {
-      "id": "armory_rpgs:smoldering_robe_chest",
+      "id": "armory_rpgs:scarlet_robe_chest",
       "required": false
     },
     {
-      "id": "armory_rpgs:smoldering_robe_legs",
+      "id": "armory_rpgs:scarlet_robe_legs",
       "required": false
     },
     {
-      "id": "armory_rpgs:smoldering_robe_feet",
+      "id": "armory_rpgs:scarlet_robe_feet",
       "required": false
     },
     {
-      "id": "armory_rpgs:glacier_robe_head",
+      "id": "armory_rpgs:azure_robe_head",
       "required": false
     },
     {
-      "id": "armory_rpgs:glacier_robe_chest",
+      "id": "armory_rpgs:azure_robe_chest",
       "required": false
     },
     {
-      "id": "armory_rpgs:glacier_robe_legs",
+      "id": "armory_rpgs:azure_robe_legs",
       "required": false
     },
     {
-      "id": "armory_rpgs:glacier_robe_feet",
+      "id": "armory_rpgs:azure_robe_feet",
       "required": false
     }
   ]

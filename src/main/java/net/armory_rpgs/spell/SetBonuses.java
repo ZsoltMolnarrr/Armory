@@ -133,12 +133,12 @@ public class SetBonuses {
         );
     }
 
-    public static Entry tempest = add(tempest());
-    private static Entry tempest() {
-        var id = Identifier.of(NAMESPACE, "tempest");
+    public static Entry astral = add(astral());
+    private static Entry astral() {
+        var id = Identifier.of(NAMESPACE, "astral");
         return new Entry(id,
-                "Tempest Regalia",
-                () -> { return ArmorSets.tempest.armorSet().pieceIds(); },
+                "Astral Regalia",
+                () -> { return ArmorSets.astral.armorSet().pieceIds(); },
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
                                 SpellSchools.ARCANE.attributeEntry,
@@ -151,12 +151,12 @@ public class SetBonuses {
         );
     }
 
-    public static Entry smoldering = add(smoldering());
-    private static Entry smoldering() {
-        var id = Identifier.of(NAMESPACE, "smoldering");
+    public static Entry scarlet = add(scarlet());
+    private static Entry scarlet() {
+        var id = Identifier.of(NAMESPACE, "scarlet");
         return new Entry(id,
-                "Smoldering Raiment",
-                () -> { return ArmorSets.smoldering.armorSet().pieceIds(); },
+                "Scarlet Raiment",
+                () -> { return ArmorSets.scarlet.armorSet().pieceIds(); },
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
                                 SpellSchools.FIRE.attributeEntry,
@@ -174,7 +174,7 @@ public class SetBonuses {
         var id = Identifier.of(NAMESPACE, "glacier");
         return new Entry(id,
                 "Glacier Mantle",
-                () -> { return ArmorSets.glacier.armorSet().pieceIds(); },
+                () -> { return ArmorSets.azure.armorSet().pieceIds(); },
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
                                 SpellSchools.FROST.attributeEntry,

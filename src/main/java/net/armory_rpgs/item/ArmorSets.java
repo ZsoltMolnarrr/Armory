@@ -306,9 +306,9 @@ public class ArmorSets {
 
     // Other name options: Scarlet, Crimson, Azure
 
-    public static final Armor.Entry tempest = create(
+    public static final Armor.Entry astral = create(
             wizard_robe,
-            Identifier.of(ArmoryMod.NAMESPACE, "tempest_robe"),
+            Identifier.of(ArmoryMod.NAMESPACE, "astral_robe"),
             durability,
             5,
             Armor.CustomItem::new,
@@ -326,13 +326,13 @@ public class ArmorSets {
                             .add(AttributeModifier.multiply(SpellSchools.ARCANE.id, caster_spell_power))
                             .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, haste_t3))
             ),
-            commonSettings(SetBonuses.tempest.id()) )
-            .translatedName("Tempest Cowl", "Tempest Robe", "Tempest Breeches", "Tempest Boots");
+            commonSettings(SetBonuses.astral.id()) )
+            .translatedName("Astral Hat", "Astral Robe", "Astral Breeches", "Astral Boots");
 
 
-    public static final Armor.Entry smoldering = create(
+    public static final Armor.Entry scarlet = create(
             wizard_robe,
-            Identifier.of(ArmoryMod.NAMESPACE, "smoldering_robe"),
+            Identifier.of(ArmoryMod.NAMESPACE, "scarlet_robe"),
             durability,
             5,
             Armor.CustomItem::new,
@@ -350,12 +350,12 @@ public class ArmorSets {
                             .add(AttributeModifier.multiply(SpellSchools.FIRE.id, caster_spell_power))
                             .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, crit_chance_t3))
             ),
-            commonSettings(SetBonuses.smoldering.id()) )
-            .translatedName("Smoldering Cowl", "Smoldering Robe", "Smoldering Breeches", "Smoldering Boots");
+            commonSettings(SetBonuses.scarlet.id()) )
+            .translatedName("Scarlet Hat", "Scarlet Robe", "Scarlet Breeches", "Scarlet Boots");
 
-    public static final Armor.Entry glacier = create(
+    public static final Armor.Entry azure = create(
             wizard_robe,
-            Identifier.of(ArmoryMod.NAMESPACE, "glacier_robe"),
+            Identifier.of(ArmoryMod.NAMESPACE, "azure_robe"),
             durability,
             5,
             Armor.CustomItem::new,
@@ -374,7 +374,7 @@ public class ArmorSets {
                             .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, crit_damage_t3))
             ),
             commonSettings(SetBonuses.glacier.id()) )
-            .translatedName("Glacier Cowl", "Glacier Robe", "Glacier Breeches", "Glacier Boots");
+            .translatedName("Azure Hat", "Azure Robe", "Azure Breeches", "Azure Boots");
 
     public static void register(Map<String, ArmorSetConfig> configs) {
         Armor.register(configs, entries, Group.KEY);
