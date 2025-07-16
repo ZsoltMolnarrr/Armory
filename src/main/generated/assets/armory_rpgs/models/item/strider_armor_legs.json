@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "armory_rpgs:item/archer_head"
+    "layer0": "armory_rpgs:item/strider_armor_legs"
   }
 }

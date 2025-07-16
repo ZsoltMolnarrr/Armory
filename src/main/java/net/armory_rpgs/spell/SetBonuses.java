@@ -115,12 +115,12 @@ public class SetBonuses {
         );
     }
 
-    public static Entry archer = add(archer());
+    public static Entry strider = add(archer());
     private static Entry archer() {
-        var id = Identifier.of(NAMESPACE, "archer");
+        var id = Identifier.of(NAMESPACE, "strider");
         return new Entry(id,
-                "Thornmantle Armor",
-                () -> { return ArmorSets.archer.armorSet().pieceIds(); },
+                "Strider Armor",
+                () -> { return ArmorSets.strider.armorSet().pieceIds(); },
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
                                 EntityAttributes_RangedWeapon.HASTE.entry,
@@ -174,7 +174,7 @@ public class SetBonuses {
         var id = Identifier.of(NAMESPACE, "glacier");
         return new Entry(id,
                 "Glacier Mantle",
-                () -> { return ArmorSets.azure.armorSet().pieceIds(); },
+                () -> { return ArmorSets.glacier.armorSet().pieceIds(); },
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
                                 SpellSchools.FROST.attributeEntry,

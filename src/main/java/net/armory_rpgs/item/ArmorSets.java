@@ -281,9 +281,9 @@ public class ArmorSets {
             commonSettings(SetBonuses.destroyer.id()) )
             .translatedName("Destroyer Greathelm", "Destroyer Chestplate", "Destroyer Greaves", "Destroyer Boots");
 
-    public static final Armor.Entry archer = create(
+    public static final Armor.Entry strider = create(
             archer_armor,
-            Identifier.of(ArmoryMod.NAMESPACE, "archer"),
+            Identifier.of(ArmoryMod.NAMESPACE, "strider_armor"),
             durability,
             5,
             Armor.CustomItem::new,
@@ -301,8 +301,8 @@ public class ArmorSets {
                             .add(damageMultiplier(arrow_damage))
                             .add(hasteMultiplier(arrow_haste))
             ),
-            commonSettings(SetBonuses.archer.id()) )
-            .translatedName("Archer Helm", "Archer Chestplate", "Archer Leggings", "Archer Boots");
+            commonSettings(SetBonuses.strider.id()) )
+            .translatedName("Strider Hood", "Strider Tunic", "Strider Leggings", "Strider Boots");
 
     // Other name options: Scarlet, Crimson, Azure
 
@@ -353,9 +353,9 @@ public class ArmorSets {
             commonSettings(SetBonuses.scarlet.id()) )
             .translatedName("Scarlet Hat", "Scarlet Robe", "Scarlet Breeches", "Scarlet Boots");
 
-    public static final Armor.Entry azure = create(
+    public static final Armor.Entry glacier = create(
             wizard_robe,
-            Identifier.of(ArmoryMod.NAMESPACE, "azure_robe"),
+            Identifier.of(ArmoryMod.NAMESPACE, "glacier_robe"),
             durability,
             5,
             Armor.CustomItem::new,
@@ -374,7 +374,7 @@ public class ArmorSets {
                             .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, crit_damage_t3))
             ),
             commonSettings(SetBonuses.glacier.id()) )
-            .translatedName("Azure Hat", "Azure Robe", "Azure Breeches", "Azure Boots");
+            .translatedName("Glacier Hat", "Glacier Robe", "Glacier Breeches", "Glacier Boots");
 
     public static void register(Map<String, ArmorSetConfig> configs) {
         Armor.register(configs, entries, Group.KEY);

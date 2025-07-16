@@ -49,19 +49,19 @@
       "required": false
     },
     {
-      "id": "armory_rpgs:azure_robe_head",
+      "id": "armory_rpgs:glacier_robe_head",
       "required": false
     },
     {
-      "id": "armory_rpgs:azure_robe_chest",
+      "id": "armory_rpgs:glacier_robe_chest",
       "required": false
     },
     {
-      "id": "armory_rpgs:azure_robe_legs",
+      "id": "armory_rpgs:glacier_robe_legs",
       "required": false
     },
     {
-      "id": "armory_rpgs:azure_robe_feet",
+      "id": "armory_rpgs:glacier_robe_feet",
       "required": false
     }
   ]

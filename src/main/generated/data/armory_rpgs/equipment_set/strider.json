@@ -6,7 +6,7 @@
           {
             "type": "ranged_weapon:haste",
             "amount": 0.1,
-            "id": "armory_rpgs:archer",
+            "id": "armory_rpgs:strider",
             "operation": "add_multiplied_base",
             "slot": "armor"
           }
@@ -25,10 +25,10 @@
     }
   ],
   "items": [
-    "armory_rpgs:archer_head",
-    "armory_rpgs:archer_chest",
-    "armory_rpgs:archer_legs",
-    "armory_rpgs:archer_feet"
+    "armory_rpgs:strider_armor_head",
+    "armory_rpgs:strider_armor_chest",
+    "armory_rpgs:strider_armor_legs",
+    "armory_rpgs:strider_armor_feet"
   ],
-  "name": "archer"
+  "name": "strider"
 }

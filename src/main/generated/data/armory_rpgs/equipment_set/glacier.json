@@ -25,10 +25,10 @@
     }
   ],
   "items": [
-    "armory_rpgs:azure_robe_head",
-    "armory_rpgs:azure_robe_chest",
-    "armory_rpgs:azure_robe_legs",
-    "armory_rpgs:azure_robe_feet"
+    "armory_rpgs:glacier_robe_head",
+    "armory_rpgs:glacier_robe_chest",
+    "armory_rpgs:glacier_robe_legs",
+    "armory_rpgs:glacier_robe_feet"
   ],
   "name": "glacier"
 }

@@ -28,12 +28,20 @@ public class CustomArmorRenderer extends AzArmorRenderer {
         return new CustomArmorRenderer("avatar_robe", "avatar_robe");
     }
 
+    public static CustomArmorRenderer strider_armor() {
+        return new CustomArmorRenderer("strider_armor", "strider_armor");
+    }
+
     public static CustomArmorRenderer astral_robe() {
         return trisifal("astral_robe");
     }
 
     public static CustomArmorRenderer scarlet_robe() {
         return trisifal("scarlet_robe");
+    }
+
+    public static CustomArmorRenderer glacier_robe() {
+        return trisifal("glacier_robe");
     }
 
     private static CustomArmorRenderer trisifal(String texture) {

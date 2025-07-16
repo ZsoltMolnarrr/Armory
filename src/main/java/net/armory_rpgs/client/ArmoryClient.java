@@ -27,6 +27,8 @@ public class ArmoryClient implements ClientModInitializer {
         registerArmorRenderer(ArmorSets.avatar.armorSet(), CustomArmorRenderer::avatar_robe);
         registerArmorRenderer(ArmorSets.scarlet.armorSet(), CustomArmorRenderer::scarlet_robe);
         registerArmorRenderer(ArmorSets.astral.armorSet(), CustomArmorRenderer::astral_robe);
+        registerArmorRenderer(ArmorSets.glacier.armorSet(), CustomArmorRenderer::glacier_robe);
+        registerArmorRenderer(ArmorSets.strider.armorSet(), CustomArmorRenderer::strider_armor);
     }
 
     private static void registerArmorRenderer(Armor.Set set, Supplier<AzArmorRenderer> armorRendererSupplier) {

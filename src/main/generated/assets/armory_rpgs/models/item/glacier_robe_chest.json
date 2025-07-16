@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "armory_rpgs:item/azure_robe_chest"
+    "layer0": "armory_rpgs:item/glacier_robe_chest"
   }
 }
