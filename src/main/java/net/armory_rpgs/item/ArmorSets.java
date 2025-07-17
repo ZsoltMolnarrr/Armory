@@ -171,141 +171,6 @@ public class ArmorSets {
         });
     }
 
-    public static final Armor.Entry justicar = create(
-            paladin_armor,
-            Identifier.of(ArmoryMod.NAMESPACE, "justicar_armor"),
-            durability,
-            5,
-            Armor.CustomItem::new,
-            ArmorSetConfig.with(
-                    new ArmorSetConfig.Piece(3)
-                            .add(toughnessBonus(plate_toughness))
-                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_spell_power)),
-                    new ArmorSetConfig.Piece(8)
-                            .add(toughnessBonus(plate_toughness))
-                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_spell_power)),
-                    new ArmorSetConfig.Piece(6)
-                            .add(toughnessBonus(plate_toughness))
-                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_spell_power)),
-                    new ArmorSetConfig.Piece(3)
-                            .add(toughnessBonus(plate_toughness))
-                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_spell_power))
-            ),
-            commonSettings(SetBonuses.justicar.id()) )
-            .translatedName("Justicar Faceguard", "Justicar Chestplate", "Justicar Legguards", "Justicar Boots");
-
-
-    public static final Armor.Entry avatar = create(
-            priest_robe,
-            Identifier.of(ArmoryMod.NAMESPACE, "avatar_robe"),
-            durability,
-            5,
-            Armor.CustomItem::new,
-            ArmorSetConfig.with(
-                    new ArmorSetConfig.Piece(1)
-                            .addAll(List.of(
-                                    AttributeModifier.multiply(SpellSchools.HEALING.id, caster_spell_power),
-                                    AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, priest_haste)
-                            )),
-                    new ArmorSetConfig.Piece(3)
-                            .addAll(List.of(
-                                    AttributeModifier.multiply(SpellSchools.HEALING.id, caster_spell_power),
-                                    AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, priest_haste)
-                            )),
-                    new ArmorSetConfig.Piece(2)
-                            .addAll(List.of(
-                                    AttributeModifier.multiply(SpellSchools.HEALING.id, caster_spell_power),
-                                    AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, priest_haste)
-                            )),
-                    new ArmorSetConfig.Piece(1)
-                            .addAll(List.of(
-                                    AttributeModifier.multiply(SpellSchools.HEALING.id, caster_spell_power),
-                                    AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, priest_haste)
-                            ))
-            ),
-            commonSettings(SetBonuses.avatar.id()) )
-            .translatedName("Avatar Cowl", "Avatar Vestment", "Avatar Breeches", "Avatar Boots");
-
-
-    public static final Armor.Entry deathmantle = create(
-            rogue_armor,
-            Identifier.of(ArmoryMod.NAMESPACE, "deathmantle_armor"),
-            durability,
-            5,
-            Armor.CustomItem::new,
-            ArmorSetConfig.with(
-                    new ArmorSetConfig.Piece(2)
-                            .add(movementSpeed(rogue_speed))
-                            .add(hasteMultiplier(rogue_haste))
-                            .add(damageMultiplier(rogue_damage)),
-                    new ArmorSetConfig.Piece(4)
-                            .add(movementSpeed(rogue_speed))
-                            .add(hasteMultiplier(rogue_haste))
-                            .add(damageMultiplier(rogue_damage)),
-                    new ArmorSetConfig.Piece(4)
-                            .add(movementSpeed(rogue_speed))
-                            .add(hasteMultiplier(rogue_haste))
-                            .add(damageMultiplier(rogue_damage)),
-                    new ArmorSetConfig.Piece(2)
-                            .add(movementSpeed(rogue_speed))
-                            .add(hasteMultiplier(rogue_haste))
-                            .add(damageMultiplier(rogue_damage))
-            ),
-            commonSettings(SetBonuses.deathmantle.id()) )
-            .translatedName("Deathmantle Hood", "Deathmantle Tunic", "Deathmantle Leggings", "Deathmantle Boots");
-
-    public static final Armor.Entry destroyer = create(
-            warrior_armor,
-            Identifier.of(ArmoryMod.NAMESPACE, "destroyer_armor"),
-            durability,
-            5,
-            Armor.CustomItem::new,
-            ArmorSetConfig.with(
-                    new ArmorSetConfig.Piece(3)
-                            .add(damageMultiplier(warrior_damage))
-                            .add(toughnessBonus(plate_toughness))
-                            .add(knockbackBonus(warrior_knockback)),
-                    new ArmorSetConfig.Piece(8)
-                            .add(damageMultiplier(warrior_damage))
-                            .add(toughnessBonus(plate_toughness))
-                            .add(knockbackBonus(warrior_knockback)),
-                    new ArmorSetConfig.Piece(6)
-                            .add(damageMultiplier(warrior_damage))
-                            .add(toughnessBonus(plate_toughness))
-                            .add(knockbackBonus(warrior_knockback)),
-                    new ArmorSetConfig.Piece(3)
-                            .add(damageMultiplier(warrior_damage))
-                            .add(toughnessBonus(plate_toughness))
-                            .add(knockbackBonus(warrior_knockback))
-            ),
-            commonSettings(SetBonuses.destroyer.id()) )
-            .translatedName("Destroyer Greathelm", "Destroyer Chestplate", "Destroyer Greaves", "Destroyer Boots");
-
-    public static final Armor.Entry strider = create(
-            archer_armor,
-            Identifier.of(ArmoryMod.NAMESPACE, "strider_armor"),
-            durability,
-            5,
-            Armor.CustomItem::new,
-            ArmorSetConfig.with(
-                    new ArmorSetConfig.Piece(2)
-                            .add(damageMultiplier(arrow_damage))
-                            .add(hasteMultiplier(arrow_haste)),
-                    new ArmorSetConfig.Piece(4)
-                            .add(damageMultiplier(arrow_damage))
-                            .add(hasteMultiplier(arrow_haste)),
-                    new ArmorSetConfig.Piece(4)
-                            .add(damageMultiplier(arrow_damage))
-                            .add(hasteMultiplier(arrow_haste)),
-                    new ArmorSetConfig.Piece(2)
-                            .add(damageMultiplier(arrow_damage))
-                            .add(hasteMultiplier(arrow_haste))
-            ),
-            commonSettings(SetBonuses.strider.id()) )
-            .translatedName("Strider Hood", "Strider Tunic", "Strider Leggings", "Strider Boots");
-
-    // Other name options: Scarlet, Crimson, Azure
-
     public static final Armor.Entry astral = create(
             wizard_robe,
             Identifier.of(ArmoryMod.NAMESPACE, "astral_robe"),
@@ -375,6 +240,137 @@ public class ArmorSets {
             ),
             commonSettings(SetBonuses.glacier.id()) )
             .translatedName("Glacier Hat", "Glacier Robe", "Glacier Breeches", "Glacier Boots");
+
+    public static final Armor.Entry avatar = create(
+            priest_robe,
+            Identifier.of(ArmoryMod.NAMESPACE, "avatar_robe"),
+            durability,
+            5,
+            Armor.CustomItem::new,
+            ArmorSetConfig.with(
+                    new ArmorSetConfig.Piece(1)
+                            .addAll(List.of(
+                                    AttributeModifier.multiply(SpellSchools.HEALING.id, caster_spell_power),
+                                    AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, priest_haste)
+                            )),
+                    new ArmorSetConfig.Piece(3)
+                            .addAll(List.of(
+                                    AttributeModifier.multiply(SpellSchools.HEALING.id, caster_spell_power),
+                                    AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, priest_haste)
+                            )),
+                    new ArmorSetConfig.Piece(2)
+                            .addAll(List.of(
+                                    AttributeModifier.multiply(SpellSchools.HEALING.id, caster_spell_power),
+                                    AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, priest_haste)
+                            )),
+                    new ArmorSetConfig.Piece(1)
+                            .addAll(List.of(
+                                    AttributeModifier.multiply(SpellSchools.HEALING.id, caster_spell_power),
+                                    AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, priest_haste)
+                            ))
+            ),
+            commonSettings(SetBonuses.avatar.id()) )
+            .translatedName("Avatar Cowl", "Avatar Vestment", "Avatar Breeches", "Avatar Boots");
+
+    public static final Armor.Entry justicar = create(
+            paladin_armor,
+            Identifier.of(ArmoryMod.NAMESPACE, "justicar_armor"),
+            durability,
+            5,
+            Armor.CustomItem::new,
+            ArmorSetConfig.with(
+                    new ArmorSetConfig.Piece(3)
+                            .add(toughnessBonus(plate_toughness))
+                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_spell_power)),
+                    new ArmorSetConfig.Piece(8)
+                            .add(toughnessBonus(plate_toughness))
+                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_spell_power)),
+                    new ArmorSetConfig.Piece(6)
+                            .add(toughnessBonus(plate_toughness))
+                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_spell_power)),
+                    new ArmorSetConfig.Piece(3)
+                            .add(toughnessBonus(plate_toughness))
+                            .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_spell_power))
+            ),
+            commonSettings(SetBonuses.justicar.id()) )
+            .translatedName("Justicar Faceguard", "Justicar Chestplate", "Justicar Legguards", "Justicar Boots");
+
+    public static final Armor.Entry destroyer = create(
+            warrior_armor,
+            Identifier.of(ArmoryMod.NAMESPACE, "destroyer_armor"),
+            durability,
+            5,
+            Armor.CustomItem::new,
+            ArmorSetConfig.with(
+                    new ArmorSetConfig.Piece(3)
+                            .add(damageMultiplier(warrior_damage))
+                            .add(toughnessBonus(plate_toughness))
+                            .add(knockbackBonus(warrior_knockback)),
+                    new ArmorSetConfig.Piece(8)
+                            .add(damageMultiplier(warrior_damage))
+                            .add(toughnessBonus(plate_toughness))
+                            .add(knockbackBonus(warrior_knockback)),
+                    new ArmorSetConfig.Piece(6)
+                            .add(damageMultiplier(warrior_damage))
+                            .add(toughnessBonus(plate_toughness))
+                            .add(knockbackBonus(warrior_knockback)),
+                    new ArmorSetConfig.Piece(3)
+                            .add(damageMultiplier(warrior_damage))
+                            .add(toughnessBonus(plate_toughness))
+                            .add(knockbackBonus(warrior_knockback))
+            ),
+            commonSettings(SetBonuses.destroyer.id()) )
+            .translatedName("Destroyer Greathelm", "Destroyer Chestplate", "Destroyer Greaves", "Destroyer Boots");
+
+    public static final Armor.Entry deathmantle = create(
+            rogue_armor,
+            Identifier.of(ArmoryMod.NAMESPACE, "deathmantle_armor"),
+            durability,
+            5,
+            Armor.CustomItem::new,
+            ArmorSetConfig.with(
+                    new ArmorSetConfig.Piece(2)
+                            .add(movementSpeed(rogue_speed))
+                            .add(hasteMultiplier(rogue_haste))
+                            .add(damageMultiplier(rogue_damage)),
+                    new ArmorSetConfig.Piece(4)
+                            .add(movementSpeed(rogue_speed))
+                            .add(hasteMultiplier(rogue_haste))
+                            .add(damageMultiplier(rogue_damage)),
+                    new ArmorSetConfig.Piece(4)
+                            .add(movementSpeed(rogue_speed))
+                            .add(hasteMultiplier(rogue_haste))
+                            .add(damageMultiplier(rogue_damage)),
+                    new ArmorSetConfig.Piece(2)
+                            .add(movementSpeed(rogue_speed))
+                            .add(hasteMultiplier(rogue_haste))
+                            .add(damageMultiplier(rogue_damage))
+            ),
+            commonSettings(SetBonuses.deathmantle.id()) )
+            .translatedName("Deathmantle Hood", "Deathmantle Tunic", "Deathmantle Leggings", "Deathmantle Boots");
+
+    public static final Armor.Entry strider = create(
+            archer_armor,
+            Identifier.of(ArmoryMod.NAMESPACE, "strider_armor"),
+            durability,
+            5,
+            Armor.CustomItem::new,
+            ArmorSetConfig.with(
+                    new ArmorSetConfig.Piece(2)
+                            .add(damageMultiplier(arrow_damage))
+                            .add(hasteMultiplier(arrow_haste)),
+                    new ArmorSetConfig.Piece(4)
+                            .add(damageMultiplier(arrow_damage))
+                            .add(hasteMultiplier(arrow_haste)),
+                    new ArmorSetConfig.Piece(4)
+                            .add(damageMultiplier(arrow_damage))
+                            .add(hasteMultiplier(arrow_haste)),
+                    new ArmorSetConfig.Piece(2)
+                            .add(damageMultiplier(arrow_damage))
+                            .add(hasteMultiplier(arrow_haste))
+            ),
+            commonSettings(SetBonuses.strider.id()) )
+            .translatedName("Strider Hood", "Strider Tunic", "Strider Leggings", "Strider Boots");
 
     public static void register(Map<String, ArmorSetConfig> configs) {
         Armor.register(configs, entries, Group.KEY);

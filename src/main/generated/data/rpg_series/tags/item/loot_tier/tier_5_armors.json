@@ -17,22 +17,6 @@
       "required": false
     },
     {
-      "id": "armory_rpgs:deathmantle_armor_head",
-      "required": false
-    },
-    {
-      "id": "armory_rpgs:deathmantle_armor_chest",
-      "required": false
-    },
-    {
-      "id": "armory_rpgs:deathmantle_armor_legs",
-      "required": false
-    },
-    {
-      "id": "armory_rpgs:deathmantle_armor_feet",
-      "required": false
-    },
-    {
       "id": "armory_rpgs:destroyer_armor_head",
       "required": false
     },
@@ -49,6 +33,22 @@
       "required": false
     },
     {
+      "id": "armory_rpgs:deathmantle_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:deathmantle_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:deathmantle_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:deathmantle_armor_feet",
+      "required": false
+    },
+    {
       "id": "armory_rpgs:strider_armor_head",
       "required": false
     },
@@ -62,22 +62,6 @@
     },
     {
       "id": "armory_rpgs:strider_armor_feet",
-      "required": false
-    },
-    {
-      "id": "armory_rpgs:avatar_robe_head",
-      "required": false
-    },
-    {
-      "id": "armory_rpgs:avatar_robe_chest",
-      "required": false
-    },
-    {
-      "id": "armory_rpgs:avatar_robe_legs",
-      "required": false
-    },
-    {
-      "id": "armory_rpgs:avatar_robe_feet",
       "required": false
     },
     {
@@ -126,6 +110,22 @@
     },
     {
       "id": "armory_rpgs:glacier_robe_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:avatar_robe_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:avatar_robe_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:avatar_robe_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:avatar_robe_feet",
       "required": false
     }
   ]

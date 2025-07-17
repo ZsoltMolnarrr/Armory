@@ -16,6 +16,6 @@ public class Group {
     public static RegistryKey<ItemGroup> KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), ID);
     public static ItemGroup GROUP;
     public static Supplier<ItemStack> ICON = () -> {
-        return new ItemStack( ArmorSets.entries.get(0).armorSet().head );
+        return new ItemStack( ArmorSets.destroyer.armorSet().head );
     };
 }

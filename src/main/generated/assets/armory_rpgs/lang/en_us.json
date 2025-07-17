@@ -54,7 +54,7 @@
   "spell.armory_rpgs.improved_frost_shield.name": "Improved Frost Shield",
   "spell.armory_rpgs.improved_judgement.description": "Reduces cooldown of Judgement by {cooldown_duration_deduct} sec",
   "spell.armory_rpgs.improved_judgement.name": "Improved Judgement",
-  "spell.armory_rpgs.improved_meteor.description": "Meteor launches {extra_launch} extra projectile",
+  "spell.armory_rpgs.improved_meteor.description": "Reduces cooldown of Meteor by {cooldown_duration_deduct} sec",
   "spell.armory_rpgs.improved_meteor.name": "Improved Meteor",
   "spell.armory_rpgs.improved_shadow_step.description": "Reduces cooldown of Shadowstep by {cooldown_duration_deduct} sec",
   "spell.armory_rpgs.improved_shadow_step.name": "Improved Shadowstep",

@@ -1,12 +1,12 @@
 {
   "values": [
     "armory_rpgs:justicar_armor_head",
-    "armory_rpgs:deathmantle_armor_head",
     "armory_rpgs:destroyer_armor_head",
+    "armory_rpgs:deathmantle_armor_head",
     "armory_rpgs:strider_armor_head",
-    "armory_rpgs:avatar_robe_head",
     "armory_rpgs:astral_robe_head",
     "armory_rpgs:scarlet_robe_head",
-    "armory_rpgs:glacier_robe_head"
+    "armory_rpgs:glacier_robe_head",
+    "armory_rpgs:avatar_robe_head"
   ]
 }

@@ -228,14 +228,13 @@ public class ArmorySpells {
     private static Entry improved_meteor() {
         var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_meteor");
         var title = "Improved Meteor";
-        var description = "Meteor launches {extra_launch} extra projectile";
+        var description = "Reduces cooldown of Meteor by {cooldown_duration_deduct} sec";
         var spell = modifierSpellBase();
         spell.school = SpellSchools.ARCANE;
 
         var modifier = new Spell.Modifier();
         modifier.spell_pattern = "wizards:fire_meteor";
-        modifier.projectile_launch = Spell.LaunchProperties.EMPTY();
-        modifier.projectile_launch.extra_launch_count = 1;
+        modifier.cooldown_duration_deduct = 3;
         spell.modifiers = List.of(modifier);
 
         return new Entry(id, spell, title, description, null, Category.SPELL);
