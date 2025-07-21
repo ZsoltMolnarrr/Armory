@@ -3,6 +3,7 @@ package net.armory_rpgs.item;
 import net.armory_rpgs.ArmoryMod;
 import net.armory_rpgs.spell.ArmorySounds;
 import net.armory_rpgs.spell.SetBonuses;
+import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ArmorItem;
@@ -104,6 +105,19 @@ public class ArmorSets {
                 EntityAttributeModifier.Operation.ADD_VALUE);
     }
 
+    private static AttributeModifier rangedDamageMultiplier(float value) {
+        return new AttributeModifier(
+                EntityAttributes_RangedWeapon.DAMAGE.id,
+                value,
+                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+    }
+
+    private static AttributeModifier rangedHasteMultiplier(float value) {
+        return new AttributeModifier(
+                EntityAttributes_RangedWeapon.HASTE.id,
+                value,
+                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+    }
 
     public static final int enchantability = 18;
 
@@ -357,17 +371,17 @@ public class ArmorSets {
             Armor.CustomItem::new,
             ArmorSetConfig.with(
                     new ArmorSetConfig.Piece(2)
-                            .add(damageMultiplier(arrow_damage))
-                            .add(hasteMultiplier(arrow_haste)),
+                            .add(rangedDamageMultiplier(arrow_damage))
+                            .add(rangedHasteMultiplier(arrow_haste)),
                     new ArmorSetConfig.Piece(4)
-                            .add(damageMultiplier(arrow_damage))
-                            .add(hasteMultiplier(arrow_haste)),
+                            .add(rangedDamageMultiplier(arrow_damage))
+                            .add(rangedHasteMultiplier(arrow_haste)),
                     new ArmorSetConfig.Piece(4)
-                            .add(damageMultiplier(arrow_damage))
-                            .add(hasteMultiplier(arrow_haste)),
+                            .add(rangedDamageMultiplier(arrow_damage))
+                            .add(rangedHasteMultiplier(arrow_haste)),
                     new ArmorSetConfig.Piece(2)
-                            .add(damageMultiplier(arrow_damage))
-                            .add(hasteMultiplier(arrow_haste))
+                            .add(rangedDamageMultiplier(arrow_damage))
+                            .add(rangedHasteMultiplier(arrow_haste))
             ),
             commonSettings(SetBonuses.strider.id()) )
             .translatedName("Strider Hood", "Strider Tunic", "Strider Leggings", "Strider Boots");
