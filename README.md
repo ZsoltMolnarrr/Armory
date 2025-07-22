@@ -1,6 +1,6 @@
 ![Title](.github/title.png)
 
-### 🦾 Legendary armor sets
+### 👑 Legendary armor sets
 
 This is a content mod for Spell Engine.
 

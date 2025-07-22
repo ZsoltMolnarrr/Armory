@@ -1,17 +1,7 @@
 package net.armory_rpgs.spell;
 
-import net.armory_rpgs.ArmoryMod;
-import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.util.Identifier;
-import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.config.ConfigFile;
-import net.spell_engine.api.config.EffectConfig;
 import net.spell_engine.api.effect.*;
-import net.spell_engine.api.entity.SpellEngineAttributes;
-import net.spell_power.api.SpellPowerMechanics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,22 +13,7 @@ public class ArmoryEffects {
         return entry;
     }
 
-//    public static Effects.Entry STUN = add(new Effects.Entry(Identifier.of(ArmoryMod.NAMESPACE,"stun"),
-//            "Stunned",
-//            "Cannot move or act.",
-//            new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x888800),
-//            new EffectConfig(List.of(
-//                    new AttributeModifier(
-//                            EntityAttributes.GENERIC_JUMP_STRENGTH.getIdAsString(),
-//                            0,
-//                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
-//                    )
-//            ))
-//    ));
-
     public static void register(ConfigFile.Effects config) {
-//        ActionImpairing.configure(STUN.effect, EntityActionsAllowed.STUN);
-
         for (var entry: entries) {
             Synchronized.configure(entry.effect, true);
         }

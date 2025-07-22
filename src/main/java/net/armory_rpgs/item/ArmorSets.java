@@ -387,6 +387,13 @@ public class ArmorSets {
             .translatedName("Strider Hood", "Strider Tunic", "Strider Leggings", "Strider Boots");
 
     public static void register(Map<String, ArmorSetConfig> configs) {
+//        for (var entry: entries) {
+//            System.out.println("ASD -> /isorender entity minecraft:armor_stand {ShowArms:1b,ArmorItems:[{id:\""
+//                    + entry.armorSet().idStrings().get(3)
+//                    + "\"},{id:\""+ entry.armorSet().idStrings().get(2)
+//                    + "\"},{id:\"" + entry.armorSet().idStrings().get(1)
+//                    +  "\"},{id:\"" + entry.armorSet().idStrings().get(0) +  "\"}]}");
+//        }
         Armor.register(configs, entries, Group.KEY);
     }
 }
