@@ -157,19 +157,19 @@ public class ArmorSets {
 
     private static final float plate_toughness = 1F;
 
-    private static final float caster_spell_power = 0.3F;
+    private static final float caster_spell_power = 0.35F;
     private static final float priest_haste = 0.05F;
     private static final float paladin_spell_power = 1.5F;
 
     public static final float rogue_speed = 0.05F;
     public static final float rogue_haste = 0.05F;
-    public static final float rogue_damage = 0.05F;
+    public static final float rogue_damage = 0.06F;
 
-    public static final float warrior_damage = 0.05F;
+    public static final float warrior_damage = 0.06F;
     public static final float warrior_knockback = 0.1F;
 
     public static final float arrow_haste = 0.05F;
-    public static final float arrow_damage = 0.1F;
+    public static final float arrow_damage = 0.12F;
 
     private static final float crit_damage_t3 = 0.1F;
     private static final float crit_chance_t3 = 0.02F;
