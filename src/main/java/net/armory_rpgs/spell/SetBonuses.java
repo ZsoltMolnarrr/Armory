@@ -88,7 +88,7 @@ public class SetBonuses {
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
                                 EntityAttributes.GENERIC_ATTACK_DAMAGE,
-                                0.1,
+                                0.05,
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id)
                         ),
@@ -106,7 +106,7 @@ public class SetBonuses {
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
                                 EntityAttributes.GENERIC_ATTACK_DAMAGE,
-                                0.1,
+                                0.05,
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id)
                         ),
@@ -123,8 +123,8 @@ public class SetBonuses {
                 () -> { return ArmorSets.strider.armorSet().pieceIds(); },
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
-                                EntityAttributes_RangedWeapon.HASTE.entry,
-                                0.1,
+                                EntityAttributes_RangedWeapon.DAMAGE.entry,
+                                0.08,
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id)
                         ),

@@ -4,8 +4,8 @@
       "attributes": {
         "modifiers": [
           {
-            "type": "ranged_weapon:haste",
-            "amount": 0.1,
+            "type": "ranged_weapon:damage",
+            "amount": 0.08,
             "id": "armory_rpgs:strider",
             "operation": "add_multiplied_base",
             "slot": "armor"

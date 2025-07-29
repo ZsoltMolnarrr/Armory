@@ -241,16 +241,16 @@ public class ArmorSets {
             ArmorSetConfig.with(
                     new ArmorSetConfig.Piece(1)
                             .add(AttributeModifier.multiply(SpellSchools.FROST.id, caster_spell_power))
-                            .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, crit_damage_t3)),
+                            .add(AttributeModifier.multiply(SpellPowerMechanics.CRITICAL_DAMAGE.id, crit_damage_t3)),
                     new ArmorSetConfig.Piece(3)
                             .add(AttributeModifier.multiply(SpellSchools.FROST.id, caster_spell_power))
-                            .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, crit_damage_t3)),
+                            .add(AttributeModifier.multiply(SpellPowerMechanics.CRITICAL_DAMAGE.id, crit_damage_t3)),
                     new ArmorSetConfig.Piece(2)
                             .add(AttributeModifier.multiply(SpellSchools.FROST.id, caster_spell_power))
-                            .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, crit_damage_t3)),
+                            .add(AttributeModifier.multiply(SpellPowerMechanics.CRITICAL_DAMAGE.id, crit_damage_t3)),
                     new ArmorSetConfig.Piece(1)
                             .add(AttributeModifier.multiply(SpellSchools.FROST.id, caster_spell_power))
-                            .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, crit_damage_t3))
+                            .add(AttributeModifier.multiply(SpellPowerMechanics.CRITICAL_DAMAGE.id, crit_damage_t3))
             ),
             commonSettings(SetBonuses.glacier.id()) )
             .translatedName("Glacier Hat", "Glacier Robe", "Glacier Breeches", "Glacier Boots");
