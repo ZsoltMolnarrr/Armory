@@ -15,7 +15,7 @@ public class ArmoryMod implements ModInitializer {
     public static final String NAMESPACE = "armory_rpgs";
     public static final String DIRECTORY = NAMESPACE;
     public static ConfigManager<ConfigFile.Equipment> itemConfig = new ConfigManager<>
-            ("equipment", new ConfigFile.Equipment())
+            ("equipment_v2", new ConfigFile.Equipment())
             .builder()
             .setDirectory(DIRECTORY)
             .sanitize(true)

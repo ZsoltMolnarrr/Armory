@@ -18,6 +18,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.spell_engine.api.config.ArmorSetConfig;
 import net.spell_engine.api.config.AttributeModifier;
+import net.spell_engine.api.entity.SpellEngineAttributes;
 import net.spell_engine.api.item.Equipment;
 import net.spell_engine.api.item.armor.Armor;
 import net.spell_engine.api.spell.SpellDataComponents;
@@ -98,6 +99,13 @@ public class ArmorSets {
                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
     }
 
+    private static AttributeModifier evasionBonus(float value) {
+        return new AttributeModifier(
+                SpellEngineAttributes.EVASION_CHANCE.id.toString(),
+                value,
+                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+    }
+
     private static AttributeModifier toughnessBonus(float value) {
         return new AttributeModifier(
                 ARMOR_TOUGHNESS_ID.toString(),
@@ -161,7 +169,7 @@ public class ArmorSets {
     private static final float priest_haste = 0.05F;
     private static final float paladin_spell_power = 1.5F;
 
-    public static final float rogue_speed = 0.05F;
+    public static final float rogue_evasion = 0.05F;
     public static final float rogue_haste = 0.05F;
     public static final float rogue_damage = 0.06F;
 
@@ -344,19 +352,19 @@ public class ArmorSets {
             Armor.CustomItem::new,
             ArmorSetConfig.with(
                     new ArmorSetConfig.Piece(2)
-                            .add(movementSpeed(rogue_speed))
+                            .add(evasionBonus(rogue_evasion))
                             .add(hasteMultiplier(rogue_haste))
                             .add(damageMultiplier(rogue_damage)),
                     new ArmorSetConfig.Piece(4)
-                            .add(movementSpeed(rogue_speed))
+                            .add(evasionBonus(rogue_evasion))
                             .add(hasteMultiplier(rogue_haste))
                             .add(damageMultiplier(rogue_damage)),
                     new ArmorSetConfig.Piece(4)
-                            .add(movementSpeed(rogue_speed))
+                            .add(evasionBonus(rogue_evasion))
                             .add(hasteMultiplier(rogue_haste))
                             .add(damageMultiplier(rogue_damage)),
                     new ArmorSetConfig.Piece(2)
-                            .add(movementSpeed(rogue_speed))
+                            .add(evasionBonus(rogue_evasion))
                             .add(hasteMultiplier(rogue_haste))
                             .add(damageMultiplier(rogue_damage))
             ),
