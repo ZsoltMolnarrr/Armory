@@ -4,17 +4,14 @@ import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRenderer;
 import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRendererRegistry;
 import net.armory_rpgs.client.armor.CustomArmorRenderer;
 import net.armory_rpgs.item.ArmorSets;
-import net.fabricmc.api.ClientModInitializer;
 import net.armory_rpgs.spell.ArmorySpells;
 import net.spell_engine.api.item.armor.Armor;
 import net.spell_engine.client.gui.SpellTooltip;
 
 import java.util.function.Supplier;
 
-public class ArmoryClient implements ClientModInitializer {
-
-    @Override
-    public void onInitializeClient() {
+public class ArmoryClient {
+    public static void init() {
         for (var entry: ArmorySpells.all) {
             if (entry.mutator() != null) {
                 SpellTooltip.addDescriptionMutator(entry.id(), entry.mutator());

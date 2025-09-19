@@ -7,14 +7,14 @@
   "authors": [ "Daedelus" ],
   "contact": {},
   "license": "All-Rights-Reserved",
-  "icon": "assets/armory_rpgs/icon.png",
+  "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
-      "net.armory_rpgs.client.ArmoryClient"
+      "net.armory.fabric.client.FabricClientMod"
     ],
     "main": [
-      "net.armory_rpgs.ArmoryMod"
+      "net.armory.fabric.FabricMod"
     ],
     "fabric-datagen": [
       "net.armory_rpgs.datagen.ArmoryDataGen"

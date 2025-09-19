@@ -1,7 +1,6 @@
 package net.armory_rpgs;
 
 import net.armory_rpgs.item.ArmorSets;
-import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -9,9 +8,9 @@ import net.minecraft.text.Text;
 import net.armory_rpgs.item.Group;
 import net.armory_rpgs.spell.ArmorySounds;
 import net.spell_engine.api.config.ConfigFile;
-import net.tinyconfig.ConfigManager;
+import net.tiny_config.ConfigManager;
 
-public class ArmoryMod implements ModInitializer {
+public class ArmoryMod {
     public static final String NAMESPACE = "armory_rpgs";
     public static final String DIRECTORY = NAMESPACE;
     public static ConfigManager<ConfigFile.Equipment> itemConfig = new ConfigManager<>
@@ -27,8 +26,7 @@ public class ArmoryMod implements ModInitializer {
             .sanitize(true)
             .build();
 
-    @Override
-    public void onInitialize() {
+    public static void init() {
         itemConfig.refresh();
         effectConfig.refresh();
         ArmorySounds.register();
