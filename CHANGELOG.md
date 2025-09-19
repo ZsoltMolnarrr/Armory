@@ -1,3 +1,7 @@
+# 1.1.0
+
+- Migrate to Architectury
+
 # 1.0.3
 
 - Rogue armor pieces now provide Evade Chance instead of Movement Speed bonus
