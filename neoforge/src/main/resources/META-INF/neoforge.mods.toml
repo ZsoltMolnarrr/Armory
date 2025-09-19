@@ -1,29 +1,49 @@
 modLoader = "javafml"
 loaderVersion = "[4,)"
-#issueTrackerURL = ""
-license = "Insert License Here"
+license = "All Rights Reserved"
 
 [[mods]]
 modId = "armory_rpgs"
 version = "${version}"
-displayName = "Armory"
-authors = "Me!"
+displayName = "Armory (RPG Series)"
+authors = "Daedelus"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+Epic armor sets, with unique designs and set bonuses.
 '''
-#logoFile = ""
+logoFile = "icon.png"
 
 [[dependencies.armory_rpgs]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.1,)"
+versionRange = "[${neoforge_version},)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.armory_rpgs]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21.1,)"
+versionRange = "[${minecraft_compat_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.armory_rpgs]]
+modId = "spell_engine"
+type = "required"
+versionRange = "[${spell_engine_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.armory_rpgs]]
+modId = "ranged_weapon_api"
+type = "required"
+versionRange = "[${ranged_weapon_api_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.armory_rpgs]]
+modId = "azurelibarmor"
+type = "required"
+versionRange = "[${azure_lib_version},)"
 ordering = "NONE"
 side = "BOTH"
 
