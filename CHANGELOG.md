@@ -1,3 +1,7 @@
+# 1.1.1
+
+- Fix config on NeoForge 
+
 # 1.1.0
 
 - Migrate to Architectury

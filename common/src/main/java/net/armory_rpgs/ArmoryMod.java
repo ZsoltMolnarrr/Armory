@@ -24,9 +24,6 @@ public class ArmoryMod {
     public static void init() {
         itemConfig.refresh();
         effectConfig.refresh();
-        // ArmoryEffects.register(effectConfig.value);
-        effectConfig.save();
-        itemConfig.save();
     }
 
     public static void registerSounds() {
@@ -35,10 +32,11 @@ public class ArmoryMod {
 
     public static void registerItems() {
         ArmorSets.register(itemConfig.value.armor_sets);
+        itemConfig.save();
     }
 
     public static void registerEffects() {
         // ArmoryEffects.register(effectConfig.value);
-        // effectConfig.save(); // Already saved in init()
+        effectConfig.save();
     }
 }
