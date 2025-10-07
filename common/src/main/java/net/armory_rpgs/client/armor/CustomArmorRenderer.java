@@ -3,6 +3,7 @@ package net.armory_rpgs.client.armor;
 import mod.azure.azurelibarmor.rewrite.render.AzRendererConfig;
 import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRenderer;
 import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRendererConfig;
+import mod.azure.azurelibarmor.rewrite.render.layer.AzAutoGlowingLayer;
 import net.armory_rpgs.ArmoryMod;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -51,7 +52,9 @@ public class CustomArmorRenderer extends AzArmorRenderer {
     public CustomArmorRenderer(String modelName, String textureName) {
         super(AzArmorRendererConfig.builder(
                 Identifier.of(ArmoryMod.NAMESPACE, "geo/" + modelName + ".geo.json"),
-                Identifier.of(ArmoryMod.NAMESPACE, "textures/armor/" + textureName + ".png")
-        ).build());
+                Identifier.of(ArmoryMod.NAMESPACE, "textures/armor/" + textureName + ".png"))
+                .addRenderLayer(new AzAutoGlowingLayer<>())
+                .build()
+        );
     }
 }

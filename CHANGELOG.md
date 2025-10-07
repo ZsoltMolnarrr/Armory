@@ -1,3 +1,7 @@
+# 1.2.0
+
+- Updated armor models: Justicar
+
 # 1.1.1
 
 - Fix config on NeoForge 
