@@ -15,6 +15,7 @@ architectury {
 fabricApi {
     configureDataGeneration() {
         client = true
+        modId = "armory_rpgs"
         outputDirectory = project(':common').file('src/main/generated')
     }
 }

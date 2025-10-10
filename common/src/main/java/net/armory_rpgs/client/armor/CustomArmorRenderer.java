@@ -19,7 +19,7 @@ public class CustomArmorRenderer extends AzArmorRenderer {
     }
 
     public static CustomArmorRenderer destroyer_armor() {
-        return new CustomArmorRenderer("destroyer_armor", "destroyer_armor");
+        return new CustomArmorRenderer("destroyer_armor", "destroyer_armor", "destroyer_armor_generic");
     }
 
     public static CustomArmorRenderer deathmantle_armor() {

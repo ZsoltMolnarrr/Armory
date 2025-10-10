@@ -23,6 +23,8 @@
   "item.armory_rpgs.destroyer_armor_feet": "Destroyer Boots",
   "item.armory_rpgs.destroyer_armor_head": "Destroyer Greathelm",
   "item.armory_rpgs.destroyer_armor_legs": "Destroyer Greaves",
+  "item.armory_rpgs.fallen_hero_upgrade": "Smithing Template",
+  "item.armory_rpgs.fallen_vanquisher_upgrade": "Smithing Template",
   "item.armory_rpgs.glacier_robe_chest": "Glacier Robe",
   "item.armory_rpgs.glacier_robe_feet": "Glacier Boots",
   "item.armory_rpgs.glacier_robe_head": "Glacier Hat",
@@ -35,6 +37,14 @@
   "item.armory_rpgs.scarlet_robe_feet": "Scarlet Boots",
   "item.armory_rpgs.scarlet_robe_head": "Scarlet Hat",
   "item.armory_rpgs.scarlet_robe_legs": "Scarlet Breeches",
+  "item.armory_rpgs.smithing_template.fallen_hero_upgrade.additions_slot_description": "Add ingot or crystal",
+  "item.armory_rpgs.smithing_template.fallen_hero_upgrade.applies_to": "Paladin, Priest, Rogue, and Warrior armor",
+  "item.armory_rpgs.smithing_template.fallen_hero_upgrade.base_slot_description": "Add a piece of armor",
+  "item.armory_rpgs.smithing_template.fallen_hero_upgrade.ingredients": "???",
+  "item.armory_rpgs.smithing_template.fallen_vanquisher_upgrade.additions_slot_description": "Add ingot or crystal",
+  "item.armory_rpgs.smithing_template.fallen_vanquisher_upgrade.applies_to": "Arcane Wizard, Fire Wizard, Frost Wizard, and Archer armor",
+  "item.armory_rpgs.smithing_template.fallen_vanquisher_upgrade.base_slot_description": "Add a piece of armor",
+  "item.armory_rpgs.smithing_template.fallen_vanquisher_upgrade.ingredients": "???",
   "item.armory_rpgs.strider_armor_chest": "Strider Tunic",
   "item.armory_rpgs.strider_armor_feet": "Strider Boots",
   "item.armory_rpgs.strider_armor_head": "Strider Hood",
@@ -59,5 +69,7 @@
   "spell.armory_rpgs.improved_shadow_step.description": "Reduces cooldown of Shadowstep by {cooldown_duration_deduct} sec",
   "spell.armory_rpgs.improved_shadow_step.name": "Improved Shadowstep",
   "spell.armory_rpgs.improved_whirlwind.description": "Reduces cooldown of Whirlwind by {cooldown_duration_deduct} sec",
-  "spell.armory_rpgs.improved_whirlwind.name": "Improved Whirlwind"
+  "spell.armory_rpgs.improved_whirlwind.name": "Improved Whirlwind",
+  "upgrade.armory_rpgs.fallen_hero_upgrade": "Fallen Hero’s Sigil",
+  "upgrade.armory_rpgs.fallen_vanquisher_upgrade": "Fallen Vanquisher’s Sigil"
 }

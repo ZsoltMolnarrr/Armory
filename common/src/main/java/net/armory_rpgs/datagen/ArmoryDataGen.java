@@ -109,6 +109,14 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
             translationBuilder.add(Group.translationKey, "Armory");
 
+            SmithingUpgrades.ENTRIES.forEach(entry -> {
+                translationBuilder.add(entry.item().get().getTranslationKey(), entry.translations().itemName());
+                translationBuilder.add(entry.upgradeTranslationKey(), entry.translations().upgradeName());
+                translationBuilder.add(entry.baseSlotDescriptionTranslationKey(), entry.translations().baseSlotDescription());
+                translationBuilder.add(entry.additionsSlotDescriptionTranslationKey(), entry.translations().additionsSlotDescription());
+                translationBuilder.add(entry.appliesToTranslationKey(), entry.appliesToClassesTranslation());
+                translationBuilder.add(entry.ingredientsTranslationKey(), entry.translations().ingredients());
+            });
             ArmorSets.entries.forEach(entry -> {
                 var translations = new LinkedHashMap<String, String>();
                 translations.put(((Item)entry.armorSet().head).getTranslationKey(), entry.armorSet().headTranslation);
@@ -146,6 +154,9 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
 
         @Override
         public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+            SmithingUpgrades.ENTRIES.forEach(entry -> {
+                itemModelGenerator.register(entry.item().get(), Models.GENERATED);
+            });
             ArmorSets.entries.forEach(entry -> {
                 for (var piece: entry.armorSet().pieces()) {
                     itemModelGenerator.register((Item) piece, Models.GENERATED);
