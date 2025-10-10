@@ -1,8 +1,0 @@
-// 1.21.1	2025-07-29T15:44:38.051216	Armory (RPG Series)/Tags for minecraft:item
-f7fd531f8e6f4bde62587e0b16d282aa8cdf36a0 data/rpg_series/tags/item/armor_type/magic.json
-1e3812f938246ff8c3f4033c332e349d82ac76ff data/minecraft/tags/item/leg_armor.json
-a7e3d7f28321a47e63c43f34ba6bb7d6c2627abd data/minecraft/tags/item/foot_armor.json
-ee87ee800efd03512806ac8f2bcd42889e2a527d data/rpg_series/tags/item/loot_tier/tier_5_armors.json
-dd09c28c714e3cb2be308d19b4e4b529af79ec68 data/minecraft/tags/item/head_armor.json
-28466cae82a8ca3c391eacd453d2921bce3e4983 data/minecraft/tags/item/chest_armor.json
-0705a70289b08b8e56b2c79999b4f9e462e4fd97 data/rpg_series/tags/item/armor_type/melee.json
