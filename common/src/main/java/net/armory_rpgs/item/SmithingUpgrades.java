@@ -80,7 +80,8 @@ public class SmithingUpgrades {
             return Util.createTranslationKey("item", Identifier.of(ArmoryMod.NAMESPACE, "smithing_template." + name + "_upgrade.ingredients"));
         }
         public Text ingredientsText() {
-            return Text.translatable(ingredientsTranslationKey()).formatted(DESCRIPTION_FORMATTING);
+            var key = ingedientItem != null ? ingedientItem.getTranslationKey() : ingredientsTranslationKey();
+            return Text.translatable(key).formatted(DESCRIPTION_FORMATTING);
         }
 
         public String baseSlotDescriptionTranslationKey() {

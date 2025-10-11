@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:emerald"
+  },
+  "base": {
+    "item": "paladins:crusader_armor_legs"
+  },
+  "result": {
+    "count": 1,
+    "id": "armory_rpgs:justicar_armor_legs"
+  },
+  "template": {
+    "item": "armory_rpgs:fallen_hero_upgrade"
+  }
+}

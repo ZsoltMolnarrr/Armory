@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:emerald"
+  },
+  "base": {
+    "item": "archers:ranger_armor_feet"
+  },
+  "result": {
+    "count": 1,
+    "id": "armory_rpgs:strider_armor_feet"
+  },
+  "template": {
+    "item": "armory_rpgs:fallen_vanquisher_upgrade"
+  }
+}

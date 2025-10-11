@@ -1,6 +1,7 @@
 package net.armory_rpgs.datagen;
 
-import net.archers.item.Armors;
+import net.armory_rpgs.datagen.recipe.SmithingRecipeProvider;
+import net.armory_rpgs.datagen.recipe.SmithingUpgradeRecipe;
 import net.armory_rpgs.item.*;
 import net.armory_rpgs.spell.SetBonuses;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -55,6 +56,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         pack.addProvider(SoundGen::new);
         pack.addProvider(EquipmentSetGenerator::new);
         pack.addProvider(RecipeGenerator::new);
+        pack.addProvider(SmithGen::new);
     }
 
     private static List<Item> allArmorPieces() {
@@ -255,12 +257,12 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         public record Upgrade(Armor.Set from, Armor.Set to, Item material) {}
 
         public final Map<SmithingUpgrades.FightClass, List<Upgrade>> UPGRADES = Map.of(
-                SmithingUpgrades.FightClass.ARCHER, List.of(
-                        new Upgrade(
-                                Armors.archerArmorSet_T2,
-                                ArmorSets.strider.armorSet(),
-                                Items.EMERALD
-                        ))
+//                SmithingUpgrades.FightClass.ARCHER, List.of(
+//                        new Upgrade(
+//                                Armors.archerArmorSet_T2,
+//                                ArmorSets.strider.armorSet(),
+//                                Items.EMERALD
+//                        ))
         );
 
         @Override
@@ -291,6 +293,96 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
                     Ingredient.ofItems(new ItemConvertible[]{inputAddition}),
                     category,
                     result).criterion("has_template", conditionsFromItem(template)).offerTo(exporter, getItemPath(result) + "_smithing");
+        }
+    }
+
+    public static class SmithGen extends SmithingRecipeProvider {
+
+        public SmithGen(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+            super(dataOutput, registryLookup);
+        }
+
+        public record ArmorIdSet(String namespace, String name) {
+            public Identifier headId() {
+                return Identifier.of(namespace, name + "_" + EquipmentSlot.HEAD.asString().toLowerCase());
+            }
+            public Identifier chestId() {
+                return Identifier.of(namespace, name + "_" + EquipmentSlot.CHEST.asString().toLowerCase());
+            }
+            public Identifier legsId() {
+                return Identifier.of(namespace, name + "_" + EquipmentSlot.LEGS.asString().toLowerCase());
+            }
+            public Identifier feetId() {
+                return Identifier.of(namespace, name + "_" + EquipmentSlot.FEET.asString().toLowerCase());
+            }
+        }
+
+        public record Upgrade(ArmorIdSet from, Armor.Set to, Item material) {}
+
+        public final Map<SmithingUpgrades.FightClass, List<Upgrade>> UPGRADES = Map.of(
+                SmithingUpgrades.FightClass.ARCHER, List.of(
+                        new Upgrade(
+                                new ArmorIdSet("archers", "ranger_armor"),
+                                ArmorSets.strider.armorSet(),
+                                Items.EMERALD
+                        )),
+                SmithingUpgrades.FightClass.PALADIN, List.of(
+                        new Upgrade(
+                                new ArmorIdSet("paladins", "crusader_armor"),
+                                ArmorSets.justicar.armorSet(),
+                                Items.EMERALD
+                        ))
+        );
+
+
+        @Override
+        public void generateRecipes(Builder builder) {
+            for (var template: SmithingUpgrades.ENTRIES) {
+                for (var figthClass: template.classes()) {
+                    var upgrades = UPGRADES.get(figthClass);
+                    if (upgrades == null) continue;
+                    // Head
+                    for (var upgradeType: upgrades) {
+                        var builderEntry = SmithingUpgradeRecipe.ofStrings(
+                                template.id().toString(),
+                                upgradeType.from.headId().toString(),
+                                template.ingedientItem().toString(),
+                                upgradeType.to.idOf(upgradeType.to.head).toString()
+                        );
+                        builder.entries.add(new Entry(upgradeType.to.idOf(upgradeType.to.head), builderEntry));
+                    }
+                    // Chest
+                    for (var upgradeType: upgrades) {
+                        var builderEntry = SmithingUpgradeRecipe.ofStrings(
+                                template.id().toString(),
+                                upgradeType.from.chestId().toString(),
+                                template.ingedientItem().toString(),
+                                upgradeType.to.idOf(upgradeType.to.chest).toString()
+                        );
+                        builder.entries.add(new Entry(upgradeType.to.idOf(upgradeType.to.chest), builderEntry));
+                    }
+                    // Legs
+                    for (var upgradeType: upgrades) {
+                        var builderEntry = SmithingUpgradeRecipe.ofStrings(
+                                template.id().toString(),
+                                upgradeType.from.legsId().toString(),
+                                template.ingedientItem().toString(),
+                                upgradeType.to.idOf(upgradeType.to.legs).toString()
+                        );
+                        builder.entries.add(new Entry(upgradeType.to.idOf(upgradeType.to.legs), builderEntry));
+                    }
+                    // Feet
+                    for (var upgradeType: upgrades) {
+                        var builderEntry = SmithingUpgradeRecipe.ofStrings(
+                                template.id().toString(),
+                                upgradeType.from.feetId().toString(),
+                                template.ingedientItem().toString(),
+                                upgradeType.to.idOf(upgradeType.to.feet).toString()
+                        );
+                        builder.entries.add(new Entry(upgradeType.to.idOf(upgradeType.to.feet), builderEntry));
+                    }
+                }
+            }
         }
     }
 }
