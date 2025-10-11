@@ -1,0 +1,30 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "paladins"
+      ]
+    }
+  ],
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:emerald"
+  },
+  "base": {
+    "item": "paladins:prior_robe_feet"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "paladins"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "armory_rpgs:avatar_robe_feet"
+  },
+  "template": {
+    "item": "armory_rpgs:fallen_hero_upgrade"
+  }
+}
