@@ -1,22 +1,25 @@
 package net.armory_rpgs.datagen;
 
+import net.archers.item.Armors;
 import net.armory_rpgs.item.*;
 import net.armory_rpgs.spell.SetBonuses;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
+import net.minecraft.data.server.recipe.RecipeExporter;
+import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryEntryLookup;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.ItemGroups;
+import net.minecraft.item.Items;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.*;
 import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
@@ -26,6 +29,7 @@ import net.armory_rpgs.spell.ArmorySounds;
 import net.armory_rpgs.spell.ArmorySpells;
 import net.spell_engine.api.datagen.SimpleSoundGeneratorV2;
 import net.spell_engine.api.datagen.SpellGenerator;
+import net.spell_engine.api.item.armor.Armor;
 import net.spell_engine.api.item.set.EquipmentSet;
 import net.spell_engine.api.item.set.EquipmentSetRegistry;
 import net.spell_engine.api.spell.Spell;
@@ -36,6 +40,7 @@ import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class ArmoryDataGen implements DataGeneratorEntrypoint {
@@ -49,6 +54,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         pack.addProvider(SpellGen::new);
         pack.addProvider(SoundGen::new);
         pack.addProvider(EquipmentSetGenerator::new);
+        pack.addProvider(RecipeGenerator::new);
     }
 
     private static List<Item> allArmorPieces() {
@@ -223,6 +229,68 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         @Override
         public String getName() {
             return "Equipment Set Generator";
+        }
+    }
+
+    public static class RecipeGenerator extends FabricRecipeProvider {
+        public RecipeGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+            super(output, registriesFuture);
+        }
+
+        public record ArmorIdSet(String namespace, String name) {
+            public Identifier headId() {
+                return Identifier.of(namespace, name + "_" + EquipmentSlot.HEAD.asString().toLowerCase());
+            }
+            public Identifier chestId() {
+                return Identifier.of(namespace, name + "_" + EquipmentSlot.CHEST.asString().toLowerCase());
+            }
+            public Identifier legsId() {
+                return Identifier.of(namespace, name + "_" + EquipmentSlot.LEGS.asString().toLowerCase());
+            }
+            public Identifier feetId() {
+                return Identifier.of(namespace, name + "_" + EquipmentSlot.FEET.asString().toLowerCase());
+            }
+        }
+
+        public record Upgrade(Armor.Set from, Armor.Set to, Item material) {}
+
+        public final Map<SmithingUpgrades.FightClass, List<Upgrade>> UPGRADES = Map.of(
+                SmithingUpgrades.FightClass.ARCHER, List.of(
+                        new Upgrade(
+                                Armors.archerArmorSet_T2,
+                                ArmorSets.strider.armorSet(),
+                                Items.EMERALD
+                        ))
+        );
+
+        @Override
+        public void generate(RecipeExporter recipeExporter) {
+            for (var template: SmithingUpgrades.ENTRIES) {
+                for (var figthClass: template.classes()) {
+                    var upgrades = UPGRADES.get(figthClass);
+                    if (upgrades == null) continue;
+                    for (var upgradeType: upgrades) {
+
+                        offerUpgradeRecipe(recipeExporter,
+                                RecipeCategory.COMBAT,
+                                template.item().get(),
+                                upgradeType.from.head,
+                                upgradeType.material,
+                                upgradeType.to.head
+                        );
+                    }
+
+                }
+            }
+        }
+
+        public static void offerUpgradeRecipe(RecipeExporter exporter, RecipeCategory category, Item template, Item inputBase, Item inputAddition, Item result) {
+            SmithingTransformRecipeJsonBuilder.create(
+                    Ingredient.ofItems(new ItemConvertible[]{template}),
+                    Ingredient.ofItems(new ItemConvertible[]{inputBase}),
+                    Ingredient.ofItems(new ItemConvertible[]{inputAddition}),
+                    category,
+                    result).criterion("has_template", conditionsFromItem(template)).offerTo(exporter, getItemPath(result) + "_smithing");
         }
     }
 }

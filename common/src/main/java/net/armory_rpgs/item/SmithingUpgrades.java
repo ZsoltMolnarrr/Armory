@@ -3,6 +3,8 @@ package net.armory_rpgs.item;
 import com.google.common.base.Suppliers;
 import net.armory_rpgs.ArmoryMod;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.item.SmithingTemplateItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -41,9 +43,9 @@ public class SmithingUpgrades {
     }
 
     public record Translations(String itemName, String upgradeName, String appliesTo, String ingredients, String baseSlotDescription, String additionsSlotDescription) { }
-    public record Entry(String name, List<FightClass> classes, Translations translations, Supplier<SmithingTemplateItem> item) {
-        public static Entry of(String name, List<FightClass> classes, Translations translations) {
-            var entry = new Entry(name, classes, translations, null);
+    public record Entry(String name, List<FightClass> classes, Translations translations, Supplier<SmithingTemplateItem> item, Item ingedientItem) {
+        public static Entry of(String name, List<FightClass> classes, Translations translations, Item ingedientItem) {
+            var entry = new Entry(name, classes, translations, null, ingedientItem);
             var factory = Suppliers.memoize(() -> new SmithingTemplateItem(
                     entry.appliesToText(),
                     entry.ingredientsText(),
@@ -53,7 +55,7 @@ public class SmithingUpgrades {
                     baseSlotTextures(),
                     additionsTextures(), new FeatureFlag[0]
             ));
-            return new Entry(name, classes, translations, factory);
+            return new Entry(name, classes, translations, factory, ingedientItem);
         }
 
         public Identifier id() {
@@ -135,7 +137,7 @@ public class SmithingUpgrades {
                 "???",
                 "Add a piece of armor",
                 "Add ingot or crystal" // ??
-        ))
+        ), Items.EMERALD)
     );
     public static final Entry FALLEN_HERO = add(Entry.of("fallen_hero",
         List.of(FightClass.PALADIN, FightClass.PRIEST, FightClass.ROGUE, FightClass.WARRIOR),
@@ -146,7 +148,7 @@ public class SmithingUpgrades {
                 "???",
                 "Add a piece of armor",
                 "Add ingot or crystal" // ??
-        ))
+        ), Items.EMERALD)
     );
 
     public static void register() {
