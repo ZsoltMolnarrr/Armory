@@ -241,61 +241,8 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         public RecipeGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
             super(output, registriesFuture);
         }
-
-        public record ArmorIdSet(String namespace, String name) {
-            public Identifier headId() {
-                return Identifier.of(namespace, name + "_" + EquipmentSlot.HEAD.asString().toLowerCase());
-            }
-            public Identifier chestId() {
-                return Identifier.of(namespace, name + "_" + EquipmentSlot.CHEST.asString().toLowerCase());
-            }
-            public Identifier legsId() {
-                return Identifier.of(namespace, name + "_" + EquipmentSlot.LEGS.asString().toLowerCase());
-            }
-            public Identifier feetId() {
-                return Identifier.of(namespace, name + "_" + EquipmentSlot.FEET.asString().toLowerCase());
-            }
-        }
-
-        public record Upgrade(Armor.Set from, Armor.Set to, Item material) {}
-
-        public final Map<FightClass, List<Upgrade>> UPGRADES = Map.of(
-//                SmithingUpgrades.FightClass.ARCHER, List.of(
-//                        new Upgrade(
-//                                Armors.archerArmorSet_T2,
-//                                ArmorSets.strider.armorSet(),
-//                                Items.EMERALD
-//                        ))
-        );
-
         @Override
         public void generate(RecipeExporter recipeExporter) {
-            for (var template: SmithingUpgrades.ENTRIES) {
-                for (var figthClass: template.classes()) {
-                    var upgrades = UPGRADES.get(figthClass);
-                    if (upgrades == null) continue;
-                    for (var upgradeType: upgrades) {
-
-                        offerUpgradeRecipe(recipeExporter,
-                                RecipeCategory.COMBAT,
-                                template.item().get(),
-                                upgradeType.from.head,
-                                upgradeType.material,
-                                upgradeType.to.head
-                        );
-                    }
-
-                }
-            }
-        }
-
-        public static void offerUpgradeRecipe(RecipeExporter exporter, RecipeCategory category, Item template, Item inputBase, Item inputAddition, Item result) {
-            SmithingTransformRecipeJsonBuilder.create(
-                    Ingredient.ofItems(new ItemConvertible[]{template}),
-                    Ingredient.ofItems(new ItemConvertible[]{inputBase}),
-                    Ingredient.ofItems(new ItemConvertible[]{inputAddition}),
-                    category,
-                    result).criterion("has_template", conditionsFromItem(template)).offerTo(exporter, getItemPath(result) + "_smithing");
         }
     }
 
