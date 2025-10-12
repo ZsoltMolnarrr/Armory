@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class UpgradeIngredients {
+public class SmtihingIngredients {
     public static class UpgradeCrystal extends Item {
         public static final Text APPLIES_TO_TEXT = Text.translatable(
                 Util.createTranslationKey("item", Identifier.ofVanilla("smithing_template.applies_to")))
@@ -48,7 +48,8 @@ public class UpgradeIngredients {
         public static Entry of(String name, List<FightClass> classes, Translations translations) {
             var factory = Suppliers.memoize(() ->
                     new UpgradeCrystal(new Item.Settings()
-                            .rarity(Rarity.EPIC),
+                            .rarity(Rarity.EPIC)
+                            .fireproof(),
                             appliesToTranslationKey(name)
             ));
             return new Entry(name, classes, translations, factory);

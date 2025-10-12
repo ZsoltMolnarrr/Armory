@@ -12,12 +12,9 @@ import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
 import net.minecraft.data.server.recipe.RecipeExporter;
-import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.item.Items;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.registry.tag.TagKey;
@@ -73,7 +70,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
             generateArmorTags(
                     ArmorSets.entries.stream().filter(entry -> entry.name().contains("archer")).toList(),
-                    RPGSeriesItemTags.ArmorMetaType.MELEE
+                    RPGSeriesItemTags.ArmorMetaType.ARCHERY
             );
             generateArmorTags(
                     ArmorSets.entries.stream().filter(entry -> entry.name().contains("armor")).toList(),
@@ -83,6 +80,15 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
                     ArmorSets.entries.stream().filter(entry -> entry.name().contains("robe")).toList(),
                     RPGSeriesItemTags.ArmorMetaType.MAGIC
             );
+            var tierTag = RPGSeriesItemTags.LootTiers.get(ArmorSets.astral.lootProperties().tier(), RPGSeriesItemTags.LootCategory.ARMORS);
+            SmithingTemplates.ENTRIES.forEach(entry -> {
+                var tag = getOrCreateTagBuilder(tierTag);
+                tag.addOptional(entry.id());
+            });
+            SmtihingIngredients.ENTRIES.forEach(entry -> {
+                var tag = getOrCreateTagBuilder(tierTag);
+                tag.addOptional(entry.id());
+            });
         }
     }
 
@@ -112,12 +118,12 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
             translationBuilder.add(Group.translationKey, "Armory");
 
-            translationBuilder.add(UpgradeIngredients.UpgradeCrystal.HINT_TRANSLATION_KEY, "Armor upgrade crystal");
-            UpgradeIngredients.ENTRIES.forEach(entry -> {
+            translationBuilder.add(SmtihingIngredients.UpgradeCrystal.HINT_TRANSLATION_KEY, "Armor upgrade crystal");
+            SmtihingIngredients.ENTRIES.forEach(entry -> {
                 translationBuilder.add(entry.item().get().getTranslationKey(), entry.translations().itemName());
                 translationBuilder.add(entry.appliesToTranslationKey(), entry.appliesToClassesTranslation());
             });
-            SmithingUpgrades.ENTRIES.forEach(entry -> {
+            SmithingTemplates.ENTRIES.forEach(entry -> {
                 translationBuilder.add(entry.item().get().getTranslationKey(), entry.translations().itemName());
                 translationBuilder.add(entry.upgradeTranslationKey(), entry.translations().upgradeName());
                 translationBuilder.add(entry.baseSlotDescriptionTranslationKey(), entry.translations().baseSlotDescription());
@@ -162,10 +168,10 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
 
         @Override
         public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-            UpgradeIngredients.ENTRIES.forEach(entry -> {
+            SmtihingIngredients.ENTRIES.forEach(entry -> {
                 itemModelGenerator.register(entry.item().get(), Models.GENERATED);
             });
-            SmithingUpgrades.ENTRIES.forEach(entry -> {
+            SmithingTemplates.ENTRIES.forEach(entry -> {
                 itemModelGenerator.register(entry.item().get(), Models.GENERATED);
             });
             ArmorSets.entries.forEach(entry -> {
@@ -243,6 +249,9 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         }
         @Override
         public void generate(RecipeExporter recipeExporter) {
+            SmithingTemplates.ENTRIES.forEach(entry -> {
+                FabricRecipeProvider.offerSmithingTemplateCopyingRecipe(recipeExporter, entry.item().get(), Items.DIAMOND);
+            });
         }
     }
 
@@ -337,7 +346,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
                 var newList = new ArrayList<Upgrade>();
                 for (var upgrade: upgrades) {
                     if (upgrade.ingredient == null) {
-                        var ingredient = UpgradeIngredients.ENTRIES.stream()
+                        var ingredient = SmtihingIngredients.ENTRIES.stream()
                                 .filter(entry -> entry.classes().contains(fightClass)).findFirst().orElse(null).item().get();
                         newList.add(new Upgrade(upgrade.from, upgrade.to, ingredient));
                     }
@@ -347,7 +356,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
 
             var includeNetherite = true;
 
-            for (var template: SmithingUpgrades.ENTRIES) {
+            for (var template: SmithingTemplates.ENTRIES) {
                 for (var entry: autoAssignedUpgrades.entrySet()) {
                     var figthClass = entry.getKey();
                     var upgrades = entry.getValue();

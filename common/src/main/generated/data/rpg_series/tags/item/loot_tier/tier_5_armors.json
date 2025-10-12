@@ -127,6 +127,26 @@
     {
       "id": "armory_rpgs:avatar_robe_feet",
       "required": false
+    },
+    {
+      "id": "armory_rpgs:epic_armor_upgrade",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:conqueror_upgrade_crystal",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:vanquisher_upgrade_crystal",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:redeemer_upgrade_crystal",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:champion_upgrade_crystal",
+      "required": false
     }
   ]
 }
