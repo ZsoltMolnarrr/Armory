@@ -26,26 +26,10 @@ public class SmithingUpgrades {
     private static final Identifier EMPTY_ARMOR_SLOT_LEGGINGS_TEXTURE = Identifier.ofVanilla("item/empty_armor_slot_leggings");
     private static final Identifier EMPTY_ARMOR_SLOT_BOOTS_TEXTURE = Identifier.ofVanilla("item/empty_armor_slot_boots");
 
-    public enum FightClass {
-        ARCANE_WIZARD("Arcane Wizard"),
-        FIRE_WIZARD("Fire Wizard"),
-        FROST_WIZARD("Frost Wizard"),
-        PRIEST("Priest"),
-        PALADIN("Paladin"),
-        ROGUE("Rogue"),
-        WARRIOR("Warrior"),
-        ARCHER("Archer");
-
-        final String translation;
-        FightClass(String translation) {
-            this.translation = translation;
-        }
-    }
-
     public record Translations(String itemName, String upgradeName, String appliesTo, String ingredients, String baseSlotDescription, String additionsSlotDescription) { }
-    public record Entry(String name, List<FightClass> classes, Translations translations, Supplier<SmithingTemplateItem> item, Item ingedientItem) {
-        public static Entry of(String name, List<FightClass> classes, Translations translations, Item ingedientItem) {
-            var entry = new Entry(name, classes, translations, null, ingedientItem);
+    public record Entry(String name, List<FightClass> classes, Translations translations, Supplier<SmithingTemplateItem> item) {
+        public static Entry of(String name, List<FightClass> classes, Translations translations) {
+            var entry = new Entry(name, classes, translations, null);
             var factory = Suppliers.memoize(() -> new SmithingTemplateItem(
                     entry.appliesToText(),
                     entry.ingredientsText(),
@@ -55,7 +39,7 @@ public class SmithingUpgrades {
                     baseSlotTextures(),
                     additionsTextures(), new FeatureFlag[0]
             ));
-            return new Entry(name, classes, translations, factory, ingedientItem);
+            return new Entry(name, classes, translations, factory);
         }
 
         public Identifier id() {
@@ -80,7 +64,7 @@ public class SmithingUpgrades {
             return Util.createTranslationKey("item", Identifier.of(ArmoryMod.NAMESPACE, "smithing_template." + name + "_upgrade.ingredients"));
         }
         public Text ingredientsText() {
-            var key = ingedientItem != null ? ingedientItem.getTranslationKey() : ingredientsTranslationKey();
+            var key = ingredientsTranslationKey();
             return Text.translatable(key).formatted(DESCRIPTION_FORMATTING);
         }
 
@@ -107,21 +91,6 @@ public class SmithingUpgrades {
         private static List<Identifier> additionsTextures() {
             return List.of();
         }
-
-        public String appliesToClassesTranslation() {
-            var classNames = classes.stream().map(c -> c.translation).toList();
-            var list = "";
-            if (classNames.size() == 1) {
-                list = classNames.get(0);
-            } else if (classNames.size() == 2) {
-                list = classNames.get(0) + " and " + classNames.get(1);
-            } else {
-                var allButLast = classNames.subList(0, classNames.size() - 1);
-                var last = classNames.get(classNames.size() - 1);
-                list = String.join(", ", allButLast) + ", and " + last;
-            }
-            return list + " armor";
-        }
     }
 
     public static final ArrayList<Entry> ENTRIES = new ArrayList<>();
@@ -129,27 +98,16 @@ public class SmithingUpgrades {
         ENTRIES.add(entry);
         return entry;
     }
-    public static final Entry FALLEN_VANQUISHER = add(Entry.of("fallen_vanquisher",
+    public static final Entry EPIC_UPGRADE = add(Entry.of("epic_armor",
         List.of(FightClass.ARCANE_WIZARD, FightClass.FIRE_WIZARD, FightClass.FROST_WIZARD, FightClass.ARCHER),
         new Translations(
                 "Smithing Template",
-                "Fallen Vanquisher’s Sigil",
-                "",
-                "???",
+                "Superior Armor Upgrade",
+                "Specialized Armor",
+                "Upgrade Crystal",
                 "Add a piece of armor",
-                "Add ingot or crystal" // ??
-        ), Items.EMERALD)
-    );
-    public static final Entry FALLEN_HERO = add(Entry.of("fallen_hero",
-        List.of(FightClass.PALADIN, FightClass.PRIEST, FightClass.ROGUE, FightClass.WARRIOR),
-        new Translations(
-                "Smithing Template",
-                "Fallen Hero’s Sigil",
-                "",
-                "???",
-                "Add a piece of armor",
-                "Add ingot or crystal" // ??
-        ), Items.EMERALD)
+                "Add upgrade crystal"
+        ))
     );
 
     public static void register() {

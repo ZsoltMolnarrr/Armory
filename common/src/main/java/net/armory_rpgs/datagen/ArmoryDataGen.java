@@ -16,8 +16,6 @@ import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemGroups;
-import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.*;
@@ -38,10 +36,7 @@ import net.spell_engine.api.spell.registry.SpellRegistry;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
 import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 public class ArmoryDataGen implements DataGeneratorEntrypoint {
@@ -117,12 +112,17 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
             translationBuilder.add(Group.translationKey, "Armory");
 
+            translationBuilder.add(UpgradeIngredients.UpgradeCrystal.HINT_TRANSLATION_KEY, "Armor upgrade crystal");
+            UpgradeIngredients.ENTRIES.forEach(entry -> {
+                translationBuilder.add(entry.item().get().getTranslationKey(), entry.translations().itemName());
+                translationBuilder.add(entry.appliesToTranslationKey(), entry.appliesToClassesTranslation());
+            });
             SmithingUpgrades.ENTRIES.forEach(entry -> {
                 translationBuilder.add(entry.item().get().getTranslationKey(), entry.translations().itemName());
                 translationBuilder.add(entry.upgradeTranslationKey(), entry.translations().upgradeName());
                 translationBuilder.add(entry.baseSlotDescriptionTranslationKey(), entry.translations().baseSlotDescription());
                 translationBuilder.add(entry.additionsSlotDescriptionTranslationKey(), entry.translations().additionsSlotDescription());
-                translationBuilder.add(entry.appliesToTranslationKey(), entry.appliesToClassesTranslation());
+                translationBuilder.add(entry.appliesToTranslationKey(), entry.translations().appliesTo());
                 translationBuilder.add(entry.ingredientsTranslationKey(), entry.translations().ingredients());
             });
             ArmorSets.entries.forEach(entry -> {
@@ -162,6 +162,9 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
 
         @Override
         public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+            UpgradeIngredients.ENTRIES.forEach(entry -> {
+                itemModelGenerator.register(entry.item().get(), Models.GENERATED);
+            });
             SmithingUpgrades.ENTRIES.forEach(entry -> {
                 itemModelGenerator.register(entry.item().get(), Models.GENERATED);
             });
@@ -256,7 +259,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
 
         public record Upgrade(Armor.Set from, Armor.Set to, Item material) {}
 
-        public final Map<SmithingUpgrades.FightClass, List<Upgrade>> UPGRADES = Map.of(
+        public final Map<FightClass, List<Upgrade>> UPGRADES = Map.of(
 //                SmithingUpgrades.FightClass.ARCHER, List.of(
 //                        new Upgrade(
 //                                Armors.archerArmorSet_T2,
@@ -317,75 +320,90 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
             }
         }
 
-        public record Upgrade(ArmorIdSet from, Armor.Set to, Item material) {
+        public record Upgrade(ArmorIdSet from, Armor.Set to, Item ingredient) {
             public Upgrade prefixVariant(String variant) {
                 return new Upgrade(
                         new ArmorIdSet(from.namespace(), variant + "_" + from.name()),
                         to,
-                        material
+                        ingredient
                 );
+            }
         }
-    }
 
-        public final Map<SmithingUpgrades.FightClass, List<Upgrade>> UPGRADES = Map.of(
-                SmithingUpgrades.FightClass.ARCHER, List.of(
+        public Map<FightClass, List<Upgrade>> UPGRADES = Map.of(
+                FightClass.ARCHER, List.of(
                         new Upgrade(
                                 new ArmorIdSet("archers", "ranger_armor"),
                                 ArmorSets.strider.armorSet(),
-                                Items.EMERALD
+                                null
                         )),
-                SmithingUpgrades.FightClass.ARCANE_WIZARD, List.of(
+                FightClass.ARCANE_WIZARD, List.of(
                         new Upgrade(
                                 new ArmorIdSet("wizards", "arcane_robe"),
                                 ArmorSets.astral.armorSet(),
-                                Items.EMERALD
+                                null
                         )),
-                SmithingUpgrades.FightClass.FIRE_WIZARD, List.of(
+                FightClass.FIRE_WIZARD, List.of(
                         new Upgrade(
                                 new ArmorIdSet("wizards", "fire_robe"),
                                 ArmorSets.scarlet.armorSet(),
-                                Items.EMERALD
+                                null
                         )),
-                SmithingUpgrades.FightClass.FROST_WIZARD, List.of(
+                FightClass.FROST_WIZARD, List.of(
                         new Upgrade(
                                 new ArmorIdSet("wizards", "frost_robe"),
                                 ArmorSets.glacier.armorSet(),
-                                Items.EMERALD
+                                null
                         )),
-                SmithingUpgrades.FightClass.PRIEST, List.of(
+                FightClass.PRIEST, List.of(
                         new Upgrade(
                                 new ArmorIdSet("paladins", "prior_robe"),
                                 ArmorSets.avatar.armorSet(),
-                                Items.EMERALD
+                                null
                         )),
-                SmithingUpgrades.FightClass.PALADIN, List.of(
+                FightClass.PALADIN, List.of(
                         new Upgrade(
                                 new ArmorIdSet("paladins", "crusader_armor"),
                                 ArmorSets.justicar.armorSet(),
-                                Items.EMERALD
+                                null
                         )),
-                SmithingUpgrades.FightClass.ROGUE, List.of(
+                FightClass.ROGUE, List.of(
                         new Upgrade(
                                 new ArmorIdSet("rogues", "assassin_armor"),
                                 ArmorSets.deathmantle.armorSet(),
-                                Items.EMERALD
+                                null
                         )),
-                SmithingUpgrades.FightClass.WARRIOR, List.of(
+                FightClass.WARRIOR, List.of(
                         new Upgrade(
-                                new ArmorIdSet("warriors", "berserker_armor"),
+                                new ArmorIdSet("rogues", "berserker_armor"),
                                 ArmorSets.destroyer.armorSet(),
-                                Items.EMERALD
+                                null
                         ))
         );
 
 
         @Override
         public void generateRecipes(Builder builder) {
+            // Add relevant Ingredient to all upgrades
+            Map<FightClass, List<Upgrade>> autoAssignedUpgrades = new HashMap<>();
+            UPGRADES.forEach((fightClass, upgrades) -> {
+                var newList = new ArrayList<Upgrade>();
+                for (var upgrade: upgrades) {
+                    if (upgrade.ingredient == null) {
+                        var ingredient = UpgradeIngredients.ENTRIES.stream()
+                                .filter(entry -> entry.classes().contains(fightClass)).findFirst().orElse(null).item().get();
+                        newList.add(new Upgrade(upgrade.from, upgrade.to, ingredient));
+                    }
+                }
+                autoAssignedUpgrades.put(fightClass, newList);
+            });
+
             var includeNetherite = true;
 
             for (var template: SmithingUpgrades.ENTRIES) {
-                for (var figthClass: template.classes()) {
-                    var upgrades = UPGRADES.get(figthClass);
+                for (var entry: autoAssignedUpgrades.entrySet()) {
+                    var figthClass = entry.getKey();
+                    var upgrades = entry.getValue();
                     if (upgrades == null) continue;
 
                     if (includeNetherite) {
@@ -398,10 +416,11 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
 
                     // Head
                     for (var upgradeType: upgrades) {
+                        var ingredientId = upgradeType.ingredient().getRegistryEntry().getKey().get().getValue().toString();
                         var builderEntry = SmithingUpgradeRecipe.ofStringsWithConditions(
                                 template.id().toString(),
                                 upgradeType.from.headId().toString(),
-                                template.ingedientItem().toString(),
+                                ingredientId,
                                 upgradeType.to.idOf(upgradeType.to.head).toString(),
                                 upgradeType.from.namespace()
                         );
@@ -411,10 +430,11 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
                     }
                     // Chest
                     for (var upgradeType: upgrades) {
+                        var ingredientId = upgradeType.ingredient().getRegistryEntry().getKey().get().getValue().toString();
                         var builderEntry = SmithingUpgradeRecipe.ofStringsWithConditions(
                                 template.id().toString(),
                                 upgradeType.from.chestId().toString(),
-                                template.ingedientItem().toString(),
+                                ingredientId,
                                 upgradeType.to.idOf(upgradeType.to.chest).toString(),
                                 upgradeType.from.namespace()
                         );
@@ -424,10 +444,11 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
                     }
                     // Legs
                     for (var upgradeType: upgrades) {
+                        var ingredientId = upgradeType.ingredient().getRegistryEntry().getKey().get().getValue().toString();
                         var builderEntry = SmithingUpgradeRecipe.ofStringsWithConditions(
                                 template.id().toString(),
                                 upgradeType.from.legsId().toString(),
-                                template.ingedientItem().toString(),
+                                ingredientId,
                                 upgradeType.to.idOf(upgradeType.to.legs).toString(),
                                 upgradeType.from.namespace()
                         );
@@ -437,10 +458,11 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
                     }
                     // Feet
                     for (var upgradeType: upgrades) {
+                        var ingredientId = upgradeType.ingredient().getRegistryEntry().getKey().get().getValue().toString();
                         var builderEntry = SmithingUpgradeRecipe.ofStringsWithConditions(
                                 template.id().toString(),
                                 upgradeType.from.feetId().toString(),
-                                template.ingedientItem().toString(),
+                                ingredientId,
                                 upgradeType.to.idOf(upgradeType.to.feet).toString(),
                                 upgradeType.from.namespace()
                         );

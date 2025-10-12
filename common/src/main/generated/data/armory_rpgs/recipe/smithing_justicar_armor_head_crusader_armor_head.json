@@ -9,7 +9,7 @@
   ],
   "type": "minecraft:smithing_transform",
   "addition": {
-    "item": "minecraft:emerald"
+    "item": "armory_rpgs:redeemer_upgrade_crystal"
   },
   "base": {
     "item": "paladins:crusader_armor_head"
@@ -25,6 +25,6 @@
     "id": "armory_rpgs:justicar_armor_head"
   },
   "template": {
-    "item": "armory_rpgs:fallen_hero_upgrade"
+    "item": "armory_rpgs:epic_armor_upgrade"
   }
 }

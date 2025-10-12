@@ -9,7 +9,7 @@
   ],
   "type": "minecraft:smithing_transform",
   "addition": {
-    "item": "minecraft:emerald"
+    "item": "armory_rpgs:vanquisher_upgrade_crystal"
   },
   "base": {
     "item": "archers:netherite_ranger_armor_legs"
@@ -25,6 +25,6 @@
     "id": "armory_rpgs:strider_armor_legs"
   },
   "template": {
-    "item": "armory_rpgs:fallen_vanquisher_upgrade"
+    "item": "armory_rpgs:epic_armor_upgrade"
   }
 }

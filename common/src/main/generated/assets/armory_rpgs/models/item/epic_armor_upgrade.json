@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "armory_rpgs:item/fallen_hero_upgrade"
+    "layer0": "armory_rpgs:item/epic_armor_upgrade"
   }
 }
