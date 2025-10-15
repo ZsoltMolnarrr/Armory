@@ -23,7 +23,7 @@ public class CustomArmorRenderer extends AzArmorRenderer {
     }
 
     public static CustomArmorRenderer deathmantle_armor() {
-        return new CustomArmorRenderer("deathmantle_armor", "deathmantle_armor");
+        return new CustomArmorRenderer("deathmantle_armor", "deathmantle_armor", "deathmantle_armor_generic");
     }
 
     public static CustomArmorRenderer avatar_robe() {
