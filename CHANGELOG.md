@@ -1,6 +1,9 @@
 # 1.2.0
 
-- Updated armor models: Justicar
+- Add new token system to allow easier obtaining of specific armor pieces
+- Update armor models: Justicar, Destroyer, Deathmantle, Strider
+- Update set bonus attribute modifier IDs
+- Update translations
 
 # 1.1.1
 
