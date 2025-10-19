@@ -6,7 +6,7 @@
           {
             "type": "minecraft:generic.attack_damage",
             "amount": 0.05,
-            "id": "armory_rpgs:deathmantle",
+            "id": "armory_rpgs:set_bonus",
             "operation": "add_multiplied_base",
             "slot": "armor"
           }

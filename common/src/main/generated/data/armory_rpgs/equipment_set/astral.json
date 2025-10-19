@@ -6,7 +6,7 @@
           {
             "type": "spell_power:arcane",
             "amount": 0.1,
-            "id": "armory_rpgs:astral",
+            "id": "armory_rpgs:set_bonus",
             "operation": "add_multiplied_base",
             "slot": "armor"
           }

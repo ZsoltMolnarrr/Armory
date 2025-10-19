@@ -6,7 +6,7 @@
           {
             "type": "spell_power:fire",
             "amount": 0.1,
-            "id": "armory_rpgs:scarlet",
+            "id": "armory_rpgs:set_bonus",
             "operation": "add_multiplied_base",
             "slot": "armor"
           }

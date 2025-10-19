@@ -20,6 +20,7 @@ import java.util.function.Supplier;
 
 public class SetBonuses {
     private static final String NAMESPACE = ArmoryMod.NAMESPACE;
+    private static final String SET_BONUS = "set_bonus";
     public record Entry(Identifier id, String title, Supplier<List<Identifier>> itemSupplier, List<EquipmentSet.Bonus> bonuses) { }
     public static final List<Entry> all = new ArrayList<>();
     private static Entry add(Entry entry) {
@@ -54,7 +55,7 @@ public class SetBonuses {
                            SpellSchools.HEALING.attributeEntry,
                            2,
                            EntityAttributeModifier.Operation.ADD_VALUE,
-                           id)
+                           id.withPath(SET_BONUS))
                        ),
                         EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_judgement.id()))
                 )
@@ -72,7 +73,7 @@ public class SetBonuses {
                                 SpellSchools.HEALING.attributeEntry,
                                 0.1,
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
-                                id)
+                                id.withPath(SET_BONUS))
                         ),
                         EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_circle_of_healing.id()))
                 )
@@ -90,7 +91,7 @@ public class SetBonuses {
                                 EntityAttributes.GENERIC_ATTACK_DAMAGE,
                                 0.05,
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
-                                id)
+                                id.withPath(SET_BONUS))
                         ),
                         EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_charge.id()))
                 )
@@ -108,7 +109,7 @@ public class SetBonuses {
                                 EntityAttributes.GENERIC_ATTACK_DAMAGE,
                                 0.05,
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
-                                id)
+                                id.withPath(SET_BONUS))
                         ),
                         EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_shadow_step.id()))
                 )
@@ -126,7 +127,7 @@ public class SetBonuses {
                                 EntityAttributes_RangedWeapon.DAMAGE.entry,
                                 0.08,
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
-                                id)
+                                id.withPath(SET_BONUS))
                         ),
                         EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_entangling_roots.id()))
                 )
@@ -144,7 +145,7 @@ public class SetBonuses {
                                 SpellSchools.ARCANE.attributeEntry,
                                 0.1,
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
-                                id)
+                                id.withPath(SET_BONUS))
                         ),
                         EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_arcane_beam.id()))
                 )
@@ -162,7 +163,7 @@ public class SetBonuses {
                                 SpellSchools.FIRE.attributeEntry,
                                 0.1,
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
-                                id)
+                                id.withPath(SET_BONUS))
                         ),
                         EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_meteor.id()))
                 )
@@ -180,7 +181,7 @@ public class SetBonuses {
                                 SpellSchools.FROST.attributeEntry,
                                 0.1,
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
-                                id)
+                                id.withPath(SET_BONUS))
                         ),
                         EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_frost_shield.id()))
                 )

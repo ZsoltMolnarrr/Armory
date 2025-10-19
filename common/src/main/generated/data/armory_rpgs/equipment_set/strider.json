@@ -6,7 +6,7 @@
           {
             "type": "ranged_weapon:damage",
             "amount": 0.08,
-            "id": "armory_rpgs:strider",
+            "id": "armory_rpgs:set_bonus",
             "operation": "add_multiplied_base",
             "slot": "armor"
           }

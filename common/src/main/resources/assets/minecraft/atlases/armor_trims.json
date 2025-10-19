@@ -6,7 +6,8 @@
       "textures": [
         "armory_rpgs:armor/trim/justicar_armor_generic",
         "armory_rpgs:armor/trim/destroyer_armor_generic",
-        "armory_rpgs:armor/trim/deathmantle_armor_generic"
+        "armory_rpgs:armor/trim/deathmantle_armor_generic",
+        "armory_rpgs:armor/trim/strider_armor_generic"
       ],
       "palette_key": "trims/color_palettes/trim_palette",
       "permutations": {

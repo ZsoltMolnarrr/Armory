@@ -6,7 +6,7 @@
           {
             "type": "spell_power:frost",
             "amount": 0.1,
-            "id": "armory_rpgs:glacier",
+            "id": "armory_rpgs:set_bonus",
             "operation": "add_multiplied_base",
             "slot": "armor"
           }

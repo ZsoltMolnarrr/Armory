@@ -31,7 +31,7 @@ public class CustomArmorRenderer extends AzArmorRenderer {
     }
 
     public static CustomArmorRenderer strider_armor() {
-        return new CustomArmorRenderer("strider_armor", "strider_armor");
+        return new CustomArmorRenderer("strider_armor", "strider_armor", "strider_armor_generic", false);
     }
 
     public static CustomArmorRenderer astral_robe() {
@@ -63,6 +63,15 @@ public class CustomArmorRenderer extends AzArmorRenderer {
                         Identifier.of(ArmoryMod.NAMESPACE, "geo/" + modelName + ".geo.json"),
                         Identifier.of(ArmoryMod.NAMESPACE, "textures/armor/" + textureName + ".png"))
                 .addRenderLayer(new AzAutoGlowingLayer<>())
+                .addRenderLayer(new AzArmorTrimLayer(Identifier.of(ArmoryMod.NAMESPACE, "armor/trim/" + trimTexture), false))
+                .build()
+        );
+    }
+
+    public CustomArmorRenderer(String modelName, String textureName, String trimTexture, boolean addGlow) {
+        super(AzArmorRendererConfig.builder(
+                        Identifier.of(ArmoryMod.NAMESPACE, "geo/" + modelName + ".geo.json"),
+                        Identifier.of(ArmoryMod.NAMESPACE, "textures/armor/" + textureName + ".png"))
                 .addRenderLayer(new AzArmorTrimLayer(Identifier.of(ArmoryMod.NAMESPACE, "armor/trim/" + trimTexture), false))
                 .build()
         );
