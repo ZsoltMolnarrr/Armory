@@ -1,3 +1,7 @@
+# 1.2.1
+
+- Fix Justicar armor model
+
 # 1.2.0
 
 - Add new token system to allow easier obtaining of specific armor pieces
