@@ -1,3 +1,7 @@
+# 1.2.2
+
+- Fix loot table injection for armor pieces
+
 # 1.2.1
 
 - Fix Justicar armor model

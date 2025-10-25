@@ -68,17 +68,21 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
 
         @Override
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+            var armorTagOptions = new ArmorOptions(false, true);
             generateArmorTags(
                     ArmorSets.entries.stream().filter(entry -> entry.name().contains("archer")).toList(),
-                    RPGSeriesItemTags.ArmorMetaType.ARCHERY
+                    RPGSeriesItemTags.ArmorMetaType.ARCHERY,
+                    armorTagOptions
             );
             generateArmorTags(
                     ArmorSets.entries.stream().filter(entry -> entry.name().contains("armor")).toList(),
-                    RPGSeriesItemTags.ArmorMetaType.MELEE
+                    RPGSeriesItemTags.ArmorMetaType.MELEE,
+                    armorTagOptions
             );
             generateArmorTags(
                     ArmorSets.entries.stream().filter(entry -> entry.name().contains("robe")).toList(),
-                    RPGSeriesItemTags.ArmorMetaType.MAGIC
+                    RPGSeriesItemTags.ArmorMetaType.MAGIC,
+                    armorTagOptions
             );
             var tierTag = RPGSeriesItemTags.LootTiers.get(ArmorSets.astral.lootProperties().tier(), RPGSeriesItemTags.LootCategory.ARMORS);
             SmithingTemplates.ENTRIES.forEach(entry -> {
