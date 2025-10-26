@@ -27,7 +27,7 @@ public class CustomArmorRenderer extends AzArmorRenderer {
     }
 
     public static CustomArmorRenderer avatar_robe() {
-        return new CustomArmorRenderer("avatar_robe", "avatar_robe");
+        return new CustomArmorRenderer("avatar_robe", "avatar_robe", "avatar_robe_generic");
     }
 
     public static CustomArmorRenderer strider_armor() {
