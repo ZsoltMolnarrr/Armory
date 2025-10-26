@@ -1,5 +1,6 @@
 # 1.2.3
 
+- Update armor models: Avatar Robes
 - Fix archer armor model issues
 - Update translations
 
