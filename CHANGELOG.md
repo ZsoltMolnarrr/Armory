@@ -1,3 +1,8 @@
+# 1.2.3
+
+- Fix archer armor model issues
+- Update translations
+
 # 1.2.2
 
 - Fix loot table injection for armor pieces
