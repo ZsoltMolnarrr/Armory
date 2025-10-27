@@ -2,6 +2,7 @@
 
 - Update armor models: Astral Robes, Glacial Robes, Scarlet Robes
 - Added generic trim pattern to these new robe models
+- Update translations
 
 # 1.2.3
 
