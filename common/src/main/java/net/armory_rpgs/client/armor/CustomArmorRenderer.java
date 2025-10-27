@@ -47,7 +47,7 @@ public class CustomArmorRenderer extends AzArmorRenderer {
     }
 
     private static CustomArmorRenderer tirisfal(String texture) {
-        return new CustomArmorRenderer("tirisfal_robe", texture);
+        return new CustomArmorRenderer("tirisfal_robe", texture, "tirisfal_robe_generic");
     }
 
     public CustomArmorRenderer(String modelName, String textureName) {

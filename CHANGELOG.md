@@ -1,3 +1,8 @@
+# 1.2.4
+
+- Update armor models: Astral Robes, Glacial Robes, Scarlet Robes
+- Added generic trim pattern to these new robe models
+
 # 1.2.3
 
 - Update armor models: Avatar Robes

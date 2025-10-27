@@ -8,7 +8,8 @@
         "armory_rpgs:armor/trim/destroyer_armor_generic",
         "armory_rpgs:armor/trim/deathmantle_armor_generic",
         "armory_rpgs:armor/trim/strider_armor_generic",
-        "armory_rpgs:armor/trim/avatar_robe_generic"
+        "armory_rpgs:armor/trim/avatar_robe_generic",
+        "armory_rpgs:armor/trim/tirisfal_robe_generic"
       ],
       "palette_key": "trims/color_palettes/trim_palette",
       "permutations": {
