@@ -74,4 +74,5 @@
   "spell.armory_rpgs.improved_shadow_step.name": "进阶暗影步",
   "spell.armory_rpgs.improved_whirlwind.description": "减少旋风斩冷却时间{cooldown_duration_deduct}秒",
   "spell.armory_rpgs.improved_whirlwind.name": "进阶旋风斩"
+  "upgrade.armory_rpgs.epic_armor_upgrade": "特级盔甲升级" 
 }
