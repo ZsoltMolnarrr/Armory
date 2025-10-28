@@ -1,7 +1,7 @@
 package net.armory_rpgs.client;
 
-import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRenderer;
-import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRendererRegistry;
+import mod.azure.azurelibarmor.common.render.armor.AzArmorRenderer;
+import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererRegistry;
 import net.armory_rpgs.client.armor.CustomArmorRenderer;
 import net.armory_rpgs.item.ArmorSets;
 import net.armory_rpgs.spell.ArmorySpells;
