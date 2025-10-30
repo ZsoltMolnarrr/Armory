@@ -1,3 +1,7 @@
+# 1.2.5
+
+- Update AzureLib
+
 # 1.2.4
 
 - Update armor models: Astral Robes, Glacial Robes, Scarlet Robes
