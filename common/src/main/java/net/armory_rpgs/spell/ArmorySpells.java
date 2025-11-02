@@ -105,13 +105,13 @@ public class ArmorySpells {
     private static Entry improved_entangling_roots() {
         var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_entangling_roots");
         var title = "Improved Entangling Roots";
-        var description = "Increases duration of Entangling Roots by {effect_duration_add} sec";
+        var description = "Increases duration of Entangling Roots by {spawn_duration_add} sec";
         var spell = modifierSpellBase();
         spell.school = ExternalSpellSchools.PHYSICAL_MELEE;
 
         var modifier = new Spell.Modifier();
         modifier.spell_pattern = "archers:entangling_roots";
-        modifier.effect_duration_add = 2;
+        modifier.spawn_duration_add = 2;
         spell.modifiers = List.of(modifier);
 
         return new Entry(id, spell, title, description, null, Category.RANGED);

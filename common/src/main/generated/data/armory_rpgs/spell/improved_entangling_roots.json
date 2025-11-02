@@ -16,7 +16,7 @@
   "modifiers": [
     {
       "spell_pattern": "archers:entangling_roots",
-      "effect_duration_add": 2.0
+      "spawn_duration_add": 2.0
     }
   ]
 }

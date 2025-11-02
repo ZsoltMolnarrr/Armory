@@ -1,3 +1,7 @@
+# 1.2.6
+
+- Fix Improved Entangling roots (Strider set bonus)
+
 # 1.2.5
 
 - Update AzureLib
