@@ -116,8 +116,8 @@ public class SetBonuses {
         );
     }
 
-    public static Entry strider = add(archer());
-    private static Entry archer() {
+    public static Entry strider = add(strider());
+    private static Entry strider() {
         var id = Identifier.of(NAMESPACE, "strider");
         return new Entry(id,
                 "Strider Armor",
@@ -125,7 +125,7 @@ public class SetBonuses {
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
                                 EntityAttributes_RangedWeapon.DAMAGE.entry,
-                                0.08,
+                                0.05,
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
                         ),

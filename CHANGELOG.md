@@ -1,3 +1,7 @@
+# 1.2.8
+
+- Update Strider armor stats
+
 # 1.2.7
 
 - Update armor stats to support Critical Strike mod

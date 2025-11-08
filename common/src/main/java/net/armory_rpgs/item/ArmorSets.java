@@ -197,7 +197,7 @@ public class ArmorSets {
     public static final float warrior_crit_damage = 0.06F;
 
     public static final float arrow_haste = 0.05F;
-    public static final float arrow_damage = 0.12F;
+    public static final float arrow_damage = 0.1F;
 
     private static final float crit_damage_t3 = 0.08F;
     private static final float crit_chance_t3 = 0.03F;
