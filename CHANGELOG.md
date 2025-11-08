@@ -1,3 +1,7 @@
+# 1.2.7
+
+- Update armor stats to support Critical Strike mod
+
 # 1.2.6
 
 - Fix Improved Entangling roots (Strider set bonus)

@@ -70,6 +70,9 @@ public class ArmorSets {
     private static final Identifier KNOCKBACK_ID = Identifier.ofVanilla("generic.knockback_resistance");
     private static final Identifier MOVEMENT_SPEED_ID = Identifier.ofVanilla("generic.movement_speed");
     private static final Identifier ARMOR_TOUGHNESS_ID = Identifier.ofVanilla("generic.armor_toughness");
+    private static final String CRIT_MOD_ID = "critical_strike";
+    private static final Identifier CRIT_CHANCE_ID = Identifier.of(CRIT_MOD_ID, "chance");
+    private static final Identifier CRIT_DAMAGE_ID = Identifier.of(CRIT_MOD_ID, "damage");
 
     private static AttributeModifier damageMultiplier(float value) {
         return new AttributeModifier(
@@ -127,6 +130,21 @@ public class ArmorSets {
                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
     }
 
+    private static AttributeModifier critChance(float value) {
+        return new AttributeModifier(
+                CRIT_CHANCE_ID.toString(),
+                value,
+                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+    }
+
+    private static AttributeModifier critDamage(float value) {
+        return new AttributeModifier(
+                CRIT_DAMAGE_ID.toString(),
+                value,
+                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+    }
+
+
     public static final int enchantability = 18;
 
     public static RegistryEntry<ArmorMaterial> wizard_robe = material(
@@ -172,15 +190,17 @@ public class ArmorSets {
     public static final float rogue_evasion = 0.05F;
     public static final float rogue_haste = 0.05F;
     public static final float rogue_damage = 0.06F;
+    public static final float rogue_crit_chance = 0.03F;
 
     public static final float warrior_damage = 0.06F;
     public static final float warrior_knockback = 0.1F;
+    public static final float warrior_crit_damage = 0.06F;
 
     public static final float arrow_haste = 0.05F;
     public static final float arrow_damage = 0.12F;
 
-    private static final float crit_damage_t3 = 0.1F;
-    private static final float crit_chance_t3 = 0.02F;
+    private static final float crit_damage_t3 = 0.08F;
+    private static final float crit_chance_t3 = 0.03F;
     private static final float haste_t3 = 0.03F;
 
     public static final int durability = 40;
@@ -226,16 +246,16 @@ public class ArmorSets {
             ArmorSetConfig.with(
                     new ArmorSetConfig.Piece(1)
                             .add(AttributeModifier.multiply(SpellSchools.FIRE.id, caster_spell_power))
-                            .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, crit_chance_t3)),
+                            .add(AttributeModifier.multiply(SpellPowerMechanics.CRITICAL_CHANCE.id, crit_chance_t3)),
                     new ArmorSetConfig.Piece(3)
                             .add(AttributeModifier.multiply(SpellSchools.FIRE.id, caster_spell_power))
-                            .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, crit_chance_t3)),
+                            .add(AttributeModifier.multiply(SpellPowerMechanics.CRITICAL_CHANCE.id, crit_chance_t3)),
                     new ArmorSetConfig.Piece(2)
                             .add(AttributeModifier.multiply(SpellSchools.FIRE.id, caster_spell_power))
-                            .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, crit_chance_t3)),
+                            .add(AttributeModifier.multiply(SpellPowerMechanics.CRITICAL_CHANCE.id, crit_chance_t3)),
                     new ArmorSetConfig.Piece(1)
                             .add(AttributeModifier.multiply(SpellSchools.FIRE.id, caster_spell_power))
-                            .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, crit_chance_t3))
+                            .add(AttributeModifier.multiply(SpellPowerMechanics.CRITICAL_CHANCE.id, crit_chance_t3))
             ),
             commonSettings(SetBonuses.scarlet.id()) )
             .translatedName("Scarlet Hat", "Scarlet Robe", "Scarlet Breeches", "Scarlet Boots");
@@ -327,19 +347,39 @@ public class ArmorSets {
                     new ArmorSetConfig.Piece(3)
                             .add(damageMultiplier(warrior_damage))
                             .add(toughnessBonus(plate_toughness))
-                            .add(knockbackBonus(warrior_knockback)),
+                            .add(knockbackBonus(warrior_knockback))
+                            .addConditional(CRIT_MOD_ID, List.of(
+                                    evasionBonus(warrior_damage),
+                                    hasteMultiplier(plate_toughness),
+                                    critDamage(warrior_crit_damage)
+                            )),
                     new ArmorSetConfig.Piece(8)
                             .add(damageMultiplier(warrior_damage))
                             .add(toughnessBonus(plate_toughness))
-                            .add(knockbackBonus(warrior_knockback)),
+                            .add(knockbackBonus(warrior_knockback))
+                            .addConditional(CRIT_MOD_ID, List.of(
+                                    evasionBonus(warrior_damage),
+                                    hasteMultiplier(plate_toughness),
+                                    critDamage(warrior_crit_damage)
+                            )),
                     new ArmorSetConfig.Piece(6)
                             .add(damageMultiplier(warrior_damage))
                             .add(toughnessBonus(plate_toughness))
-                            .add(knockbackBonus(warrior_knockback)),
+                            .add(knockbackBonus(warrior_knockback))
+                            .addConditional(CRIT_MOD_ID, List.of(
+                                    evasionBonus(warrior_damage),
+                                    hasteMultiplier(plate_toughness),
+                                    critDamage(warrior_crit_damage)
+                            )),
                     new ArmorSetConfig.Piece(3)
                             .add(damageMultiplier(warrior_damage))
                             .add(toughnessBonus(plate_toughness))
                             .add(knockbackBonus(warrior_knockback))
+                            .addConditional(CRIT_MOD_ID, List.of(
+                                    evasionBonus(warrior_damage),
+                                    hasteMultiplier(plate_toughness),
+                                    critDamage(warrior_crit_damage)
+                            ))
             ),
             commonSettings(SetBonuses.destroyer.id()) )
             .translatedName("Destroyer Greathelm", "Destroyer Chestplate", "Destroyer Greaves", "Destroyer Boots");
@@ -354,19 +394,39 @@ public class ArmorSets {
                     new ArmorSetConfig.Piece(2)
                             .add(evasionBonus(rogue_evasion))
                             .add(hasteMultiplier(rogue_haste))
-                            .add(damageMultiplier(rogue_damage)),
+                            .add(damageMultiplier(rogue_damage))
+                            .addConditional(CRIT_MOD_ID, List.of(
+                                    evasionBonus(rogue_evasion),
+                                    hasteMultiplier(rogue_haste),
+                                    critChance(rogue_crit_chance)
+                            )),
                     new ArmorSetConfig.Piece(4)
                             .add(evasionBonus(rogue_evasion))
                             .add(hasteMultiplier(rogue_haste))
-                            .add(damageMultiplier(rogue_damage)),
+                            .add(damageMultiplier(rogue_damage))
+                            .addConditional(CRIT_MOD_ID, List.of(
+                                    evasionBonus(rogue_evasion),
+                                    hasteMultiplier(rogue_haste),
+                                    critChance(rogue_crit_chance)
+                            )),
                     new ArmorSetConfig.Piece(4)
                             .add(evasionBonus(rogue_evasion))
                             .add(hasteMultiplier(rogue_haste))
-                            .add(damageMultiplier(rogue_damage)),
+                            .add(damageMultiplier(rogue_damage))
+                            .addConditional(CRIT_MOD_ID, List.of(
+                                    evasionBonus(rogue_evasion),
+                                    hasteMultiplier(rogue_haste),
+                                    critChance(rogue_crit_chance)
+                            )),
                     new ArmorSetConfig.Piece(2)
                             .add(evasionBonus(rogue_evasion))
                             .add(hasteMultiplier(rogue_haste))
                             .add(damageMultiplier(rogue_damage))
+                            .addConditional(CRIT_MOD_ID, List.of(
+                                    evasionBonus(rogue_evasion),
+                                    hasteMultiplier(rogue_haste),
+                                    critChance(rogue_crit_chance)
+                            ))
             ),
             commonSettings(SetBonuses.deathmantle.id()) )
             .translatedName("Deathmantle Hood", "Deathmantle Tunic", "Deathmantle Leggings", "Deathmantle Boots");
