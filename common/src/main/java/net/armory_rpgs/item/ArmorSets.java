@@ -349,8 +349,8 @@ public class ArmorSets {
                             .add(toughnessBonus(plate_toughness))
                             .add(knockbackBonus(warrior_knockback))
                             .addConditional(CRIT_MOD_ID, List.of(
-                                    evasionBonus(warrior_damage),
-                                    hasteMultiplier(plate_toughness),
+                                    damageMultiplier(warrior_damage),
+                                    toughnessBonus(plate_toughness),
                                     critDamage(warrior_crit_damage)
                             )),
                     new ArmorSetConfig.Piece(8)
@@ -358,8 +358,8 @@ public class ArmorSets {
                             .add(toughnessBonus(plate_toughness))
                             .add(knockbackBonus(warrior_knockback))
                             .addConditional(CRIT_MOD_ID, List.of(
-                                    evasionBonus(warrior_damage),
-                                    hasteMultiplier(plate_toughness),
+                                    damageMultiplier(warrior_damage),
+                                    toughnessBonus(plate_toughness),
                                     critDamage(warrior_crit_damage)
                             )),
                     new ArmorSetConfig.Piece(6)
@@ -367,8 +367,8 @@ public class ArmorSets {
                             .add(toughnessBonus(plate_toughness))
                             .add(knockbackBonus(warrior_knockback))
                             .addConditional(CRIT_MOD_ID, List.of(
-                                    evasionBonus(warrior_damage),
-                                    hasteMultiplier(plate_toughness),
+                                    damageMultiplier(warrior_damage),
+                                    toughnessBonus(plate_toughness),
                                     critDamage(warrior_crit_damage)
                             )),
                     new ArmorSetConfig.Piece(3)
@@ -376,8 +376,8 @@ public class ArmorSets {
                             .add(toughnessBonus(plate_toughness))
                             .add(knockbackBonus(warrior_knockback))
                             .addConditional(CRIT_MOD_ID, List.of(
-                                    evasionBonus(warrior_damage),
-                                    hasteMultiplier(plate_toughness),
+                                    damageMultiplier(warrior_damage),
+                                    toughnessBonus(plate_toughness),
                                     critDamage(warrior_crit_damage)
                             ))
             ),
