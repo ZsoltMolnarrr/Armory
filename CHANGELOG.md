@@ -1,3 +1,7 @@
+# 1.2.9
+
+- Update Strider armor set bonus
+
 # 1.2.8
 
 - Update Strider armor stats
