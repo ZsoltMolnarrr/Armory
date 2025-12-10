@@ -1,3 +1,7 @@
+# 1.2.10
+
+- Update translations
+
 # 1.2.9
 
 - Update Strider armor set bonus
