@@ -1,5 +1,6 @@
 # 1.2.10
 
+- Remove some dead recipe file
 - Update translations
 
 # 1.2.9
