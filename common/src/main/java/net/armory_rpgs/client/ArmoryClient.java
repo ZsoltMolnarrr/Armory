@@ -5,8 +5,8 @@ import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererRegistry;
 import net.armory_rpgs.client.armor.CustomArmorRenderer;
 import net.armory_rpgs.item.ArmorSets;
 import net.armory_rpgs.spell.ArmorySpells;
-import net.spell_engine.api.item.armor.Armor;
 import net.spell_engine.client.gui.SpellTooltip;
+import net.spell_engine.rpg_series.item.Armor;
 
 import java.util.function.Supplier;
 

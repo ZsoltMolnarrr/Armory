@@ -25,12 +25,12 @@ import net.armory_rpgs.spell.ArmorySounds;
 import net.armory_rpgs.spell.ArmorySpells;
 import net.spell_engine.api.datagen.SimpleSoundGeneratorV2;
 import net.spell_engine.api.datagen.SpellGenerator;
-import net.spell_engine.api.item.armor.Armor;
 import net.spell_engine.api.item.set.EquipmentSet;
 import net.spell_engine.api.item.set.EquipmentSetRegistry;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.registry.SpellRegistry;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
+import net.spell_engine.rpg_series.item.Armor;
 import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 
 import java.util.*;
@@ -70,12 +70,12 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
             var armorTagOptions = new ArmorOptions(false, true);
             generateArmorTags(
-                    ArmorSets.entries.stream().filter(entry -> entry.name().contains("archer")).toList(),
+                    List.of(ArmorSets.strider),
                     RPGSeriesItemTags.ArmorMetaType.ARCHERY,
                     armorTagOptions
             );
             generateArmorTags(
-                    ArmorSets.entries.stream().filter(entry -> entry.name().contains("armor")).toList(),
+                    List.of(ArmorSets.destroyer, ArmorSets.deathmantle, ArmorSets.justicar),
                     RPGSeriesItemTags.ArmorMetaType.MELEE,
                     armorTagOptions
             );

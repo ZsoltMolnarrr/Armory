@@ -19,9 +19,9 @@ import net.minecraft.util.Rarity;
 import net.spell_engine.api.config.ArmorSetConfig;
 import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.entity.SpellEngineAttributes;
-import net.spell_engine.api.item.Equipment;
-import net.spell_engine.api.item.armor.Armor;
 import net.spell_engine.api.spell.SpellDataComponents;
+import net.spell_engine.rpg_series.item.Armor;
+import net.spell_engine.rpg_series.item.Equipment;
 import net.spell_power.api.SpellPowerMechanics;
 import net.spell_power.api.SpellSchools;
 

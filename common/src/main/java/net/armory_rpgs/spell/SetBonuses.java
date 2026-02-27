@@ -11,7 +11,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.item.set.EquipmentSet;
-import net.spell_engine.api.spell.container.SpellContainerHelper;
+import net.spell_engine.api.spell.container.SpellContainers;
 import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
@@ -57,7 +57,7 @@ public class SetBonuses {
                            EntityAttributeModifier.Operation.ADD_VALUE,
                            id.withPath(SET_BONUS))
                        ),
-                        EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_judgement.id()))
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_judgement.id()))
                 )
         );
     }
@@ -75,7 +75,7 @@ public class SetBonuses {
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
                         ),
-                        EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_circle_of_healing.id()))
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_circle_of_healing.id()))
                 )
         );
     }
@@ -93,7 +93,7 @@ public class SetBonuses {
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
                         ),
-                        EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_charge.id()))
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_charge.id()))
                 )
         );
     }
@@ -111,7 +111,7 @@ public class SetBonuses {
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
                         ),
-                        EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_shadow_step.id()))
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_shadow_step.id()))
                 )
         );
     }
@@ -129,7 +129,7 @@ public class SetBonuses {
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
                         ),
-                        EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_entangling_roots.id()))
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_entangling_roots.id()))
                 )
         );
     }
@@ -147,7 +147,7 @@ public class SetBonuses {
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
                         ),
-                        EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_arcane_beam.id()))
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_arcane_beam.id()))
                 )
         );
     }
@@ -165,7 +165,7 @@ public class SetBonuses {
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
                         ),
-                        EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_meteor.id()))
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_meteor.id()))
                 )
         );
     }
@@ -183,7 +183,7 @@ public class SetBonuses {
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
                         ),
-                        EquipmentSet.Bonus.withSpells(4, SpellContainerHelper.createForModifier(ArmorySpells.improved_frost_shield.id()))
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_frost_shield.id()))
                 )
         );
     }
