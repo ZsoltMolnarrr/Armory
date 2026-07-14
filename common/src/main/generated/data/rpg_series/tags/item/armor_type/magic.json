@@ -63,6 +63,70 @@
     {
       "id": "armory_rpgs:avatar_robe_feet",
       "required": false
+    },
+    {
+      "id": "armory_rpgs:tempest_robe_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:tempest_robe_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:tempest_robe_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:tempest_robe_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:smouldering_robe_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:smouldering_robe_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:smouldering_robe_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:smouldering_robe_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:rimeweave_robe_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:rimeweave_robe_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:rimeweave_robe_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:rimeweave_robe_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:absolution_robe_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:absolution_robe_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:absolution_robe_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:absolution_robe_feet",
+      "required": false
     }
   ]
 }

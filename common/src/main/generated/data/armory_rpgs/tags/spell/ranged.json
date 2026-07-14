@@ -3,6 +3,10 @@
     {
       "id": "armory_rpgs:improved_entangling_roots",
       "required": false
+    },
+    {
+      "id": "armory_rpgs:improved_spirit_wolf",
+      "required": false
     }
   ]
 }

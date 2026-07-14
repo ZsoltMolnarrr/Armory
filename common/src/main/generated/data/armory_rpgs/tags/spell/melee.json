@@ -15,6 +15,18 @@
     {
       "id": "armory_rpgs:improved_shadow_step",
       "required": false
+    },
+    {
+      "id": "armory_rpgs:improved_battle_banner",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:improved_mortal_strike",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:improved_mutilate",
+      "required": false
     }
   ]
 }

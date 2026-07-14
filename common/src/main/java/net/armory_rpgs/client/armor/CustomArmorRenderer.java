@@ -45,6 +45,38 @@ public class CustomArmorRenderer extends AzArmorRenderer {
         return new CustomArmorRenderer("tirisfal_robe", texture, "tirisfal_robe_generic");
     }
 
+    public static CustomArmorRenderer tempest_robe() {
+        return new CustomArmorRenderer("tempest_robe", "tempest_robe", "tempest_robe_generic");
+    }
+
+    public static CustomArmorRenderer smouldering_robe() {
+        return new CustomArmorRenderer("smouldering_robe", "smouldering_robe", "smouldering_robe_generic");
+    }
+
+    public static CustomArmorRenderer rimeweave_robe() {
+        return new CustomArmorRenderer("rimeweave_robe", "rimeweave_robe", "rimeweave_robe_generic");
+    }
+
+    public static CustomArmorRenderer absolution_robe() {
+        return new CustomArmorRenderer("absolution_robe", "absolution_robe", "absolution_robe_generic");
+    }
+
+    public static CustomArmorRenderer lightbringer_armor() {
+        return new CustomArmorRenderer("lightbringer_armor", "lightbringer_armor", "lightbringer_armor_generic");
+    }
+
+    public static CustomArmorRenderer onslaught_armor() {
+        return new CustomArmorRenderer("onslaught_armor", "onslaught_armor", "onslaught_armor_generic");
+    }
+
+    public static CustomArmorRenderer slayer_armor() {
+        return new CustomArmorRenderer("slayer_armor", "slayer_armor", "slayer_armor_generic");
+    }
+
+    public static CustomArmorRenderer ranger_armor() {
+        return new CustomArmorRenderer("ranger_armor", "ranger_armor", "ranger_armor_generic");
+    }
+
     public CustomArmorRenderer(String modelName, String textureName) {
         super(AzArmorRendererConfig.builder(
                 Identifier.of(ArmoryMod.NAMESPACE, "geo/" + modelName + ".geo.json"),

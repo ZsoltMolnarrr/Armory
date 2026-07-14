@@ -1,12 +1,20 @@
 {
   "values": [
     "armory_rpgs:strider_armor_head",
+    "armory_rpgs:ranger_armor_head",
     "armory_rpgs:destroyer_armor_head",
     "armory_rpgs:deathmantle_armor_head",
     "armory_rpgs:justicar_armor_head",
+    "armory_rpgs:onslaught_armor_head",
+    "armory_rpgs:slayer_armor_head",
+    "armory_rpgs:lightbringer_armor_head",
     "armory_rpgs:astral_robe_head",
     "armory_rpgs:scarlet_robe_head",
     "armory_rpgs:glacier_robe_head",
-    "armory_rpgs:avatar_robe_head"
+    "armory_rpgs:avatar_robe_head",
+    "armory_rpgs:tempest_robe_head",
+    "armory_rpgs:smouldering_robe_head",
+    "armory_rpgs:rimeweave_robe_head",
+    "armory_rpgs:absolution_robe_head"
   ]
 }

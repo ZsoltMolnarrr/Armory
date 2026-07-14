@@ -70,12 +70,13 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
             var armorTagOptions = new ArmorOptions(false, true);
             generateArmorTags(
-                    List.of(ArmorSets.strider),
+                    List.of(ArmorSets.strider, ArmorSets.ranger),
                     RPGSeriesItemTags.ArmorMetaType.ARCHERY,
                     armorTagOptions
             );
             generateArmorTags(
-                    List.of(ArmorSets.destroyer, ArmorSets.deathmantle, ArmorSets.justicar),
+                    List.of(ArmorSets.destroyer, ArmorSets.deathmantle, ArmorSets.justicar,
+                            ArmorSets.onslaught, ArmorSets.slayer, ArmorSets.lightbringer),
                     RPGSeriesItemTags.ArmorMetaType.MELEE,
                     armorTagOptions
             );
@@ -89,7 +90,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
                 var tag = getOrCreateTagBuilder(tierTag);
                 tag.addOptional(entry.id());
             });
-            SmtihingIngredients.ENTRIES.forEach(entry -> {
+            SmithingIngredients.ENTRIES.forEach(entry -> {
                 var tag = getOrCreateTagBuilder(tierTag);
                 tag.addOptional(entry.id());
             });
@@ -122,8 +123,8 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
             translationBuilder.add(Group.translationKey, "Armory");
 
-            translationBuilder.add(SmtihingIngredients.UpgradeCrystal.HINT_TRANSLATION_KEY, "Armor upgrade crystal");
-            SmtihingIngredients.ENTRIES.forEach(entry -> {
+            translationBuilder.add(SmithingIngredients.UpgradeCrystal.HINT_TRANSLATION_KEY, "Armor upgrade crystal");
+            SmithingIngredients.ENTRIES.forEach(entry -> {
                 translationBuilder.add(entry.item().get().getTranslationKey(), entry.translations().itemName());
                 translationBuilder.add(entry.appliesToTranslationKey(), entry.appliesToClassesTranslation());
             });
@@ -172,7 +173,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
 
         @Override
         public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-            SmtihingIngredients.ENTRIES.forEach(entry -> {
+            SmithingIngredients.ENTRIES.forEach(entry -> {
                 itemModelGenerator.register(entry.item().get(), Models.GENERATED);
             });
             SmithingTemplates.ENTRIES.forEach(entry -> {
@@ -280,7 +281,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
             }
         }
 
-        public record Upgrade(ArmorIdSet from, Armor.Set to, Item ingredient) {
+        public record Upgrade(ArmorIdSet from, Armor.Set to, SmithingIngredients.Entry ingredient) {
             public Upgrade prefixVariant(String variant) {
                 return new Upgrade(
                         new ArmorIdSet(from.namespace(), variant + "_" + from.name()),
@@ -288,84 +289,118 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
                         ingredient
                 );
             }
+
+            /// Base armor id -> upgraded armor id, per equipment slot
+            public List<Map.Entry<Identifier, Identifier>> slots() {
+                return List.of(
+                        Map.entry(from.headId(), to.idOf(to.head)),
+                        Map.entry(from.chestId(), to.idOf(to.chest)),
+                        Map.entry(from.legsId(), to.idOf(to.legs)),
+                        Map.entry(from.feetId(), to.idOf(to.feet))
+                );
+            }
         }
 
+        /// Each class has two legendary sets, crafted from the very same base armor.
+        /// The crystal (the smithing addition) is what decides which of the two is produced.
         public Map<FightClass, List<Upgrade>> UPGRADES = Map.of(
                 FightClass.ARCHER, List.of(
                         new Upgrade(
                                 new ArmorIdSet("archers", "ranger_armor"),
                                 ArmorSets.strider.armorSet(),
-                                null
+                                SmithingIngredients.VANQUISHER
+                        ),
+                        new Upgrade(
+                                new ArmorIdSet("archers", "ranger_armor"),
+                                ArmorSets.ranger.armorSet(),
+                                SmithingIngredients.VANQUISHER_FORGOTTEN
                         )),
                 FightClass.ARCANE_WIZARD, List.of(
                         new Upgrade(
                                 new ArmorIdSet("wizards", "arcane_robe"),
                                 ArmorSets.astral.armorSet(),
-                                null
+                                SmithingIngredients.CONQUEROR
+                        ),
+                        new Upgrade(
+                                new ArmorIdSet("wizards", "arcane_robe"),
+                                ArmorSets.tempest.armorSet(),
+                                SmithingIngredients.CONQUEROR_FORGOTTEN
                         )),
                 FightClass.FIRE_WIZARD, List.of(
                         new Upgrade(
                                 new ArmorIdSet("wizards", "fire_robe"),
                                 ArmorSets.scarlet.armorSet(),
-                                null
+                                SmithingIngredients.CONQUEROR
+                        ),
+                        new Upgrade(
+                                new ArmorIdSet("wizards", "fire_robe"),
+                                ArmorSets.smouldering.armorSet(),
+                                SmithingIngredients.CONQUEROR_FORGOTTEN
                         )),
                 FightClass.FROST_WIZARD, List.of(
                         new Upgrade(
                                 new ArmorIdSet("wizards", "frost_robe"),
                                 ArmorSets.glacier.armorSet(),
-                                null
+                                SmithingIngredients.VANQUISHER
+                        ),
+                        new Upgrade(
+                                new ArmorIdSet("wizards", "frost_robe"),
+                                ArmorSets.rimeweave.armorSet(),
+                                SmithingIngredients.VANQUISHER_FORGOTTEN
                         )),
                 FightClass.PRIEST, List.of(
                         new Upgrade(
                                 new ArmorIdSet("paladins", "prior_robe"),
                                 ArmorSets.avatar.armorSet(),
-                                null
+                                SmithingIngredients.REDEEMER
+                        ),
+                        new Upgrade(
+                                new ArmorIdSet("paladins", "prior_robe"),
+                                ArmorSets.absolution.armorSet(),
+                                SmithingIngredients.REDEEMER_FORGOTTEN
                         )),
                 FightClass.PALADIN, List.of(
                         new Upgrade(
                                 new ArmorIdSet("paladins", "crusader_armor"),
                                 ArmorSets.justicar.armorSet(),
-                                null
+                                SmithingIngredients.REDEEMER
+                        ),
+                        new Upgrade(
+                                new ArmorIdSet("paladins", "crusader_armor"),
+                                ArmorSets.lightbringer.armorSet(),
+                                SmithingIngredients.REDEEMER_FORGOTTEN
                         )),
                 FightClass.ROGUE, List.of(
                         new Upgrade(
                                 new ArmorIdSet("rogues", "assassin_armor"),
                                 ArmorSets.deathmantle.armorSet(),
-                                null
+                                SmithingIngredients.CHAMPION
+                        ),
+                        new Upgrade(
+                                new ArmorIdSet("rogues", "assassin_armor"),
+                                ArmorSets.slayer.armorSet(),
+                                SmithingIngredients.CHAMPION_FORGOTTEN
                         )),
                 FightClass.WARRIOR, List.of(
                         new Upgrade(
                                 new ArmorIdSet("rogues", "berserker_armor"),
                                 ArmorSets.destroyer.armorSet(),
-                                null
+                                SmithingIngredients.CHAMPION
+                        ),
+                        new Upgrade(
+                                new ArmorIdSet("rogues", "berserker_armor"),
+                                ArmorSets.onslaught.armorSet(),
+                                SmithingIngredients.CHAMPION_FORGOTTEN
                         ))
         );
 
 
         @Override
         public void generateRecipes(Builder builder) {
-            // Add relevant Ingredient to all upgrades
-            Map<FightClass, List<Upgrade>> autoAssignedUpgrades = new HashMap<>();
-            UPGRADES.forEach((fightClass, upgrades) -> {
-                var newList = new ArrayList<Upgrade>();
-                for (var upgrade: upgrades) {
-                    if (upgrade.ingredient == null) {
-                        var ingredient = SmtihingIngredients.ENTRIES.stream()
-                                .filter(entry -> entry.classes().contains(fightClass)).findFirst().orElse(null).item().get();
-                        newList.add(new Upgrade(upgrade.from, upgrade.to, ingredient));
-                    }
-                }
-                autoAssignedUpgrades.put(fightClass, newList);
-            });
-
             var includeNetherite = true;
 
             for (var template: SmithingTemplates.ENTRIES) {
-                for (var entry: autoAssignedUpgrades.entrySet()) {
-                    var figthClass = entry.getKey();
-                    var upgrades = entry.getValue();
-                    if (upgrades == null) continue;
-
+                for (var upgrades: UPGRADES.values()) {
                     if (includeNetherite) {
                         var list = new ArrayList<Upgrade>(upgrades);
                         for (var upgrade: upgrades) {
@@ -374,61 +409,22 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
                         upgrades = list;
                     }
 
-                    // Head
-                    for (var upgradeType: upgrades) {
-                        var ingredientId = upgradeType.ingredient().getRegistryEntry().getKey().get().getValue().toString();
-                        var builderEntry = SmithingUpgradeRecipe.ofStringsWithConditions(
-                                template.id().toString(),
-                                upgradeType.from.headId().toString(),
-                                ingredientId,
-                                upgradeType.to.idOf(upgradeType.to.head).toString(),
-                                upgradeType.from.namespace()
-                        );
-                        var itemId = upgradeType.to.idOf(upgradeType.to.head);
-                        var id = Identifier.of(itemId.getNamespace(), "smithing_" + itemId.getPath() + "_" + upgradeType.from.headId().getPath());
-                        builder.entries.add(new Entry(id, builderEntry));
-                    }
-                    // Chest
-                    for (var upgradeType: upgrades) {
-                        var ingredientId = upgradeType.ingredient().getRegistryEntry().getKey().get().getValue().toString();
-                        var builderEntry = SmithingUpgradeRecipe.ofStringsWithConditions(
-                                template.id().toString(),
-                                upgradeType.from.chestId().toString(),
-                                ingredientId,
-                                upgradeType.to.idOf(upgradeType.to.chest).toString(),
-                                upgradeType.from.namespace()
-                        );
-                        var itemId = upgradeType.to.idOf(upgradeType.to.chest);
-                        var id = Identifier.of(itemId.getNamespace(), "smithing_" + itemId.getPath() + "_" + upgradeType.from.chestId().getPath());
-                        builder.entries.add(new Entry(id, builderEntry));
-                    }
-                    // Legs
-                    for (var upgradeType: upgrades) {
-                        var ingredientId = upgradeType.ingredient().getRegistryEntry().getKey().get().getValue().toString();
-                        var builderEntry = SmithingUpgradeRecipe.ofStringsWithConditions(
-                                template.id().toString(),
-                                upgradeType.from.legsId().toString(),
-                                ingredientId,
-                                upgradeType.to.idOf(upgradeType.to.legs).toString(),
-                                upgradeType.from.namespace()
-                        );
-                        var itemId = upgradeType.to.idOf(upgradeType.to.legs);
-                        var id = Identifier.of(itemId.getNamespace(), "smithing_" + itemId.getPath() + "_" + upgradeType.from.legsId().getPath());
-                        builder.entries.add(new Entry(id, builderEntry));
-                    }
-                    // Feet
-                    for (var upgradeType: upgrades) {
-                        var ingredientId = upgradeType.ingredient().getRegistryEntry().getKey().get().getValue().toString();
-                        var builderEntry = SmithingUpgradeRecipe.ofStringsWithConditions(
-                                template.id().toString(),
-                                upgradeType.from.feetId().toString(),
-                                ingredientId,
-                                upgradeType.to.idOf(upgradeType.to.feet).toString(),
-                                upgradeType.from.namespace()
-                        );
-                        var itemId = upgradeType.to.idOf(upgradeType.to.feet);
-                        var id = Identifier.of(itemId.getNamespace(), "smithing_" + itemId.getPath() + "_" + upgradeType.from.feetId().getPath());
-                        builder.entries.add(new Entry(id, builderEntry));
+                    for (var upgrade: upgrades) {
+                        var ingredientId = upgrade.ingredient().id().toString();
+                        for (var slot: upgrade.slots()) {
+                            var baseId = slot.getKey();
+                            var resultId = slot.getValue();
+                            var recipe = SmithingUpgradeRecipe.ofStringsWithConditions(
+                                    template.id().toString(),
+                                    baseId.toString(),
+                                    ingredientId,
+                                    resultId.toString(),
+                                    upgrade.from.namespace()
+                            );
+                            var id = Identifier.of(resultId.getNamespace(),
+                                    "smithing_" + resultId.getPath() + "_" + baseId.getPath());
+                            builder.entries.add(new Entry(id, recipe));
+                        }
                     }
                 }
             }

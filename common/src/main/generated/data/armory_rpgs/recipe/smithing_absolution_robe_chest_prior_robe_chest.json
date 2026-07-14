@@ -1,0 +1,30 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "paladins"
+      ]
+    }
+  ],
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "armory_rpgs:redeemer_forgotten_upgrade_crystal"
+  },
+  "base": {
+    "item": "paladins:prior_robe_chest"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "paladins"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "armory_rpgs:absolution_robe_chest"
+  },
+  "template": {
+    "item": "armory_rpgs:epic_armor_upgrade"
+  }
+}

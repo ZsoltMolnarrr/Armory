@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class SmtihingIngredients {
+public class SmithingIngredients {
     public static class UpgradeCrystal extends Item {
         public static final Text APPLIES_TO_TEXT = Text.translatable(
                 Util.createTranslationKey("item", Identifier.ofVanilla("smithing_template.applies_to")))
@@ -84,6 +84,7 @@ public class SmtihingIngredients {
         return entry;
     }
 
+    // Lost crystals - upgrade base class armor into the first legendary set of the class
     public static final Entry CONQUEROR = add(Entry.of("conqueror", List.of(FightClass.ARCANE_WIZARD, FightClass.FIRE_WIZARD),
             new Translations("Conqueror's Lost Crystal")
     ));
@@ -95,6 +96,20 @@ public class SmtihingIngredients {
     ));
     public static final Entry CHAMPION = add(Entry.of("champion", List.of( FightClass.ROGUE, FightClass.WARRIOR),
             new Translations("Champion's Lost Crystal")
+    ));
+
+    // Forgotten crystals - upgrade the same base class armor into the second legendary set of the class
+    public static final Entry CONQUEROR_FORGOTTEN = add(Entry.of("conqueror_forgotten", List.of(FightClass.ARCANE_WIZARD, FightClass.FIRE_WIZARD),
+            new Translations("Conqueror's Forgotten Crystal")
+    ));
+    public static final Entry VANQUISHER_FORGOTTEN = add(Entry.of("vanquisher_forgotten", List.of(FightClass.FROST_WIZARD, FightClass.ARCHER),
+            new Translations("Vanquisher's Forgotten Crystal")
+    ));
+    public static final Entry REDEEMER_FORGOTTEN = add(Entry.of("redeemer_forgotten", List.of(FightClass.PALADIN, FightClass.PRIEST),
+            new Translations("Redeemer's Forgotten Crystal")
+    ));
+    public static final Entry CHAMPION_FORGOTTEN = add(Entry.of("champion_forgotten", List.of( FightClass.ROGUE, FightClass.WARRIOR),
+            new Translations("Champion's Forgotten Crystal")
     ));
     public static void register() {
         for (var entry : ENTRIES) {

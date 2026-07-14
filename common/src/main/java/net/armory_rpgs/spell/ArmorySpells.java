@@ -212,4 +212,116 @@ public class ArmorySpells {
 
         return new Entry(id, spell, title, description, null, Category.MELEE);
     }
+
+    public static Entry improved_arcane_barrage = add(improved_arcane_barrage());
+    private static Entry improved_arcane_barrage() {
+        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_arcane_barrage");
+        var title = "Improved Arcane Barrage";
+        var description = "Arcane Barrage summons {summon_spawn_count_add} additional emitter";
+        var spell = modifierSpellBase();
+        spell.school = SpellSchools.ARCANE;
+
+        var modifier = new Spell.Modifier();
+        modifier.spell_pattern = "wizards:arcane_barrage";
+        modifier.summon_spawn_count_add = 1;
+        spell.modifiers = List.of(modifier);
+
+        return new Entry(id, spell, title, description, null, Category.SPELL);
+    }
+
+    public static Entry improved_fire_wall = add(improved_fire_wall());
+    private static Entry improved_fire_wall() {
+        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_fire_wall");
+        var title = "Improved Fire Wall";
+        var description = "Increases duration of Fire Wall by {spawn_duration_add} sec";
+        var spell = modifierSpellBase();
+        spell.school = SpellSchools.FIRE;
+
+        var modifier = new Spell.Modifier();
+        modifier.spell_pattern = "wizards:fire_wall";
+        modifier.spawn_duration_add = 4;
+        spell.modifiers = List.of(modifier);
+
+        return new Entry(id, spell, title, description, null, Category.SPELL);
+    }
+
+    public static Entry improved_frost_blizzard = add(improved_frost_blizzard());
+    private static Entry improved_frost_blizzard() {
+        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_frost_blizzard");
+        var title = "Improved Blizzard";
+        var description = "Blizzard releases {channel_ticks_add} additional waves";
+        var spell = modifierSpellBase();
+        spell.school = SpellSchools.FROST;
+
+        var modifier = new Spell.Modifier();
+        modifier.spell_pattern = "wizards:frost_blizzard";
+        modifier.channel_ticks_add = 4;
+        spell.modifiers = List.of(modifier);
+
+        return new Entry(id, spell, title, description, null, Category.SPELL);
+    }
+
+    public static Entry improved_battle_banner = add(improved_battle_banner());
+    private static Entry improved_battle_banner() {
+        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_battle_banner");
+        var title = "Improved Battle Banner";
+        var description = "Increases duration of Battle Banner by {spawn_duration_add} sec";
+        var spell = modifierSpellBase();
+        spell.school = SpellSchools.HEALING;
+
+        var modifier = new Spell.Modifier();
+        modifier.spell_pattern = "paladins:battle_banner";
+        modifier.spawn_duration_add = 5;
+        spell.modifiers = List.of(modifier);
+
+        return new Entry(id, spell, title, description, null, Category.MELEE);
+    }
+
+    public static Entry improved_mortal_strike = add(improved_mortal_strike());
+    private static Entry improved_mortal_strike() {
+        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_mortal_strike");
+        var title = "Improved Mortal Strike";
+        var description = "Mortal Strike applies {effect_amplifier_add} additional stack of Bleed";
+        var spell = modifierSpellBase();
+        spell.school = ExternalSpellSchools.PHYSICAL_MELEE;
+
+        var modifier = new Spell.Modifier();
+        modifier.spell_pattern = "rogues:mortal_strike";
+        modifier.effect_amplifier_add = 1;
+        spell.modifiers = List.of(modifier);
+
+        return new Entry(id, spell, title, description, null, Category.MELEE);
+    }
+
+    public static Entry improved_mutilate = add(improved_mutilate());
+    private static Entry improved_mutilate() {
+        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_mutilate");
+        var title = "Improved Mutilate";
+        var description = "Increases damage of Mutilate by {melee_damage_multiplier}";
+        var spell = modifierSpellBase();
+        spell.school = ExternalSpellSchools.PHYSICAL_MELEE;
+
+        var modifier = new Spell.Modifier();
+        modifier.spell_pattern = "rogues:mutilate";
+        modifier.melee_damage_multiplier = 0.3F;
+        spell.modifiers = List.of(modifier);
+
+        return new Entry(id, spell, title, description, null, Category.MELEE);
+    }
+
+    public static Entry improved_spirit_wolf = add(improved_spirit_wolf());
+    private static Entry improved_spirit_wolf() {
+        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_spirit_wolf");
+        var title = "Improved Spirit Wolf";
+        var description = "Increases duration of Spirit Wolf by {summon_active_seconds_add} sec";
+        var spell = modifierSpellBase();
+        spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
+
+        var modifier = new Spell.Modifier();
+        modifier.spell_pattern = "archers:spirit_wolf";
+        modifier.summon_behaviour.lifespan.active_seconds_add = 15;
+        spell.modifiers = List.of(modifier);
+
+        return new Entry(id, spell, title, description, null, Category.RANGED);
+    }
 }

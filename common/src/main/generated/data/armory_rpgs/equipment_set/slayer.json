@@ -1,0 +1,33 @@
+{
+  "bonuses": [
+    {
+      "attributes": {
+        "modifiers": [
+          {
+            "type": "spell_engine:evasion_chance",
+            "amount": 0.05,
+            "id": "armory_rpgs:set_bonus",
+            "operation": "add_multiplied_base",
+            "slot": "armor"
+          }
+        ]
+      },
+      "required_piece_count": 2
+    },
+    {
+      "required_piece_count": 4,
+      "spells": {
+        "spell_ids": [
+          "armory_rpgs:improved_mutilate"
+        ]
+      }
+    }
+  ],
+  "items": [
+    "armory_rpgs:slayer_armor_head",
+    "armory_rpgs:slayer_armor_chest",
+    "armory_rpgs:slayer_armor_legs",
+    "armory_rpgs:slayer_armor_feet"
+  ],
+  "name": "slayer"
+}

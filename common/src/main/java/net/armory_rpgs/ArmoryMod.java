@@ -2,7 +2,7 @@ package net.armory_rpgs;
 
 import net.armory_rpgs.item.ArmorSets;
 import net.armory_rpgs.item.SmithingTemplates;
-import net.armory_rpgs.item.SmtihingIngredients;
+import net.armory_rpgs.item.SmithingIngredients;
 import net.armory_rpgs.spell.ArmorySounds;
 import net.spell_engine.api.config.ConfigFile;
 import net.tiny_config.ConfigManager;
@@ -34,7 +34,7 @@ public class ArmoryMod {
 
     public static void registerItems() {
         SmithingTemplates.register();
-        SmtihingIngredients.register();
+        SmithingIngredients.register();
         ArmorSets.register(itemConfig.value.armor_sets);
         itemConfig.save();
     }

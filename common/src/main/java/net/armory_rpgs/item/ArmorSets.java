@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 public class ArmorSets {
     public static final ArrayList<Armor.Entry> entries = new ArrayList<>();
@@ -186,18 +187,24 @@ public class ArmorSets {
     private static final float caster_spell_power = 0.35F;
     private static final float priest_haste = 0.05F;
     private static final float paladin_spell_power = 1.5F;
+    private static final float paladin_damage = 0.04F;
 
     public static final float rogue_evasion = 0.05F;
     public static final float rogue_haste = 0.05F;
     public static final float rogue_damage = 0.06F;
     public static final float rogue_crit_chance = 0.03F;
+    public static final float rogue_crit_damage = 0.05F;
+    public static final float rogue_movement_speed = 0.04F;
 
     public static final float warrior_damage = 0.06F;
     public static final float warrior_knockback = 0.1F;
     public static final float warrior_crit_damage = 0.06F;
+    public static final float warrior_haste = 0.04F;
+    public static final float warrior_crit_chance = 0.03F;
 
     public static final float arrow_haste = 0.05F;
     public static final float arrow_damage = 0.1F;
+    public static final float archer_evasion = 0.04F;
 
     private static final float crit_damage_t3 = 0.08F;
     private static final float crit_chance_t3 = 0.03F;
@@ -453,6 +460,128 @@ public class ArmorSets {
             ),
             commonSettings(SetBonuses.strider.id()) )
             .translatedName("Strider Hood", "Strider Tunic", "Strider Leggings", "Strider Boots");
+
+    /// Builds an armor set config where every piece carries the same modifiers, only the armor value differs.
+    private static ArmorSetConfig pieces(int head, int chest, int legs, int feet, UnaryOperator<ArmorSetConfig.Piece> modifiers) {
+        return ArmorSetConfig.with(
+                modifiers.apply(new ArmorSetConfig.Piece(head)),
+                modifiers.apply(new ArmorSetConfig.Piece(chest)),
+                modifiers.apply(new ArmorSetConfig.Piece(legs)),
+                modifiers.apply(new ArmorSetConfig.Piece(feet))
+        );
+    }
+
+    // MARK: - Forgotten sets
+    // Second legendary set of each class, crafted from the same base armor using a Forgotten crystal.
+
+    public static final Armor.Entry tempest = create(
+            wizard_robe,
+            Identifier.of(ArmoryMod.NAMESPACE, "tempest_robe"),
+            durability,
+            5,
+            Armor.CustomItem::new,
+            pieces(1, 3, 2, 1, piece -> piece
+                    .add(AttributeModifier.multiply(SpellSchools.ARCANE.id, caster_spell_power))
+                    .add(AttributeModifier.multiply(SpellPowerMechanics.CRITICAL_DAMAGE.id, crit_damage_t3))),
+            commonSettings(SetBonuses.tempest.id()) )
+            .translatedName("Tempest Hat", "Tempest Robe", "Tempest Breeches", "Tempest Boots");
+
+    public static final Armor.Entry smouldering = create(
+            wizard_robe,
+            Identifier.of(ArmoryMod.NAMESPACE, "smouldering_robe"),
+            durability,
+            5,
+            Armor.CustomItem::new,
+            pieces(1, 3, 2, 1, piece -> piece
+                    .add(AttributeModifier.multiply(SpellSchools.FIRE.id, caster_spell_power))
+                    .add(AttributeModifier.multiply(SpellPowerMechanics.HASTE.id, haste_t3))),
+            commonSettings(SetBonuses.smouldering.id()) )
+            .translatedName("Smouldering Hat", "Smouldering Robe", "Smouldering Breeches", "Smouldering Boots");
+
+    public static final Armor.Entry rimeweave = create(
+            wizard_robe,
+            Identifier.of(ArmoryMod.NAMESPACE, "rimeweave_robe"),
+            durability,
+            5,
+            Armor.CustomItem::new,
+            pieces(1, 3, 2, 1, piece -> piece
+                    .add(AttributeModifier.multiply(SpellSchools.FROST.id, caster_spell_power))
+                    .add(AttributeModifier.multiply(SpellPowerMechanics.CRITICAL_CHANCE.id, crit_chance_t3))),
+            commonSettings(SetBonuses.rimeweave.id()) )
+            .translatedName("Rimeweave Hat", "Rimeweave Robe", "Rimeweave Breeches", "Rimeweave Boots");
+
+    public static final Armor.Entry absolution = create(
+            priest_robe,
+            Identifier.of(ArmoryMod.NAMESPACE, "absolution_robe"),
+            durability,
+            5,
+            Armor.CustomItem::new,
+            pieces(1, 3, 2, 1, piece -> piece
+                    .add(AttributeModifier.multiply(SpellSchools.HEALING.id, caster_spell_power))
+                    .add(AttributeModifier.multiply(SpellPowerMechanics.CRITICAL_CHANCE.id, crit_chance_t3))),
+            commonSettings(SetBonuses.absolution.id()) )
+            .translatedName("Absolution Cowl", "Absolution Vestment", "Absolution Breeches", "Absolution Boots");
+
+    public static final Armor.Entry lightbringer = create(
+            paladin_armor,
+            Identifier.of(ArmoryMod.NAMESPACE, "lightbringer_armor"),
+            durability,
+            5,
+            Armor.CustomItem::new,
+            pieces(3, 8, 6, 3, piece -> piece
+                    .add(toughnessBonus(plate_toughness))
+                    .add(damageMultiplier(paladin_damage))
+                    .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_spell_power))),
+            commonSettings(SetBonuses.lightbringer.id()) )
+            .translatedName("Lightbringer Faceguard", "Lightbringer Chestplate", "Lightbringer Legguards", "Lightbringer Boots");
+
+    public static final Armor.Entry onslaught = create(
+            warrior_armor,
+            Identifier.of(ArmoryMod.NAMESPACE, "onslaught_armor"),
+            durability,
+            5,
+            Armor.CustomItem::new,
+            pieces(3, 8, 6, 3, piece -> piece
+                    .add(damageMultiplier(warrior_damage))
+                    .add(toughnessBonus(plate_toughness))
+                    .add(hasteMultiplier(warrior_haste))
+                    .addConditional(CRIT_MOD_ID, List.of(
+                            damageMultiplier(warrior_damage),
+                            toughnessBonus(plate_toughness),
+                            critChance(warrior_crit_chance)
+                    ))),
+            commonSettings(SetBonuses.onslaught.id()) )
+            .translatedName("Onslaught Greathelm", "Onslaught Chestplate", "Onslaught Greaves", "Onslaught Boots");
+
+    public static final Armor.Entry slayer = create(
+            rogue_armor,
+            Identifier.of(ArmoryMod.NAMESPACE, "slayer_armor"),
+            durability,
+            5,
+            Armor.CustomItem::new,
+            pieces(2, 4, 4, 2, piece -> piece
+                    .add(damageMultiplier(rogue_damage))
+                    .add(hasteMultiplier(rogue_haste))
+                    .add(movementSpeed(rogue_movement_speed))
+                    .addConditional(CRIT_MOD_ID, List.of(
+                            hasteMultiplier(rogue_haste),
+                            movementSpeed(rogue_movement_speed),
+                            critDamage(rogue_crit_damage)
+                    ))),
+            commonSettings(SetBonuses.slayer.id()) )
+            .translatedName("Slayer Hood", "Slayer Tunic", "Slayer Leggings", "Slayer Boots");
+
+    public static final Armor.Entry ranger = create(
+            archer_armor,
+            Identifier.of(ArmoryMod.NAMESPACE, "ranger_armor"),
+            durability,
+            5,
+            Armor.CustomItem::new,
+            pieces(2, 4, 4, 2, piece -> piece
+                    .add(rangedDamageMultiplier(arrow_damage))
+                    .add(evasionBonus(archer_evasion))),
+            commonSettings(SetBonuses.ranger.id()) )
+            .translatedName("Ranger Hood", "Ranger Tunic", "Ranger Leggings", "Ranger Boots");
 
     public static void register(Map<String, ArmorSetConfig> configs) {
 //        for (var entry: entries) {

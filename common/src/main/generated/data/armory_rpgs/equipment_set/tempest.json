@@ -1,0 +1,33 @@
+{
+  "bonuses": [
+    {
+      "attributes": {
+        "modifiers": [
+          {
+            "type": "spell_power:haste",
+            "amount": 0.05,
+            "id": "armory_rpgs:set_bonus",
+            "operation": "add_multiplied_base",
+            "slot": "armor"
+          }
+        ]
+      },
+      "required_piece_count": 2
+    },
+    {
+      "required_piece_count": 4,
+      "spells": {
+        "spell_ids": [
+          "armory_rpgs:improved_arcane_barrage"
+        ]
+      }
+    }
+  ],
+  "items": [
+    "armory_rpgs:tempest_robe_head",
+    "armory_rpgs:tempest_robe_chest",
+    "armory_rpgs:tempest_robe_legs",
+    "armory_rpgs:tempest_robe_feet"
+  ],
+  "name": "tempest"
+}

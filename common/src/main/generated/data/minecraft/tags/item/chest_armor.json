@@ -1,12 +1,20 @@
 {
   "values": [
     "armory_rpgs:strider_armor_chest",
+    "armory_rpgs:ranger_armor_chest",
     "armory_rpgs:destroyer_armor_chest",
     "armory_rpgs:deathmantle_armor_chest",
     "armory_rpgs:justicar_armor_chest",
+    "armory_rpgs:onslaught_armor_chest",
+    "armory_rpgs:slayer_armor_chest",
+    "armory_rpgs:lightbringer_armor_chest",
     "armory_rpgs:astral_robe_chest",
     "armory_rpgs:scarlet_robe_chest",
     "armory_rpgs:glacier_robe_chest",
-    "armory_rpgs:avatar_robe_chest"
+    "armory_rpgs:avatar_robe_chest",
+    "armory_rpgs:tempest_robe_chest",
+    "armory_rpgs:smouldering_robe_chest",
+    "armory_rpgs:rimeweave_robe_chest",
+    "armory_rpgs:absolution_robe_chest"
   ]
 }

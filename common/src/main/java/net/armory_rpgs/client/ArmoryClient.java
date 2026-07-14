@@ -26,6 +26,15 @@ public class ArmoryClient {
         registerArmorRenderer(ArmorSets.astral.armorSet(), CustomArmorRenderer::astral_robe);
         registerArmorRenderer(ArmorSets.glacier.armorSet(), CustomArmorRenderer::glacier_robe);
         registerArmorRenderer(ArmorSets.strider.armorSet(), CustomArmorRenderer::strider_armor);
+
+        registerArmorRenderer(ArmorSets.tempest.armorSet(), CustomArmorRenderer::tempest_robe);
+        registerArmorRenderer(ArmorSets.smouldering.armorSet(), CustomArmorRenderer::smouldering_robe);
+        registerArmorRenderer(ArmorSets.rimeweave.armorSet(), CustomArmorRenderer::rimeweave_robe);
+        registerArmorRenderer(ArmorSets.absolution.armorSet(), CustomArmorRenderer::absolution_robe);
+        registerArmorRenderer(ArmorSets.lightbringer.armorSet(), CustomArmorRenderer::lightbringer_armor);
+        registerArmorRenderer(ArmorSets.onslaught.armorSet(), CustomArmorRenderer::onslaught_armor);
+        registerArmorRenderer(ArmorSets.slayer.armorSet(), CustomArmorRenderer::slayer_armor);
+        registerArmorRenderer(ArmorSets.ranger.armorSet(), CustomArmorRenderer::ranger_armor);
     }
 
     private static void registerArmorRenderer(Armor.Set set, Supplier<AzArmorRenderer> armorRendererSupplier) {

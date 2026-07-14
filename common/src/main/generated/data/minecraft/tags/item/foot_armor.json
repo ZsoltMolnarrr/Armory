@@ -1,12 +1,20 @@
 {
   "values": [
     "armory_rpgs:strider_armor_feet",
+    "armory_rpgs:ranger_armor_feet",
     "armory_rpgs:destroyer_armor_feet",
     "armory_rpgs:deathmantle_armor_feet",
     "armory_rpgs:justicar_armor_feet",
+    "armory_rpgs:onslaught_armor_feet",
+    "armory_rpgs:slayer_armor_feet",
+    "armory_rpgs:lightbringer_armor_feet",
     "armory_rpgs:astral_robe_feet",
     "armory_rpgs:scarlet_robe_feet",
     "armory_rpgs:glacier_robe_feet",
-    "armory_rpgs:avatar_robe_feet"
+    "armory_rpgs:avatar_robe_feet",
+    "armory_rpgs:tempest_robe_feet",
+    "armory_rpgs:smouldering_robe_feet",
+    "armory_rpgs:rimeweave_robe_feet",
+    "armory_rpgs:absolution_robe_feet"
   ]
 }

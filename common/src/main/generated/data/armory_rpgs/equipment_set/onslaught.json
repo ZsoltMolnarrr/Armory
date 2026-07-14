@@ -1,0 +1,33 @@
+{
+  "bonuses": [
+    {
+      "attributes": {
+        "modifiers": [
+          {
+            "type": "minecraft:generic.attack_speed",
+            "amount": 0.05,
+            "id": "armory_rpgs:set_bonus",
+            "operation": "add_multiplied_base",
+            "slot": "armor"
+          }
+        ]
+      },
+      "required_piece_count": 2
+    },
+    {
+      "required_piece_count": 4,
+      "spells": {
+        "spell_ids": [
+          "armory_rpgs:improved_mortal_strike"
+        ]
+      }
+    }
+  ],
+  "items": [
+    "armory_rpgs:onslaught_armor_head",
+    "armory_rpgs:onslaught_armor_chest",
+    "armory_rpgs:onslaught_armor_legs",
+    "armory_rpgs:onslaught_armor_feet"
+  ],
+  "name": "onslaught"
+}

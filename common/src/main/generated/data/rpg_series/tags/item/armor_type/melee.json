@@ -47,6 +47,54 @@
     {
       "id": "armory_rpgs:justicar_armor_feet",
       "required": false
+    },
+    {
+      "id": "armory_rpgs:onslaught_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:onslaught_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:onslaught_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:onslaught_armor_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:slayer_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:slayer_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:slayer_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:slayer_armor_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:lightbringer_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:lightbringer_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:lightbringer_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:lightbringer_armor_feet",
+      "required": false
     }
   ]
 }

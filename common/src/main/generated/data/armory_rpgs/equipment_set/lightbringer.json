@@ -1,0 +1,33 @@
+{
+  "bonuses": [
+    {
+      "attributes": {
+        "modifiers": [
+          {
+            "type": "minecraft:generic.armor",
+            "amount": 2.0,
+            "id": "armory_rpgs:set_bonus",
+            "operation": "add_value",
+            "slot": "armor"
+          }
+        ]
+      },
+      "required_piece_count": 2
+    },
+    {
+      "required_piece_count": 4,
+      "spells": {
+        "spell_ids": [
+          "armory_rpgs:improved_battle_banner"
+        ]
+      }
+    }
+  ],
+  "items": [
+    "armory_rpgs:lightbringer_armor_head",
+    "armory_rpgs:lightbringer_armor_chest",
+    "armory_rpgs:lightbringer_armor_legs",
+    "armory_rpgs:lightbringer_armor_feet"
+  ],
+  "name": "lightbringer"
+}

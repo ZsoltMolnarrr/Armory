@@ -11,6 +11,18 @@
     {
       "id": "armory_rpgs:improved_frost_shield",
       "required": false
+    },
+    {
+      "id": "armory_rpgs:improved_arcane_barrage",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:improved_fire_wall",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:improved_frost_blizzard",
+      "required": false
     }
   ]
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "armory_rpgs:item/absolution_robe_chest"
+  }
+}

@@ -10,8 +10,10 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
+import net.spell_engine.api.entity.SpellEngineAttributes;
 import net.spell_engine.api.item.set.EquipmentSet;
 import net.spell_engine.api.spell.container.SpellContainers;
+import net.spell_power.api.SpellPowerMechanics;
 import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
@@ -184,6 +186,152 @@ public class SetBonuses {
                                 id.withPath(SET_BONUS))
                         ),
                         EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_frost_shield.id()))
+                )
+        );
+    }
+
+    // MARK: - Forgotten sets
+
+    public static Entry tempest = add(tempest());
+    private static Entry tempest() {
+        var id = Identifier.of(NAMESPACE, "tempest");
+        return new Entry(id,
+                "Tempest Regalia",
+                () -> { return ArmorSets.tempest.armorSet().pieceIds(); },
+                List.of(
+                        EquipmentSet.Bonus.withAttributes(2, attribute(
+                                SpellPowerMechanics.HASTE.attributeEntry,
+                                0.05,
+                                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
+                                id.withPath(SET_BONUS))
+                        ),
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_arcane_barrage.id()))
+                )
+        );
+    }
+
+    public static Entry smouldering = add(smouldering());
+    private static Entry smouldering() {
+        var id = Identifier.of(NAMESPACE, "smouldering");
+        return new Entry(id,
+                "Smouldering Raiment",
+                () -> { return ArmorSets.smouldering.armorSet().pieceIds(); },
+                List.of(
+                        EquipmentSet.Bonus.withAttributes(2, attribute(
+                                SpellPowerMechanics.CRITICAL_CHANCE.attributeEntry,
+                                0.05,
+                                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
+                                id.withPath(SET_BONUS))
+                        ),
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_fire_wall.id()))
+                )
+        );
+    }
+
+    public static Entry rimeweave = add(rimeweave());
+    private static Entry rimeweave() {
+        var id = Identifier.of(NAMESPACE, "rimeweave");
+        return new Entry(id,
+                "Rimeweave Mantle",
+                () -> { return ArmorSets.rimeweave.armorSet().pieceIds(); },
+                List.of(
+                        EquipmentSet.Bonus.withAttributes(2, attribute(
+                                SpellPowerMechanics.CRITICAL_DAMAGE.attributeEntry,
+                                0.1,
+                                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
+                                id.withPath(SET_BONUS))
+                        ),
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_frost_blizzard.id()))
+                )
+        );
+    }
+
+    public static Entry absolution = add(absolution());
+    private static Entry absolution() {
+        var id = Identifier.of(NAMESPACE, "absolution");
+        return new Entry(id,
+                "Absolution Raiment",
+                () -> { return ArmorSets.absolution.armorSet().pieceIds(); },
+                List.of(
+                        EquipmentSet.Bonus.withAttributes(2, attribute(
+                                SpellPowerMechanics.HASTE.attributeEntry,
+                                0.05,
+                                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
+                                id.withPath(SET_BONUS))
+                        ),
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_barrier.id()))
+                )
+        );
+    }
+
+    public static Entry lightbringer = add(lightbringer());
+    private static Entry lightbringer() {
+        var id = Identifier.of(NAMESPACE, "lightbringer");
+        return new Entry(id,
+                "Lightbringer Regalia",
+                () -> { return ArmorSets.lightbringer.armorSet().pieceIds(); },
+                List.of(
+                        EquipmentSet.Bonus.withAttributes(2, attribute(
+                                EntityAttributes.GENERIC_ARMOR,
+                                2,
+                                EntityAttributeModifier.Operation.ADD_VALUE,
+                                id.withPath(SET_BONUS))
+                        ),
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_battle_banner.id()))
+                )
+        );
+    }
+
+    public static Entry onslaught = add(onslaught());
+    private static Entry onslaught() {
+        var id = Identifier.of(NAMESPACE, "onslaught");
+        return new Entry(id,
+                "Onslaught Armor",
+                () -> { return ArmorSets.onslaught.armorSet().pieceIds(); },
+                List.of(
+                        EquipmentSet.Bonus.withAttributes(2, attribute(
+                                EntityAttributes.GENERIC_ATTACK_SPEED,
+                                0.05,
+                                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
+                                id.withPath(SET_BONUS))
+                        ),
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_mortal_strike.id()))
+                )
+        );
+    }
+
+    public static Entry slayer = add(slayer());
+    private static Entry slayer() {
+        var id = Identifier.of(NAMESPACE, "slayer");
+        return new Entry(id,
+                "Slayer Armor",
+                () -> { return ArmorSets.slayer.armorSet().pieceIds(); },
+                List.of(
+                        EquipmentSet.Bonus.withAttributes(2, attribute(
+                                SpellEngineAttributes.EVASION_CHANCE.entry,
+                                0.05,
+                                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
+                                id.withPath(SET_BONUS))
+                        ),
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_mutilate.id()))
+                )
+        );
+    }
+
+    public static Entry ranger = add(ranger());
+    private static Entry ranger() {
+        var id = Identifier.of(NAMESPACE, "ranger");
+        return new Entry(id,
+                "Ranger Armor",
+                () -> { return ArmorSets.ranger.armorSet().pieceIds(); },
+                List.of(
+                        EquipmentSet.Bonus.withAttributes(2, attribute(
+                                EntityAttributes_RangedWeapon.HASTE.entry,
+                                0.05,
+                                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
+                                id.withPath(SET_BONUS))
+                        ),
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_spirit_wolf.id()))
                 )
         );
     }
