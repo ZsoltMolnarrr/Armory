@@ -16,7 +16,11 @@
   "modifiers": [
     {
       "spell_pattern": "wizards:arcane_barrage",
-      "summon_spawn_count_add": 1
+      "summon_behaviour": {
+        "lifespan": {
+          "active_seconds_add": 5
+        }
+      }
     }
   ]
 }

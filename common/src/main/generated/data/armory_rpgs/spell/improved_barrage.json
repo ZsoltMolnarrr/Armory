@@ -1,5 +1,5 @@
 {
-  "school": "spell_power:fire",
+  "school": "spell_power:physical_ranged",
   "range": 0.0,
   "tier": 1,
   "tooltip": {
@@ -15,8 +15,10 @@
   "type": "MODIFIER",
   "modifiers": [
     {
-      "spell_pattern": "wizards:fire_wall",
-      "spawn_duration_add": 4.0
+      "spell_pattern": "archers:barrage",
+      "arrow_perks": {
+        "pierce": 1
+      }
     }
   ]
 }

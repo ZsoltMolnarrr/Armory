@@ -16,7 +16,9 @@
   "modifiers": [
     {
       "spell_pattern": "paladins:circle_of_healing",
-      "effect_duration_add": 2.0
+      "power_modifier": {
+        "power_multiplier": 0.1
+      }
     }
   ]
 }

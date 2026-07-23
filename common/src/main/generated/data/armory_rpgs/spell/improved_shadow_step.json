@@ -16,7 +16,7 @@
   "modifiers": [
     {
       "spell_pattern": "rogues:shadow_step",
-      "cooldown_duration_deduct": 4.0
+      "cooldown_duration_deduct": 3.0
     }
   ]
 }

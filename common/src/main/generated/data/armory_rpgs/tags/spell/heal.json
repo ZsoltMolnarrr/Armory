@@ -1,11 +1,15 @@
 {
   "values": [
     {
-      "id": "armory_rpgs:improved_barrier",
+      "id": "armory_rpgs:improved_circle_of_healing",
       "required": false
     },
     {
-      "id": "armory_rpgs:improved_circle_of_healing",
+      "id": "armory_rpgs:improved_penance",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:improved_divine_protection",
       "required": false
     }
   ]

@@ -12,7 +12,7 @@
     "item": "armory_rpgs:vanquisher_forgotten_upgrade_crystal"
   },
   "base": {
-    "item": "archers:ranger_armor_chest"
+    "item": "archers:netherite_ranger_armor_legs"
   },
   "neoforge:conditions": [
     {
@@ -22,7 +22,7 @@
   ],
   "result": {
     "count": 1,
-    "id": "armory_rpgs:ranger_armor_chest"
+    "id": "armory_rpgs:riftstalker_armor_legs"
   },
   "template": {
     "item": "armory_rpgs:epic_armor_upgrade"

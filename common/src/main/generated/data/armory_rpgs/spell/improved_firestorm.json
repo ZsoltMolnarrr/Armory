@@ -1,5 +1,5 @@
 {
-  "school": "spell_power:physical_melee",
+  "school": "spell_power:fire",
   "range": 0.0,
   "tier": 1,
   "tooltip": {
@@ -15,8 +15,8 @@
   "type": "MODIFIER",
   "modifiers": [
     {
-      "spell_pattern": "rogues:mutilate",
-      "melee_damage_multiplier": 0.3
+      "spell_pattern": "wizards:fire_storm",
+      "range_add": 1.0
     }
   ]
 }

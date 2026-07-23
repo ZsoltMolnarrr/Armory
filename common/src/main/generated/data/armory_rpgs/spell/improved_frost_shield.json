@@ -1,5 +1,5 @@
 {
-  "school": "spell_power:arcane",
+  "school": "spell_power:frost",
   "range": 0.0,
   "tier": 1,
   "tooltip": {
@@ -16,7 +16,23 @@
   "modifiers": [
     {
       "spell_pattern": "wizards:frost_shield",
-      "effect_duration_add": 2.0
+      "mutate_impacts": "APPEND",
+      "impacts": [
+        {
+          "action": {
+            "type": "STATUS_EFFECT",
+            "status_effect": {
+              "apply_mode": "REMOVE",
+              "remove": {
+                "id": "!minecraft:trial_omen"
+              }
+            }
+          },
+          "sound": {
+            "id": "spell_engine:generic_dispel_1"
+          }
+        }
+      ]
     }
   ]
 }

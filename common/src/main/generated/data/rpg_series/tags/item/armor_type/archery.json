@@ -17,19 +17,19 @@
       "required": false
     },
     {
-      "id": "armory_rpgs:ranger_armor_head",
+      "id": "armory_rpgs:riftstalker_armor_head",
       "required": false
     },
     {
-      "id": "armory_rpgs:ranger_armor_chest",
+      "id": "armory_rpgs:riftstalker_armor_chest",
       "required": false
     },
     {
-      "id": "armory_rpgs:ranger_armor_legs",
+      "id": "armory_rpgs:riftstalker_armor_legs",
       "required": false
     },
     {
-      "id": "armory_rpgs:ranger_armor_feet",
+      "id": "armory_rpgs:riftstalker_armor_feet",
       "required": false
     }
   ]

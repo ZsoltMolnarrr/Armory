@@ -4,10 +4,10 @@
       "attributes": {
         "modifiers": [
           {
-            "type": "minecraft:generic.armor",
-            "amount": 2.0,
+            "type": "minecraft:generic.attack_damage",
+            "amount": 0.1,
             "id": "armory_rpgs:set_bonus",
-            "operation": "add_value",
+            "operation": "add_multiplied_base",
             "slot": "armor"
           }
         ]
@@ -18,7 +18,7 @@
       "required_piece_count": 4,
       "spells": {
         "spell_ids": [
-          "armory_rpgs:improved_battle_banner"
+          "armory_rpgs:improved_judgement"
         ]
       }
     }

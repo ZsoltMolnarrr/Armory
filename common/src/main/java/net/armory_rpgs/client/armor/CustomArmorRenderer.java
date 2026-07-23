@@ -73,8 +73,8 @@ public class CustomArmorRenderer extends AzArmorRenderer {
         return new CustomArmorRenderer("slayer_armor", "slayer_armor", "slayer_armor_generic");
     }
 
-    public static CustomArmorRenderer ranger_armor() {
-        return new CustomArmorRenderer("ranger_armor", "ranger_armor", "ranger_armor_generic");
+    public static CustomArmorRenderer riftstalker_armor() {
+        return new CustomArmorRenderer("riftstalker_armor", "riftstalker_armor", "riftstalker_armor_generic");
     }
 
     public CustomArmorRenderer(String modelName, String textureName) {

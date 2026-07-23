@@ -24,10 +24,10 @@
     }
   ],
   "items": [
-    "armory_rpgs:ranger_armor_head",
-    "armory_rpgs:ranger_armor_chest",
-    "armory_rpgs:ranger_armor_legs",
-    "armory_rpgs:ranger_armor_feet"
+    "armory_rpgs:riftstalker_armor_head",
+    "armory_rpgs:riftstalker_armor_chest",
+    "armory_rpgs:riftstalker_armor_legs",
+    "armory_rpgs:riftstalker_armor_feet"
   ],
-  "name": "ranger"
+  "name": "riftstalker"
 }

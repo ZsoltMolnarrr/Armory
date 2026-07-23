@@ -5,7 +5,15 @@
       "required": false
     },
     {
+      "id": "armory_rpgs:improved_arcane_barrage",
+      "required": false
+    },
+    {
       "id": "armory_rpgs:improved_meteor",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:improved_firestorm",
       "required": false
     },
     {
@@ -13,15 +21,7 @@
       "required": false
     },
     {
-      "id": "armory_rpgs:improved_arcane_barrage",
-      "required": false
-    },
-    {
-      "id": "armory_rpgs:improved_fire_wall",
-      "required": false
-    },
-    {
-      "id": "armory_rpgs:improved_frost_blizzard",
+      "id": "armory_rpgs:improved_ice_lance",
       "required": false
     }
   ]

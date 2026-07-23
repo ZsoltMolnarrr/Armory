@@ -70,7 +70,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
             var armorTagOptions = new ArmorOptions(false, true);
             generateArmorTags(
-                    List.of(ArmorSets.strider, ArmorSets.ranger),
+                    List.of(ArmorSets.strider, ArmorSets.riftstalker),
                     RPGSeriesItemTags.ArmorMetaType.ARCHERY,
                     armorTagOptions
             );
@@ -312,7 +312,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
                         ),
                         new Upgrade(
                                 new ArmorIdSet("archers", "ranger_armor"),
-                                ArmorSets.ranger.armorSet(),
+                                ArmorSets.riftstalker.armorSet(),
                                 SmithingIngredients.VANQUISHER_FORGOTTEN
                         )),
                 FightClass.ARCANE_WIZARD, List.of(

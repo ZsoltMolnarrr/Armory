@@ -70,35 +70,25 @@
 
   "itemGroup.armory_rpgs.generic": "Armurerie",
 
-  "spell.armory_rpgs.improved_arcane_beam.description": "Augmente la chance de coup critique du Rayon Arcanique de {critical_chance_bonus}",
   "spell.armory_rpgs.improved_arcane_beam.name": "Rayon Arcanique Amélioré",
 
-  "spell.armory_rpgs.improved_barrier.description": "Augmente la durée de Barrière de {effect_duration_add} s",
-  "spell.armory_rpgs.improved_barrier.name": "Barrière Améliorée",
 
   "spell.armory_rpgs.improved_charge.description": "Réduit le temps de recharge de Charge de {cooldown_duration_deduct} s",
   "spell.armory_rpgs.improved_charge.name": "Charge Améliorée",
 
-  "spell.armory_rpgs.improved_circle_of_healing.description": "Augmente la durée d’absorption du Cercle de Guérison de {effect_duration_add} s",
   "spell.armory_rpgs.improved_circle_of_healing.name": "Cercle de Guérison Amélioré",
 
-  "spell.armory_rpgs.improved_entangling_roots.description": "Augmente la durée d’Enracinement de {spawn_duration_add} s",
-  "spell.armory_rpgs.improved_entangling_roots.name": "Racines Entravantes Améliorées",
 
-  "spell.armory_rpgs.improved_frost_shield.description": "Augmente la durée du Bouclier de Givre de {effect_duration_add} s",
   "spell.armory_rpgs.improved_frost_shield.name": "Bouclier de Givre Amélioré",
 
   "spell.armory_rpgs.improved_judgement.description": "Réduit le temps de recharge de Jugement de {cooldown_duration_deduct} s",
   "spell.armory_rpgs.improved_judgement.name": "Jugement Amélioré",
 
-  "spell.armory_rpgs.improved_meteor.description": "Réduit le temps de recharge de Météore de {cooldown_duration_deduct} s",
   "spell.armory_rpgs.improved_meteor.name": "Météore Amélioré",
 
   "spell.armory_rpgs.improved_shadow_step.description": "Réduit le temps de recharge de Pas de l’Ombre de {cooldown_duration_deduct} s",
   "spell.armory_rpgs.improved_shadow_step.name": "Pas de l’Ombre Amélioré",
 
-  "spell.armory_rpgs.improved_whirlwind.description": "Réduit le temps de recharge de Tourbillon de {cooldown_duration_deduct} s",
-  "spell.armory_rpgs.improved_whirlwind.name": "Tourbillon Amélioré",
 
   "upgrade.armory_rpgs.epic_armor_upgrade": "Amélioration d’Armure Supérieure"
 }

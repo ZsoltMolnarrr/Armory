@@ -205,6 +205,7 @@ public class ArmorSets {
     public static final float arrow_haste = 0.05F;
     public static final float arrow_damage = 0.1F;
     public static final float archer_evasion = 0.04F;
+    public static final float archer_crit_chance = 0.03F;
 
     private static final float crit_damage_t3 = 0.08F;
     private static final float crit_chance_t3 = 0.03F;
@@ -533,7 +534,7 @@ public class ArmorSets {
                     .add(damageMultiplier(paladin_damage))
                     .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_spell_power))),
             commonSettings(SetBonuses.lightbringer.id()) )
-            .translatedName("Lightbringer Faceguard", "Lightbringer Chestplate", "Lightbringer Legguards", "Lightbringer Boots");
+            .translatedName("Lightbringer Crown", "Lightbringer Chestplate", "Lightbringer Legguards", "Lightbringer Boots");
 
     public static final Armor.Entry onslaught = create(
             warrior_armor,
@@ -571,17 +572,21 @@ public class ArmorSets {
             commonSettings(SetBonuses.slayer.id()) )
             .translatedName("Slayer Hood", "Slayer Tunic", "Slayer Leggings", "Slayer Boots");
 
-    public static final Armor.Entry ranger = create(
+    public static final Armor.Entry riftstalker = create(
             archer_armor,
-            Identifier.of(ArmoryMod.NAMESPACE, "ranger_armor"),
+            Identifier.of(ArmoryMod.NAMESPACE, "riftstalker_armor"),
             durability,
             5,
             Armor.CustomItem::new,
             pieces(2, 4, 4, 2, piece -> piece
                     .add(rangedDamageMultiplier(arrow_damage))
-                    .add(evasionBonus(archer_evasion))),
-            commonSettings(SetBonuses.ranger.id()) )
-            .translatedName("Ranger Hood", "Ranger Tunic", "Ranger Leggings", "Ranger Boots");
+                    .add(evasionBonus(archer_evasion))
+                    .addConditional(CRIT_MOD_ID, List.of(
+                            rangedDamageMultiplier(arrow_damage),
+                            critChance(archer_crit_chance)
+                    ))),
+            commonSettings(SetBonuses.riftstalker.id()) )
+            .translatedName("Riftstalker Hood", "Riftstalker Tunic", "Riftstalker Leggings", "Riftstalker Boots");
 
     public static void register(Map<String, ArmorSetConfig> configs) {
 //        for (var entry: entries) {

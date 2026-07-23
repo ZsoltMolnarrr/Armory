@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "armory_rpgs:item/ranger_armor_legs"
+    "layer0": "armory_rpgs:item/riftstalker_armor_legs"
   }
 }

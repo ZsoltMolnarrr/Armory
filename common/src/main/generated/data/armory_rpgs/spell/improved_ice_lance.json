@@ -1,5 +1,5 @@
 {
-  "school": "spell_power:physical_melee",
+  "school": "spell_power:frost",
   "range": 0.0,
   "tier": 1,
   "tooltip": {
@@ -15,8 +15,10 @@
   "type": "MODIFIER",
   "modifiers": [
     {
-      "spell_pattern": "rogues:mortal_strike",
-      "effect_amplifier_add": 1
+      "spell_pattern": "wizards:frost_lance",
+      "power_modifier": {
+        "critical_damage_bonus": 0.25
+      }
     }
   ]
 }

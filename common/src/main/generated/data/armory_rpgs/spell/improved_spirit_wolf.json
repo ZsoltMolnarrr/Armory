@@ -16,11 +16,7 @@
   "modifiers": [
     {
       "spell_pattern": "archers:spirit_wolf",
-      "summon_behaviour": {
-        "lifespan": {
-          "active_seconds_add": 15
-        }
-      }
+      "cooldown_duration_deduct": 5.0
     }
   ]
 }

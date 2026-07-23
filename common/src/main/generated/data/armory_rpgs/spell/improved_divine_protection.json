@@ -15,8 +15,8 @@
   "type": "MODIFIER",
   "modifiers": [
     {
-      "spell_pattern": "paladins:battle_banner",
-      "spawn_duration_add": 5.0
+      "spell_pattern": "paladins:divine_protection",
+      "cooldown_duration_deduct": 5.0
     }
   ]
 }

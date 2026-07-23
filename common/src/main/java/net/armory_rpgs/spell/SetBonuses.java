@@ -59,7 +59,7 @@ public class SetBonuses {
                            EntityAttributeModifier.Operation.ADD_VALUE,
                            id.withPath(SET_BONUS))
                        ),
-                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_judgement.id()))
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_divine_protection.id()))
                 )
         );
     }
@@ -131,7 +131,7 @@ public class SetBonuses {
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
                         ),
-                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_entangling_roots.id()))
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_barrage.id()))
                 )
         );
     }
@@ -223,7 +223,7 @@ public class SetBonuses {
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
                         ),
-                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_fire_wall.id()))
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_firestorm.id()))
                 )
         );
     }
@@ -241,7 +241,7 @@ public class SetBonuses {
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
                         ),
-                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_frost_blizzard.id()))
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_ice_lance.id()))
                 )
         );
     }
@@ -259,7 +259,7 @@ public class SetBonuses {
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
                         ),
-                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_barrier.id()))
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_penance.id()))
                 )
         );
     }
@@ -272,12 +272,12 @@ public class SetBonuses {
                 () -> { return ArmorSets.lightbringer.armorSet().pieceIds(); },
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
-                                EntityAttributes.GENERIC_ARMOR,
-                                2,
-                                EntityAttributeModifier.Operation.ADD_VALUE,
+                                EntityAttributes.GENERIC_ATTACK_DAMAGE,
+                                0.1,
+                                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
                         ),
-                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_battle_banner.id()))
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_judgement.id()))
                 )
         );
     }
@@ -295,7 +295,7 @@ public class SetBonuses {
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
                         ),
-                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_mortal_strike.id()))
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_shout.id()))
                 )
         );
     }
@@ -313,17 +313,17 @@ public class SetBonuses {
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
                         ),
-                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_mutilate.id()))
+                        EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_bear_trap.id()))
                 )
         );
     }
 
-    public static Entry ranger = add(ranger());
-    private static Entry ranger() {
-        var id = Identifier.of(NAMESPACE, "ranger");
+    public static Entry riftstalker = add(riftstalker());
+    private static Entry riftstalker() {
+        var id = Identifier.of(NAMESPACE, "riftstalker");
         return new Entry(id,
-                "Ranger Armor",
-                () -> { return ArmorSets.ranger.armorSet().pieceIds(); },
+                "Riftstalker Armor",
+                () -> { return ArmorSets.riftstalker.armorSet().pieceIds(); },
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
                                 EntityAttributes_RangedWeapon.HASTE.entry,

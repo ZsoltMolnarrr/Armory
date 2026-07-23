@@ -34,7 +34,7 @@ public class ArmoryClient {
         registerArmorRenderer(ArmorSets.lightbringer.armorSet(), CustomArmorRenderer::lightbringer_armor);
         registerArmorRenderer(ArmorSets.onslaught.armorSet(), CustomArmorRenderer::onslaught_armor);
         registerArmorRenderer(ArmorSets.slayer.armorSet(), CustomArmorRenderer::slayer_armor);
-        registerArmorRenderer(ArmorSets.ranger.armorSet(), CustomArmorRenderer::ranger_armor);
+        registerArmorRenderer(ArmorSets.riftstalker.armorSet(), CustomArmorRenderer::riftstalker_armor);
     }
 
     private static void registerArmorRenderer(Armor.Set set, Supplier<AzArmorRenderer> armorRendererSupplier) {
