@@ -187,7 +187,9 @@ public class ArmorSets {
     private static final float caster_spell_power = 0.35F;
     private static final float priest_haste = 0.05F;
     private static final float paladin_spell_power = 1.5F;
-    private static final float paladin_damage = 0.04F;
+    // Lightbringer trades a slice of Justicar's healing power for offense
+    private static final float lightbringer_spell_power = 1.25F;
+    private static final float lightbringer_damage = 0.03F;
 
     public static final float rogue_evasion = 0.05F;
     public static final float rogue_haste = 0.05F;
@@ -531,8 +533,8 @@ public class ArmorSets {
             Armor.CustomItem::new,
             pieces(3, 8, 6, 3, piece -> piece
                     .add(toughnessBonus(plate_toughness))
-                    .add(damageMultiplier(paladin_damage))
-                    .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), paladin_spell_power))),
+                    .add(damageMultiplier(lightbringer_damage))
+                    .addAll(AttributeModifier.bonuses(List.of(SpellSchools.HEALING.id), lightbringer_spell_power))),
             commonSettings(SetBonuses.lightbringer.id()) )
             .translatedName("Lightbringer Crown", "Lightbringer Chestplate", "Lightbringer Legguards", "Lightbringer Boots");
 
