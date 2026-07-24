@@ -1,12 +1,16 @@
 package net.armory_rpgs.client.armor;
 
-import mod.azure.azurelibarmor.common.render.AzRendererConfig;
 import mod.azure.azurelibarmor.common.render.armor.AzArmorRenderer;
 import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererConfig;
 import mod.azure.azurelibarmor.common.render.layer.AzArmorTrimLayer;
 import mod.azure.azurelibarmor.common.render.layer.AzAutoGlowingLayer;
+import mod.azure.azurelibarmor.common.render.layer.AzRenderLayer;
 import net.armory_rpgs.ArmoryMod;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.UUID;
 
 public class CustomArmorRenderer extends AzArmorRenderer {
     public static CustomArmorRenderer justicar_armor() {
@@ -62,7 +66,7 @@ public class CustomArmorRenderer extends AzArmorRenderer {
     }
 
     public static CustomArmorRenderer lightbringer_armor() {
-        return new CustomArmorRenderer("lightbringer_armor", "lightbringer_armor", "lightbringer_armor_generic");
+        return new CustomArmorRenderer("lightbringer_armor", "lightbringer_armor", "lightbringer_armor_generic", new RadiantGlowLayer<>());
     }
 
     public static CustomArmorRenderer onslaught_armor() {
@@ -86,21 +90,28 @@ public class CustomArmorRenderer extends AzArmorRenderer {
     }
 
     public CustomArmorRenderer(String modelName, String textureName, String trimTexture) {
-        super(AzArmorRendererConfig.builder(
-                        Identifier.of(ArmoryMod.NAMESPACE, "geo/" + modelName + ".geo.json"),
-                        Identifier.of(ArmoryMod.NAMESPACE, "textures/armor/" + textureName + ".png"))
-                .addRenderLayer(new AzAutoGlowingLayer<>())
-                .addRenderLayer(new AzArmorTrimLayer(Identifier.of(ArmoryMod.NAMESPACE, "armor/trim/" + trimTexture), false))
-                .build()
-        );
+        this(modelName, textureName, trimTexture, true);
     }
 
     public CustomArmorRenderer(String modelName, String textureName, String trimTexture, boolean addGlow) {
-        super(AzArmorRendererConfig.builder(
-                        Identifier.of(ArmoryMod.NAMESPACE, "geo/" + modelName + ".geo.json"),
-                        Identifier.of(ArmoryMod.NAMESPACE, "textures/armor/" + textureName + ".png"))
-                .addRenderLayer(new AzArmorTrimLayer(Identifier.of(ArmoryMod.NAMESPACE, "armor/trim/" + trimTexture), false))
-                .build()
-        );
+        super(config(modelName, textureName, trimTexture, addGlow ? new AzAutoGlowingLayer<>() : null));
+    }
+
+    /// Same as the trim constructor, but with the emissive pass drawn by a layer of your choosing
+    /// instead of AzureLib's stock one - see [RadiantGlowLayer].
+    public CustomArmorRenderer(String modelName, String textureName, String trimTexture, AzRenderLayer<UUID, ItemStack> glowLayer) {
+        super(config(modelName, textureName, trimTexture, glowLayer));
+    }
+
+    private static AzArmorRendererConfig config(String modelName, String textureName, String trimTexture, @Nullable AzRenderLayer<UUID, ItemStack> glowLayer) {
+        var builder = AzArmorRendererConfig.builder(
+                Identifier.of(ArmoryMod.NAMESPACE, "geo/" + modelName + ".geo.json"),
+                Identifier.of(ArmoryMod.NAMESPACE, "textures/armor/" + textureName + ".png"));
+        if (glowLayer != null) {
+            // Drawn before the trim, so the trim lands on top of it
+            builder.addRenderLayer(glowLayer);
+        }
+        builder.addRenderLayer(new AzArmorTrimLayer(Identifier.of(ArmoryMod.NAMESPACE, "armor/trim/" + trimTexture), false));
+        return builder.build();
     }
 }
