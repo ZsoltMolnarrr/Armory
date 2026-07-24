@@ -563,12 +563,12 @@ public class ArmorSets {
             5,
             Armor.CustomItem::new,
             pieces(2, 4, 4, 2, piece -> piece
-                    .add(damageMultiplier(rogue_damage))
+                    .add(evasionBonus(rogue_evasion))
                     .add(hasteMultiplier(rogue_haste))
-                    .add(movementSpeed(rogue_movement_speed))
+                    .add(damageMultiplier(rogue_damage))
                     .addConditional(CRIT_MOD_ID, List.of(
+                            evasionBonus(rogue_evasion),
                             hasteMultiplier(rogue_haste),
-                            movementSpeed(rogue_movement_speed),
                             critDamage(rogue_crit_damage)
                     ))),
             commonSettings(SetBonuses.slayer.id()) )

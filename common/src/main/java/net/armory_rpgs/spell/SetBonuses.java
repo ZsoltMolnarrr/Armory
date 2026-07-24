@@ -10,7 +10,6 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
-import net.spell_engine.api.entity.SpellEngineAttributes;
 import net.spell_engine.api.item.set.EquipmentSet;
 import net.spell_engine.api.spell.container.SpellContainers;
 import net.spell_power.api.SpellPowerMechanics;
@@ -108,7 +107,7 @@ public class SetBonuses {
                 () -> { return ArmorSets.deathmantle.armorSet().pieceIds(); },
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
-                                EntityAttributes.GENERIC_ATTACK_DAMAGE,
+                                EntityAttributes.GENERIC_MOVEMENT_SPEED,
                                 0.05,
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
@@ -308,7 +307,7 @@ public class SetBonuses {
                 () -> { return ArmorSets.slayer.armorSet().pieceIds(); },
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
-                                SpellEngineAttributes.EVASION_CHANCE.entry,
+                                EntityAttributes.GENERIC_ATTACK_DAMAGE,
                                 0.05,
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))

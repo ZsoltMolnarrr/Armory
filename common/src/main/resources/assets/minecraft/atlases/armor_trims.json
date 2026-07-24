@@ -9,7 +9,13 @@
         "armory_rpgs:armor/trim/deathmantle_armor_generic",
         "armory_rpgs:armor/trim/strider_armor_generic",
         "armory_rpgs:armor/trim/avatar_robe_generic",
-        "armory_rpgs:armor/trim/tirisfal_robe_generic"
+        "armory_rpgs:armor/trim/tirisfal_robe_generic",
+        "armory_rpgs:armor/trim/tempest_robe_generic",
+        "armory_rpgs:armor/trim/absolution_robe_generic",
+        "armory_rpgs:armor/trim/lightbringer_armor_generic",
+        "armory_rpgs:armor/trim/onslaught_armor_generic",
+        "armory_rpgs:armor/trim/slayer_armor_generic",
+        "armory_rpgs:armor/trim/riftstalker_armor_generic"
       ],
       "palette_key": "trims/color_palettes/trim_palette",
       "permutations": {

@@ -4,7 +4,7 @@
       "attributes": {
         "modifiers": [
           {
-            "type": "minecraft:generic.attack_damage",
+            "type": "minecraft:generic.movement_speed",
             "amount": 0.05,
             "id": "armory_rpgs:set_bonus",
             "operation": "add_multiplied_base",

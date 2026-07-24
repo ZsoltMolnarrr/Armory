@@ -49,16 +49,20 @@ public class CustomArmorRenderer extends AzArmorRenderer {
         return new CustomArmorRenderer("tirisfal_robe", texture, "tirisfal_robe_generic");
     }
 
+    private static CustomArmorRenderer tempest(String texture) {
+        return new CustomArmorRenderer("tempest_robe", texture, "tempest_robe_generic");
+    }
+
     public static CustomArmorRenderer tempest_robe() {
-        return new CustomArmorRenderer("tempest_robe", "tempest_robe", "tempest_robe_generic");
+        return tempest("tempest_robe");
     }
 
     public static CustomArmorRenderer smouldering_robe() {
-        return new CustomArmorRenderer("tempest_robe", "smouldering_robe", "smouldering_robe_generic");
+        return tempest("smouldering_robe");
     }
 
     public static CustomArmorRenderer rimeweave_robe() {
-        return new CustomArmorRenderer("tempest_robe", "rimeweave_robe", "rimeweave_robe_generic");
+        return tempest("rimeweave_robe");
     }
 
     public static CustomArmorRenderer absolution_robe() {
