@@ -2,16 +2,27 @@ package net.armory_rpgs.client;
 
 import mod.azure.azurelibarmor.common.render.armor.AzArmorRenderer;
 import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererRegistry;
+import net.armory_rpgs.ArmoryMod;
 import net.armory_rpgs.client.armor.CustomArmorRenderer;
 import net.armory_rpgs.item.ArmorSets;
 import net.armory_rpgs.spell.ArmorySpells;
 import net.spell_engine.client.gui.SpellTooltip;
 import net.spell_engine.rpg_series.item.Armor;
+import net.tiny_config.ConfigManager;
 
 import java.util.function.Supplier;
 
 public class ArmoryClient {
+    public static ConfigManager<ArmoryClientConfig> config = new ConfigManager<>
+            ("client", new ArmoryClientConfig())
+            .builder()
+            .setDirectory(ArmoryMod.DIRECTORY)
+            .sanitize(true)
+            .build();
+
     public static void init() {
+        config.refresh();
+
         for (var entry: ArmorySpells.all) {
             if (entry.mutator() != null) {
                 SpellTooltip.addDescriptionMutator(entry.id(), entry.mutator());

@@ -3,6 +3,7 @@ package net.armory_rpgs.client.armor;
 import mod.azure.azurelibarmor.common.cache.texture.AzAbstractTexture;
 import mod.azure.azurelibarmor.common.render.AzRendererPipelineContext;
 import mod.azure.azurelibarmor.common.render.layer.AzAutoGlowingLayer;
+import net.armory_rpgs.client.ArmoryClient;
 import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
@@ -42,9 +43,16 @@ public class RadiantGlowLayer<K, T> extends AzAutoGlowingLayer<K, T> {
     private static final Function<Identifier, RenderLayer> FILL = Util.memoize(
             texture -> CustomLayers.spellObject(texture, LightEmission.RADIATE, false));
 
+    /// Read live rather than decided when the renderer is built, so the option takes hold on the next
+    /// frame instead of the next launch. Spell Engine reads `renderBeamsHighLuminance` the same way.
+    private static boolean isEnabled() {
+        return ArmoryClient.config.value.allow_high_luminance_armor;
+    }
+
     @Override
     protected RenderLayer determineRenderType(AzRendererPipelineContext<K, T> context) {
-        return FILL.apply(emissiveTexture(context));
+        // Turned off, this hands back exactly what AzureLib's own layer would have drawn
+        return isEnabled() ? FILL.apply(emissiveTexture(context)) : super.determineRenderType(context);
     }
 
     private Identifier emissiveTexture(AzRendererPipelineContext<K, T> context) {
@@ -76,7 +84,7 @@ public class RadiantGlowLayer<K, T> extends AzAutoGlowingLayer<K, T> {
     /// [LightmapTextureManager#MAX_LIGHT_COORDINATE] - vanilla's emissive program ignores the coordinate,
     /// but under a shader pack the pack's own `gbuffers_entities` runs instead, and that one lights by it.
     private void renderBurn(AzRendererPipelineContext<K, T> context) {
-        if (ArmoryGlowLayers.gain <= 1F) {
+        if (!isEnabled() || ArmoryGlowLayers.gain <= 1F) {
             return;
         }
         var burn = ArmoryGlowLayers.radiantBurn(emissiveTexture(context));
