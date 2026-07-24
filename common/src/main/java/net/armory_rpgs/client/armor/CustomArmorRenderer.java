@@ -54,11 +54,11 @@ public class CustomArmorRenderer extends AzArmorRenderer {
     }
 
     public static CustomArmorRenderer smouldering_robe() {
-        return new CustomArmorRenderer("smouldering_robe", "smouldering_robe", "smouldering_robe_generic");
+        return new CustomArmorRenderer("tempest_robe", "smouldering_robe", "smouldering_robe_generic");
     }
 
     public static CustomArmorRenderer rimeweave_robe() {
-        return new CustomArmorRenderer("rimeweave_robe", "rimeweave_robe", "rimeweave_robe_generic");
+        return new CustomArmorRenderer("tempest_robe", "rimeweave_robe", "rimeweave_robe_generic");
     }
 
     public static CustomArmorRenderer absolution_robe() {
