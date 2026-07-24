@@ -94,6 +94,20 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
                 var tag = getOrCreateTagBuilder(tierTag);
                 tag.addOptional(entry.id());
             });
+
+            // Loot-filtering tags splitting the two crystal batches, so a boss can drop one batch each.
+            // The upgrade template belongs in both, since either batch needs it to craft.
+            var epicArmorA = TagKey.of(RegistryKeys.ITEM, Identifier.of(ArmoryMod.NAMESPACE, "loot/epic_armor_a"));
+            var epicArmorB = TagKey.of(RegistryKeys.ITEM, Identifier.of(ArmoryMod.NAMESPACE, "loot/epic_armor_b"));
+            SmithingTemplates.ENTRIES.forEach(entry -> {
+                getOrCreateTagBuilder(epicArmorA).addOptional(entry.id());
+                getOrCreateTagBuilder(epicArmorB).addOptional(entry.id());
+            });
+            SmithingIngredients.ENTRIES.forEach(entry -> {
+                // Forgotten crystals are the second (new) batch; the rest are the first batch.
+                var tag = entry.name().contains("forgotten") ? epicArmorB : epicArmorA;
+                getOrCreateTagBuilder(tag).addOptional(entry.id());
+            });
         }
     }
 

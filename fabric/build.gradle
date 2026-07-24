@@ -48,14 +48,14 @@ repositories {
         }
     }
     maven {
-        name = "TerraformersMC"
-        url = "https://maven.terraformersmc.com/"
-    }
-    maven {
         name = "Ladysnake Libs"
         url = 'https://maven.ladysnake.org/releases'
     }
     maven { url 'https://maven.wispforest.io/releases' }
+    maven {
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/"
+    }
 
     mavenLocal()
 }
@@ -76,6 +76,8 @@ dependencies {
     // full transitive graph; use Modrinth in CI (TerraformersMC has been unreliable there).
     if (System.getenv("CI")) {
         modImplementation("maven.modrinth:trinkets:${project.trinkets_version}")
+        modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-base:6.1.3")
+        modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-entity:6.1.3")
     } else {
         modImplementation("dev.emi:trinkets:${project.trinkets_version}")
     }
@@ -86,8 +88,8 @@ dependencies {
 //    modImplementation("net.foundation:ranged_weapon_api-${platform}:${project.ranged_weapon_api_version}")
     modImplementation("maven.modrinth:spell-power:${project.spell_power_version}-${platform}")
 //    modImplementation("net.spell_power:spell_power-${platform}:${project.spell_power_version}")
-//    modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
-    modImplementation("net.spell_engine:spell_engine-${platform}:${project.spell_engine_version}")
+    modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
+//    modImplementation("net.spell_engine:spell_engine-${platform}:${project.spell_engine_version}")
 }
 
 processResources {

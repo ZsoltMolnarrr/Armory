@@ -1,0 +1,24 @@
+{
+  "values": [
+    {
+      "id": "armory_rpgs:epic_armor_upgrade",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:conqueror_forgotten_upgrade_crystal",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:vanquisher_forgotten_upgrade_crystal",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:redeemer_forgotten_upgrade_crystal",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:champion_forgotten_upgrade_crystal",
+      "required": false
+    }
+  ]
+}
