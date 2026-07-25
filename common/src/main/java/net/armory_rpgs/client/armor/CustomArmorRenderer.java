@@ -82,7 +82,7 @@ public class CustomArmorRenderer extends AzArmorRenderer {
     }
 
     public static CustomArmorRenderer riftstalker_armor() {
-        return new CustomArmorRenderer("riftstalker_armor", "riftstalker_armor", "riftstalker_armor_generic");
+        return new CustomArmorRenderer("riftstalker_armor", "riftstalker_armor", "riftstalker_armor_generic", false);
     }
 
     public CustomArmorRenderer(String modelName, String textureName) {

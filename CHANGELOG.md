@@ -1,6 +1,12 @@
+# 1.4.1
+
+Fix missing glowmask for:
+- Riftstalker set
+- Slayer set
+
 # 1.4.0
 
-Requires Spell Engine 1.9.14 or later.
+Requires Spell Engine 1.9.13 or later.
 
 SPELL EXPANSION! Introducing new armor sets for all classes:
 - Arcane Wizard: Tempest
