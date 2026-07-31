@@ -1,6 +1,7 @@
 # 1.4.3
 
 - Updated Slayer Armor model
+- Updated Lightbringer Armor model
 - Replaced several sets of inventory sprites
 
 # 1.4.2
