@@ -1,3 +1,8 @@
+# 1.4.3
+
+- Updated Slayer Armor model
+- Replaced several sets of inventory sprites
+
 # 1.4.2
 
 - Fix radiant glow (Lightbringer armor) when using Complementary Shaders 5.6+
