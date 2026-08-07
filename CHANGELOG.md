@@ -1,3 +1,7 @@
+# 1.4.4
+
+- Update Astral, Scarlet and Glacier armor models
+
 # 1.4.3
 
 - Updated Slayer Armor model
