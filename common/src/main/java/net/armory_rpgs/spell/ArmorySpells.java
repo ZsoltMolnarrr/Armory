@@ -6,7 +6,6 @@ import net.minecraft.util.Identifier;
 import net.spell_engine.api.datagen.SpellBuilder;
 import net.spell_engine.api.spell.ExternalSpellSchools;
 import net.spell_engine.api.spell.Spell;
-import net.spell_engine.client.gui.SpellTooltip;
 import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,10 +25,9 @@ public class ArmorySpells {
         MELEE, RANGED, SPELL, HEAL, SHIELD
     }
     public record Entry(Identifier id, Spell spell, String title, String description,
-                        @Nullable SpellTooltip.DescriptionMutator mutator, EnumSet<Category> categories) {
-        public Entry(Identifier id, Spell spell, String title, String description,
-                     @Nullable SpellTooltip.DescriptionMutator mutator, Category category) {
-            this(id, spell, title, description, mutator, EnumSet.of(category));
+                        EnumSet<Category> categories) {
+        public Entry(Identifier id, Spell spell, String title, String description, Category category) {
+            this(id, spell, title, description, EnumSet.of(category));
         }
     }
 
@@ -91,7 +89,7 @@ public class ArmorySpells {
         modifier.channel_ticks_add = 2;
         spell.modifiers = List.of(modifier);
 
-        return new Entry(id, spell, title, description, null, Category.SPELL);
+        return new Entry(id, spell, title, description, Category.SPELL);
     }
 
     public static Entry improved_arcane_barrage = add(improved_arcane_barrage());
@@ -109,7 +107,7 @@ public class ArmorySpells {
         modifier.summon_behaviour.lifespan.active_seconds_add = seconds;
         spell.modifiers = List.of(modifier);
 
-        return new Entry(id, spell, title, description, null, Category.SPELL);
+        return new Entry(id, spell, title, description, Category.SPELL);
     }
 
     // MARK: - Fire (Wizard)
@@ -128,7 +126,7 @@ public class ArmorySpells {
         modifier.power_modifier.critical_chance_bonus = 0.05F;
         spell.modifiers = List.of(modifier);
 
-        return new Entry(id, spell, title, description, null, Category.SPELL);
+        return new Entry(id, spell, title, description, Category.SPELL);
     }
 
     public static Entry improved_firestorm = add(improved_firestorm());
@@ -145,7 +143,7 @@ public class ArmorySpells {
         modifier.range_add = 1F;
         spell.modifiers = List.of(modifier);
 
-        return new Entry(id, spell, title, description, null, Category.SPELL);
+        return new Entry(id, spell, title, description, Category.SPELL);
     }
 
     // MARK: - Frost (Wizard)
@@ -166,7 +164,7 @@ public class ArmorySpells {
         modifier.impacts = List.of(SpellBuilder.Impacts.effectCleanse());
         spell.modifiers = List.of(modifier);
 
-        return new Entry(id, spell, title, description, null, Category.SPELL);
+        return new Entry(id, spell, title, description, Category.SPELL);
     }
 
     public static Entry improved_ice_lance = add(improved_ice_lance());
@@ -183,7 +181,7 @@ public class ArmorySpells {
         modifier.power_modifier.critical_damage_bonus = 0.25F;
         spell.modifiers = List.of(modifier);
 
-        return new Entry(id, spell, title, description, null, Category.SPELL);
+        return new Entry(id, spell, title, description, Category.SPELL);
     }
 
     // MARK: - Priest
@@ -202,7 +200,7 @@ public class ArmorySpells {
         modifier.power_modifier.power_multiplier = 0.1F;
         spell.modifiers = List.of(modifier);
 
-        return new Entry(id, spell, title, description, null, Category.HEAL);
+        return new Entry(id, spell, title, description, Category.HEAL);
     }
 
     public static Entry improved_penance = add(improved_penance());
@@ -219,7 +217,7 @@ public class ArmorySpells {
         modifier.power_modifier.critical_chance_bonus = 0.05F;
         spell.modifiers = List.of(modifier);
 
-        return new Entry(id, spell, title, description, null, Category.HEAL);
+        return new Entry(id, spell, title, description, Category.HEAL);
     }
 
     // MARK: - Paladin
@@ -237,7 +235,7 @@ public class ArmorySpells {
         modifier.cooldown_duration_deduct = 5;
         spell.modifiers = List.of(modifier);
 
-        return new Entry(id, spell, title, description, null, Category.HEAL);
+        return new Entry(id, spell, title, description, Category.HEAL);
     }
 
     public static Entry improved_judgement = add(improved_judgement());
@@ -253,7 +251,7 @@ public class ArmorySpells {
         modifier.cooldown_duration_deduct = 3;
         spell.modifiers = List.of(modifier);
 
-        return new Entry(id, spell, title, description, null, Category.MELEE);
+        return new Entry(id, spell, title, description, Category.MELEE);
     }
 
     // MARK: - Rogue
@@ -271,7 +269,7 @@ public class ArmorySpells {
         modifier.cooldown_duration_deduct = 3;
         spell.modifiers = List.of(modifier);
 
-        return new Entry(id, spell, title, description, null, Category.MELEE);
+        return new Entry(id, spell, title, description, Category.MELEE);
     }
 
     public static Entry improved_bear_trap = add(improved_bear_trap());
@@ -288,7 +286,7 @@ public class ArmorySpells {
         modifier.power_modifier.power_multiplier = 0.1F;
         spell.modifiers = List.of(modifier);
 
-        return new Entry(id, spell, title, description, null, Category.MELEE);
+        return new Entry(id, spell, title, description, Category.MELEE);
     }
 
     // MARK: - Warrior
@@ -306,7 +304,7 @@ public class ArmorySpells {
         modifier.cooldown_duration_deduct = 2;
         spell.modifiers = List.of(modifier);
 
-        return new Entry(id, spell, title, description, null, Category.MELEE);
+        return new Entry(id, spell, title, description, Category.MELEE);
     }
 
     public static Entry improved_shout = add(improved_shout());
@@ -332,7 +330,7 @@ public class ArmorySpells {
         modifier.impact_filters = List.of(damageOnly);
         spell.modifiers = List.of(modifier);
 
-        return new Entry(id, spell, title, description, null, Category.MELEE);
+        return new Entry(id, spell, title, description, Category.MELEE);
     }
 
     // MARK: - Archer
@@ -354,7 +352,7 @@ public class ArmorySpells {
         modifier.arrow_perks.pierce = 1;
         spell.modifiers = List.of(modifier);
 
-        return new Entry(id, spell, title, description, null, Category.RANGED);
+        return new Entry(id, spell, title, description, Category.RANGED);
     }
 
     public static Entry improved_spirit_wolf = add(improved_spirit_wolf());
@@ -370,6 +368,6 @@ public class ArmorySpells {
         modifier.cooldown_duration_deduct = 5;
         spell.modifiers = List.of(modifier);
 
-        return new Entry(id, spell, title, description, null, Category.RANGED);
+        return new Entry(id, spell, title, description, Category.RANGED);
     }
 }

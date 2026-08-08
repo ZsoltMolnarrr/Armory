@@ -6,7 +6,6 @@ import net.armory_rpgs.ArmoryMod;
 import net.armory_rpgs.client.armor.CustomArmorRenderer;
 import net.armory_rpgs.item.ArmorSets;
 import net.armory_rpgs.spell.ArmorySpells;
-import net.spell_engine.client.gui.SpellTooltip;
 import net.spell_engine.rpg_series.item.Armor;
 import net.tiny_config.ConfigManager;
 
@@ -22,12 +21,6 @@ public class ArmoryClient {
 
     public static void init() {
         config.refresh();
-
-        for (var entry: ArmorySpells.all) {
-            if (entry.mutator() != null) {
-                SpellTooltip.addDescriptionMutator(entry.id(), entry.mutator());
-            }
-        }
 
         registerArmorRenderer(ArmorSets.justicar.armorSet(), CustomArmorRenderer::justicar_armor);
         registerArmorRenderer(ArmorSets.destroyer.armorSet(), CustomArmorRenderer::destroyer_armor);
