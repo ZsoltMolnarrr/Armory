@@ -17,7 +17,7 @@
       "net.armory.fabric.FabricMod"
     ],
     "fabric-datagen": [
-      "net.armory_rpgs.datagen.ArmoryDataGen"
+      "net.armory.fabric.datagen.ArmoryDataGen"
     ]
   },
   "mixins": [

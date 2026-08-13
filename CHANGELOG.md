@@ -1,3 +1,7 @@
+# 1.5.0
+
+- NeoForge version no longer depends on Forgified Fabric API
+
 # 1.4.4
 
 - Update Astral, Scarlet and Glacier armor models

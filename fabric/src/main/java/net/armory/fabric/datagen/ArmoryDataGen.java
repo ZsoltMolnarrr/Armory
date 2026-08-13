@@ -1,7 +1,7 @@
-package net.armory_rpgs.datagen;
+package net.armory.fabric.datagen;
 
-import net.armory_rpgs.datagen.recipe.SmithingRecipeProvider;
-import net.armory_rpgs.datagen.recipe.SmithingUpgradeRecipe;
+import net.armory.fabric.datagen.recipe.SmithingRecipeProvider;
+import net.armory.fabric.datagen.recipe.SmithingUpgradeRecipe;
 import net.armory_rpgs.item.*;
 import net.armory_rpgs.spell.SetBonuses;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;

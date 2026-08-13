@@ -1,4 +1,4 @@
-package net.armory_rpgs.datagen;
+package net.armory.fabric.datagen;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

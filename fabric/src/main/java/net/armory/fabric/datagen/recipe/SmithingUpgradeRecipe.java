@@ -1,4 +1,4 @@
-package net.armory_rpgs.datagen.recipe;
+package net.armory.fabric.datagen.recipe;
 
 import com.google.gson.annotations.SerializedName;
 import net.minecraft.item.Item;

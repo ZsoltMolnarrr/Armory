@@ -2,7 +2,6 @@ package net.armory_rpgs.item;
 
 import com.google.common.base.Suppliers;
 import net.armory_rpgs.ArmoryMod;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.SmithingTemplateItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -112,10 +111,7 @@ public class SmithingTemplates {
         for (var entry : ENTRIES) {
             Registry.register(Registries.ITEM, entry.id(), entry.item().get());
         }
-        ItemGroupEvents.modifyEntriesEvent(Group.KEY).register((content) -> {
-            for (var entry : ENTRIES) {
-                content.add(entry.item().get());
-            }
-        });
+        // Creative-tab placement is wired per-platform from each loader's entrypoint
+        // (Fabric ItemGroupEvents / NeoForge BuildCreativeModeTabContentsEvent), iterating ENTRIES.
     }
 }
