@@ -4,7 +4,7 @@ import net.armory_rpgs.item.ArmorSets;
 import net.armory_rpgs.item.SmithingTemplates;
 import net.armory_rpgs.item.SmithingIngredients;
 import net.armory_rpgs.spell.ArmorySounds;
-import net.spell_engine.api.config.ConfigFile;
+import net.spell_engine.rpg_series.config.ConfigFile;
 import net.tiny_config.ConfigManager;
 
 public class ArmoryMod {
