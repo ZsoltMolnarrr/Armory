@@ -39,7 +39,6 @@ repositories {
     maven { url 'https://maven.fabricmc.net' }
     maven { url 'https://maven.kosmx.dev/' }
     maven { url 'https://maven.shedaniel.me/' }
-    maven { url 'https://maven.azuredoom.com/mods' }
     maven {
         name = 'Modrinth'
         url = 'https://api.modrinth.com/maven'
@@ -82,7 +81,7 @@ dependencies {
         modImplementation("dev.emi:trinkets:${project.trinkets_version}")
     }
 
-    modImplementation("mod.azure.azurelibarmor:azurelibarmor-${platform}-${project.azure_mc_version}:${project.azure_lib_version}")
+    modImplementation("net.rpg_foundation:armor_model_api-fabric:${project.armor_model_api_version}")
 
     modImplementation("maven.modrinth:ranged-weapon-api:${project.ranged_weapon_api_version}-${platform}")
 //    modImplementation("net.foundation:ranged_weapon_api-${platform}:${project.ranged_weapon_api_version}")
@@ -139,7 +138,7 @@ publishMods {
         client = true                    // >=1 of client/server REQUIRED by CurseForge (Error 1021)
         server = true
         changelogType = "markdown"
-        requires("fabric-api", "azurelib-armor", "spell-engine", "ranged-weapon-api")
+        requires("fabric-api", "armor-model-api", "spell-engine", "ranged-weapon-api")
     }
 
     modrinth {
@@ -148,7 +147,7 @@ publishMods {
         minecraftVersions.add(project.minecraft_version)
         minecraftVersions.add(project.minecraft_compat_version)
         requires { slug = "fabric-api" }
-        requires { slug = "azurelib-armor" }
+        requires { slug = "armor-model-api" }
         requires { slug = "ranged-weapon-api" }
         requires { slug = "spell-engine" }
     }
