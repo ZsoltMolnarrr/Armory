@@ -1,3 +1,7 @@
+# 1.5.1
+
+- Replaced armor rendering dependency AzureLibArmor with ArmorModelAPI
+
 # 1.5.0
 
 - Adopt Spell Engine 1.10 changes
