@@ -19,10 +19,13 @@ repositories {
         name = "Ladysnake Libs"
         url = 'https://maven.ladysnake.org/releases'
     }
-
-    // For Trinkets (Fabric) / Curios (NeoForge):
-    maven { url 'https://maven.su5ed.dev/releases' }
     maven { url 'https://maven.fabricmc.net' }
+
+    // Hosts `dev.emi:trinkets`, inherited transitively from SpellEngine's Fabric artifact.
+    maven {
+        name = "Sleeping Town"
+        url = "https://repo.sleeping.town/"
+    }
 
     mavenLocal()
 }
