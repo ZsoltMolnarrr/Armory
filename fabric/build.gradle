@@ -39,13 +39,6 @@ repositories {
     maven { url 'https://maven.fabricmc.net' }
     maven { url 'https://maven.kosmx.dev/' }
     maven { url 'https://maven.shedaniel.me/' }
-    // CurseMaven - for Armor Model API
-    maven {
-        url = "https://www.cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
-    }
     maven {
         name = 'Modrinth'
         url = 'https://api.modrinth.com/maven'
@@ -87,7 +80,7 @@ dependencies {
         modImplementation("dev.emi:trinkets:${project.trinkets_version}")
     }
 
-    modImplementation("curse.maven:armor-model-api-1659764:${project.armor_model_api_fabric_file}")
+    modImplementation("maven.modrinth:armor-model-api:${project.armor_model_api_version}-${platform}")
 
     modImplementation("maven.modrinth:ranged-weapon-api:${project.ranged_weapon_api_version}-${platform}")
 //    modImplementation("net.foundation:ranged_weapon_api-${platform}:${project.ranged_weapon_api_version}")
