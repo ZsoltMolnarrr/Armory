@@ -24,8 +24,10 @@
     "armory_rpgs.mixins.json"
   ],
   "depends": {
-    "minecraft": ">=${minecraft_compat_version}",
-    "fabricloader": ">=${fabric_loader_version}",
+    "minecraft": "~1.21.11",
+    "fabricloader": ">=0.19.3",
+    "fabric-api": "*",
+    "java": ">=21",
     "armor_model_api": ">=${armor_model_api_version}",
     "spell_engine": ">=${spell_engine_version}",
     "ranged_weapon_api": ">=${ranged_weapon_api_version}"
