@@ -7,11 +7,12 @@ import net.armory_rpgs.spell.SetBonuses;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.Models;
-import net.minecraft.data.server.recipe.RecipeExporter;
+import net.minecraft.client.data.BlockStateModelGenerator;
+import net.minecraft.client.data.ItemModelGenerator;
+import net.minecraft.client.data.Models;
+import net.minecraft.data.recipe.RecipeExporter;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -47,7 +48,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         pack.addProvider(SpellGen::new);
         pack.addProvider(SoundGen::new);
         pack.addProvider(EquipmentSetGenerator::new);
-        pack.addProvider(RecipeGenerator::new);
+        pack.addProvider(TemplateRecipeGenerator::new);
         pack.addProvider(SmithGen::new);
     }
 
@@ -87,12 +88,12 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
             );
             var tierTag = RPGSeriesItemTags.LootTiers.get(ArmorSets.astral.lootProperties().tier(), RPGSeriesItemTags.LootCategory.ARMORS);
             SmithingTemplates.ENTRIES.forEach(entry -> {
-                var tag = getOrCreateTagBuilder(tierTag);
-                tag.addOptional(entry.id());
+                var tag = builder(tierTag);
+                tag.addOptional(itemKey(entry.id()));
             });
             SmithingIngredients.ENTRIES.forEach(entry -> {
-                var tag = getOrCreateTagBuilder(tierTag);
-                tag.addOptional(entry.id());
+                var tag = builder(tierTag);
+                tag.addOptional(itemKey(entry.id()));
             });
 
             // Loot-filtering tags splitting the two crystal batches, so a boss can drop one batch each.
@@ -100,14 +101,19 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
             var epicArmorA = TagKey.of(RegistryKeys.ITEM, Identifier.of(ArmoryMod.NAMESPACE, "loot/epic_armor_a"));
             var epicArmorB = TagKey.of(RegistryKeys.ITEM, Identifier.of(ArmoryMod.NAMESPACE, "loot/epic_armor_b"));
             SmithingTemplates.ENTRIES.forEach(entry -> {
-                getOrCreateTagBuilder(epicArmorA).addOptional(entry.id());
-                getOrCreateTagBuilder(epicArmorB).addOptional(entry.id());
+                builder(epicArmorA).addOptional(itemKey(entry.id()));
+                builder(epicArmorB).addOptional(itemKey(entry.id()));
             });
             SmithingIngredients.ENTRIES.forEach(entry -> {
                 // Forgotten crystals are the second (new) batch; the rest are the first batch.
                 var tag = entry.name().contains("forgotten") ? epicArmorB : epicArmorA;
-                getOrCreateTagBuilder(tag).addOptional(entry.id());
+                builder(tag).addOptional(itemKey(entry.id()));
             });
+        }
+
+        /// Tag builders take a `RegistryKey` since 1.21.6, not an `Identifier`.
+        private static RegistryKey<Item> itemKey(Identifier id) {
+            return RegistryKey.of(RegistryKeys.ITEM, id);
         }
     }
 
@@ -121,8 +127,8 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
             ArmorySpells.all.forEach(entry -> {
                 for (var category: entry.categories()) {
                     var tagKey = TagKey.of(SpellRegistry.KEY, Identifier.of(ArmoryMod.NAMESPACE, category.toString().toLowerCase()));
-                    var tag = getOrCreateTagBuilder(tagKey);
-                    tag.addOptional(entry.id());
+                    var tag = builder(tagKey);
+                    tag.addOptional(RegistryKey.of(SpellRegistry.KEY, entry.id()));
                 }
             });
         }
@@ -238,7 +244,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
 
         @Override
         protected void configure(RegistryWrapper.WrapperLookup registries, Entries entries) {
-            RegistryEntryLookup<Item> itemLookup = registries.createRegistryLookup().getOrThrow(RegistryKeys.ITEM);
+            RegistryEntryLookup<Item> itemLookup = registries.getOrThrow(RegistryKeys.ITEM);
             for (var set: SetBonuses.all) {
                 var items = RegistryEntryList.of(
                         set.itemSupplier().get().stream()
@@ -262,15 +268,28 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         }
     }
 
-    public static class RecipeGenerator extends FabricRecipeProvider {
-        public RecipeGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+    /// 1.21.11 moved the recipe helpers off the provider onto `net.minecraft.data.recipe.RecipeGenerator`,
+    /// which the provider now returns from `getRecipeGenerator`.
+    public static class TemplateRecipeGenerator extends FabricRecipeProvider {
+        public TemplateRecipeGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
             super(output, registriesFuture);
         }
+
         @Override
-        public void generate(RecipeExporter recipeExporter) {
-            SmithingTemplates.ENTRIES.forEach(entry -> {
-                FabricRecipeProvider.offerSmithingTemplateCopyingRecipe(recipeExporter, entry.item().get(), Items.DIAMOND);
-            });
+        public String getName() {
+            return "Armory Smithing Template Copying Recipes";
+        }
+
+        @Override
+        protected net.minecraft.data.recipe.RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
+            return new net.minecraft.data.recipe.RecipeGenerator(registries, exporter) {
+                @Override
+                public void generate() {
+                    SmithingTemplates.ENTRIES.forEach(entry -> {
+                        offerSmithingTemplateCopyingRecipe(entry.item().get(), Items.DIAMOND);
+                    });
+                }
+            };
         }
     }
 

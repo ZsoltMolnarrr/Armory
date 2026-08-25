@@ -2,11 +2,14 @@ package net.armory_rpgs.item;
 
 import com.google.common.base.Suppliers;
 import net.armory_rpgs.ArmoryMod;
+import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -16,6 +19,7 @@ import net.minecraft.util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class SmithingIngredients {
@@ -33,28 +37,35 @@ public class SmithingIngredients {
             this.appliesToTranslationKey = appliesToTranslationKey;
         }
 
-        public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType type) {
-            super.appendTooltip(stack, context, tooltip, type);
-            tooltip.add(HINT_TEXT);
-            tooltip.add(ScreenTexts.EMPTY);
-            tooltip.add(APPLIES_TO_TEXT);
-            tooltip.add(ScreenTexts.space().append(Text.translatable(appliesToTranslationKey)).formatted(Formatting.BLUE));
+        @Override
+        public void appendTooltip(ItemStack stack, Item.TooltipContext context, TooltipDisplayComponent displayComponent,
+                                  Consumer<Text> textConsumer, TooltipType type) {
+            super.appendTooltip(stack, context, displayComponent, textConsumer, type);
+            textConsumer.accept(HINT_TEXT);
+            textConsumer.accept(ScreenTexts.EMPTY);
+            textConsumer.accept(APPLIES_TO_TEXT);
+            textConsumer.accept(ScreenTexts.space().append(Text.translatable(appliesToTranslationKey)).formatted(Formatting.BLUE));
         }
     }
 
     public record Translations(String itemName) { }
     public record Entry(String name, List<FightClass> classes, Translations translations, Supplier<UpgradeCrystal> item) {
         public static Entry of(String name, List<FightClass> classes, Translations translations) {
-            var factory = Suppliers.memoize(() ->
+            Supplier<UpgradeCrystal> factory = Suppliers.memoize(() ->
                     new UpgradeCrystal(new Item.Settings()
+                            // Every `Item.Settings` built in a factory needs its registry key since 1.21.2
+                            .registryKey(RegistryKey.of(RegistryKeys.ITEM, idOf(name)))
                             .rarity(Rarity.EPIC)
                             .fireproof(),
                             appliesToTranslationKey(name)
-            ));
+            ))::get;
             return new Entry(name, classes, translations, factory);
         }
-        public Identifier id() {
+        public static Identifier idOf(String name) {
             return Identifier.of(ArmoryMod.NAMESPACE, name + "_upgrade_crystal");
+        }
+        public Identifier id() {
+            return idOf(name);
         }
         public static String appliesToTranslationKey(String name) {
             return Util.createTranslationKey("item", Identifier.of(ArmoryMod.NAMESPACE, "upgrade_crystal." + name + ".applies_to"));

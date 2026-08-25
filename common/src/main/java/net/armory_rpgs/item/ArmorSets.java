@@ -6,13 +6,16 @@ import net.armory_rpgs.spell.SetBonuses;
 import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.item.Item;
+import net.minecraft.item.equipment.ArmorMaterial;
+import net.minecraft.item.equipment.EquipmentAsset;
+import net.minecraft.item.equipment.EquipmentAssetKeys;
+import net.minecraft.item.equipment.EquipmentType;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
@@ -33,7 +36,7 @@ import java.util.function.UnaryOperator;
 
 public class ArmorSets {
     public static final ArrayList<Armor.Entry> entries = new ArrayList<>();
-    private static Armor.Entry create(RegistryEntry<ArmorMaterial> material, Identifier id, int durability, int tier,
+    private static Armor.Entry create(ArmorMaterial material, Identifier id, int durability, int tier,
                                       Armor.Set.ItemFactory factory, ArmorSetConfig defaults, Armor.ItemSettingsTweaker settings) {
         var entry = Armor.Entry.create(
                 material,
@@ -48,29 +51,49 @@ public class ArmorSets {
         return entry;
     }
 
-    public static RegistryEntry<ArmorMaterial> material(
-            String name, int protectionHead, int protectionChest, int protectionLegs, int protectionFeet,
-            int enchantability, RegistryEntry<SoundEvent> equipSound, Supplier<Ingredient> repairIngredient) {
+    /// 1.21.4 replaced armor material layers with equipment assets
+    /// (`assets/<ns>/equipment/<name>.json`). Armory renders its armor through ArmorModelAPI's geo
+    /// renderers, so no asset file is shipped - the loader falls back to an empty model and only the
+    /// geo pass draws.
+    private static RegistryKey<EquipmentAsset> assetId(String name) {
+        return RegistryKey.of(EquipmentAssetKeys.REGISTRY_KEY, Identifier.of(ArmoryMod.NAMESPACE, name));
+    }
 
-        var material = new ArmorMaterial(
+    /// Repair ingredients are tags since 1.21.2 (`ArmorMaterial.repairIngredient`).
+    /// `#minecraft:repairs_netherite_armor` is exactly the netherite ingot the 1.21.1 ingredient listed.
+    private static final TagKey<Item> NETHERITE_INGREDIENTS = ItemTags.REPAIRS_NETHERITE_ARMOR;
+
+    /// `ArmorMaterial` is a plain record since 1.21.2 - no registry, no `RegistryEntry`.
+    /// `durability` here must match the value passed to `Armor.Entry.create`, because
+    /// `Item.Settings.armor(material, type)` recomputes `maxDamage` from the material.
+    public static ArmorMaterial material(
+            String name, int protectionHead, int protectionChest, int protectionLegs, int protectionFeet,
+            int enchantability, RegistryEntry<SoundEvent> equipSound, TagKey<Item> repairIngredient) {
+
+        return new ArmorMaterial(
+                durability,
                 Map.of(
-                        ArmorItem.Type.HELMET, protectionHead,
-                        ArmorItem.Type.CHESTPLATE, protectionChest,
-                        ArmorItem.Type.LEGGINGS, protectionLegs,
-                        ArmorItem.Type.BOOTS, protectionFeet),
-                enchantability, equipSound, repairIngredient,
-                List.of(new ArmorMaterial.Layer(Identifier.of(ArmoryMod.NAMESPACE, name))),
-                0,0
-        );
-        return Registry.registerReference(Registries.ARMOR_MATERIAL, Identifier.of(ArmoryMod.NAMESPACE, name), material);
+                        EquipmentType.HELMET, protectionHead,
+                        EquipmentType.CHESTPLATE, protectionChest,
+                        EquipmentType.LEGGINGS, protectionLegs,
+                        EquipmentType.BOOTS, protectionFeet),
+                enchantability,
+                equipSound,
+                0F,
+                0F,
+                repairIngredient,
+                assetId(name));
     }
 
 
-    private static final Identifier ATTACK_DAMAGE_ID = Identifier.ofVanilla("generic.attack_damage");
-    private static final Identifier ATTACK_SPEED_ID = Identifier.ofVanilla("generic.attack_speed");
-    private static final Identifier KNOCKBACK_ID = Identifier.ofVanilla("generic.knockback_resistance");
-    private static final Identifier MOVEMENT_SPEED_ID = Identifier.ofVanilla("generic.movement_speed");
-    private static final Identifier ARMOR_TOUGHNESS_ID = Identifier.ofVanilla("generic.armor_toughness");
+    /// Vanilla attribute ids lost the `generic.` prefix in 1.21.2 - derive them from the registry
+    /// entries instead of spelling them out, so the next rename cannot silently drop the bonus
+    /// (`Armor.attributesFrom` swallows unresolvable ids).
+    private static final Identifier ATTACK_DAMAGE_ID = EntityAttributes.ATTACK_DAMAGE.getKey().orElseThrow().getValue();
+    private static final Identifier ATTACK_SPEED_ID = EntityAttributes.ATTACK_SPEED.getKey().orElseThrow().getValue();
+    private static final Identifier KNOCKBACK_ID = EntityAttributes.KNOCKBACK_RESISTANCE.getKey().orElseThrow().getValue();
+    private static final Identifier MOVEMENT_SPEED_ID = EntityAttributes.MOVEMENT_SPEED.getKey().orElseThrow().getValue();
+    private static final Identifier ARMOR_TOUGHNESS_ID = EntityAttributes.ARMOR_TOUGHNESS.getKey().orElseThrow().getValue();
     private static final String CRIT_MOD_ID = "critical_strike";
     private static final Identifier CRIT_CHANCE_ID = Identifier.of(CRIT_MOD_ID, "chance");
     private static final Identifier CRIT_DAMAGE_ID = Identifier.of(CRIT_MOD_ID, "damage");
@@ -148,39 +171,39 @@ public class ArmorSets {
 
     public static final int enchantability = 18;
 
-    public static RegistryEntry<ArmorMaterial> wizard_robe = material(
+    public static ArmorMaterial wizard_robe = material(
             "wizard_robe",
             1, 3, 2, 1,
             enchantability,
-            ArmorySounds.cloth_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
-    public static RegistryEntry<ArmorMaterial> priest_robe = material(
+            ArmorySounds.cloth_equip.entry(), NETHERITE_INGREDIENTS);
+    public static ArmorMaterial priest_robe = material(
             "priest_robe",
             1, 3, 2, 1,
             enchantability,
-            ArmorySounds.cloth_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+            ArmorySounds.cloth_equip.entry(), NETHERITE_INGREDIENTS);
 
-    public static RegistryEntry<ArmorMaterial> archer_armor = material(
+    public static ArmorMaterial archer_armor = material(
             "archer_armor",
             2, 4, 4, 2,
             enchantability,
-            ArmorySounds.leather_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+            ArmorySounds.leather_equip.entry(), NETHERITE_INGREDIENTS);
 
-    public static RegistryEntry<ArmorMaterial> rogue_armor = material(
+    public static ArmorMaterial rogue_armor = material(
             "rogue_armor",
             2, 4, 4, 2,
             enchantability,
-            ArmorySounds.leather_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+            ArmorySounds.leather_equip.entry(), NETHERITE_INGREDIENTS);
 
-    public static RegistryEntry<ArmorMaterial> paladin_armor = material(
+    public static ArmorMaterial paladin_armor = material(
             "paladin_armor",
             3, 8, 6, 3,
             enchantability,
-            ArmorySounds.plate_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
-    public static RegistryEntry<ArmorMaterial> warrior_armor = material(
+            ArmorySounds.plate_equip.entry(), NETHERITE_INGREDIENTS);
+    public static ArmorMaterial warrior_armor = material(
             "warrior_armor",
             3, 8, 6, 2,
             enchantability,
-            ArmorySounds.plate_equip.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+            ArmorySounds.plate_equip.entry(), NETHERITE_INGREDIENTS);
 
     private static final float plate_toughness = 1F;
 

@@ -25,19 +25,22 @@ import java.util.List;
  *     }
  *   ],
  *   "type": "minecraft:smithing_transform",
- *   "template": { "item": "minecraft:netherite_upgrade_smithing_template" },
- *   "base": { "item": "minecraft:diamond_helmet" },
- *   "addition": { "item": "minecraft:netherite_ingot" },
+ *   "template": "minecraft:netherite_upgrade_smithing_template",
+ *   "base": "minecraft:diamond_helmet",
+ *   "addition": "minecraft:netherite_ingot",
  *   "result": { "id": "minecraft:netherite_helmet", "count": 1 }
  * }
+ *
+ * Since 1.21.2 ingredients are plain strings (`"ns:item"` / `"#ns:tag"` / an array), not
+ * `{"item": ...}` objects - the old form is silently rejected at data load.
  */
 public record SmithingUpgradeRecipe(
         @SerializedName("fabric:load_conditions") List<FabricLoadCondition> fabricLoadConditions,
         @SerializedName("neoforge:conditions") List<NeoForgeCondition> neoforgeConditions,
         String type,
-        ItemIngredient template,
-        ItemIngredient base,
-        ItemIngredient addition,
+        String template,
+        String base,
+        String addition,
         ItemResult result
 ) {
     public static final String TYPE = "minecraft:smithing_transform";
@@ -70,21 +73,9 @@ public record SmithingUpgradeRecipe(
         }
     }
 
-    /**
-     * Represents an item ingredient in the recipe (template, base, or addition)
-     */
-    public record ItemIngredient(String item) {
-        public static ItemIngredient of(Item item) {
-            return new ItemIngredient(Registries.ITEM.getId(item).toString());
-        }
-
-        public static ItemIngredient of(ItemConvertible item) {
-            return of(item.asItem());
-        }
-
-        public static ItemIngredient of(Identifier id) {
-            return new ItemIngredient(id.toString());
-        }
+    /// Ingredients are plain item-id strings since 1.21.2
+    private static String ingredientOf(Item item) {
+        return Registries.ITEM.getId(item).toString();
     }
 
     /**
@@ -116,9 +107,9 @@ public record SmithingUpgradeRecipe(
                 null,
                 null,
                 TYPE,
-                ItemIngredient.of(template),
-                ItemIngredient.of(base),
-                ItemIngredient.of(addition),
+                ingredientOf(template),
+                ingredientOf(base),
+                ingredientOf(addition),
                 ItemResult.of(result)
         );
     }
@@ -135,9 +126,9 @@ public record SmithingUpgradeRecipe(
                 null,
                 null,
                 TYPE,
-                new ItemIngredient(templateId),
-                new ItemIngredient(baseId),
-                new ItemIngredient(additionId),
+                templateId,
+                baseId,
+                additionId,
                 new ItemResult(resultId, 1)
         );
     }
@@ -165,9 +156,9 @@ public record SmithingUpgradeRecipe(
                 fabricConditions,
                 neoforgeConditions,
                 TYPE,
-                new ItemIngredient(templateId),
-                new ItemIngredient(baseId),
-                new ItemIngredient(additionId),
+                templateId,
+                baseId,
+                additionId,
                 new ItemResult(resultId, 1)
         );
     }
@@ -186,9 +177,9 @@ public record SmithingUpgradeRecipe(
                 fabricConditions,
                 neoforgeConditions,
                 TYPE,
-                ItemIngredient.of(template),
-                ItemIngredient.of(base),
-                ItemIngredient.of(addition),
+                ingredientOf(template),
+                ingredientOf(base),
+                ingredientOf(addition),
                 ItemResult.of(result)
         );
     }

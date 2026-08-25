@@ -40,8 +40,7 @@ public class SetBonuses {
                                         operation
                                 ),
                                 AttributeModifierSlot.ARMOR)
-                ),
-                true
+                )
         );
     }
 
@@ -89,7 +88,7 @@ public class SetBonuses {
                 () -> { return ArmorSets.destroyer.armorSet().pieceIds(); },
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
-                                EntityAttributes.GENERIC_ATTACK_DAMAGE,
+                                EntityAttributes.ATTACK_DAMAGE,
                                 0.05,
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
@@ -107,7 +106,7 @@ public class SetBonuses {
                 () -> { return ArmorSets.deathmantle.armorSet().pieceIds(); },
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
-                                EntityAttributes.GENERIC_MOVEMENT_SPEED,
+                                EntityAttributes.MOVEMENT_SPEED,
                                 0.05,
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
@@ -271,7 +270,7 @@ public class SetBonuses {
                 () -> { return ArmorSets.lightbringer.armorSet().pieceIds(); },
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
-                                EntityAttributes.GENERIC_ATTACK_DAMAGE,
+                                EntityAttributes.ATTACK_DAMAGE,
                                 0.1,
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
@@ -289,7 +288,7 @@ public class SetBonuses {
                 () -> { return ArmorSets.onslaught.armorSet().pieceIds(); },
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
-                                EntityAttributes.GENERIC_ATTACK_SPEED,
+                                EntityAttributes.ATTACK_SPEED,
                                 0.05,
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
@@ -307,7 +306,7 @@ public class SetBonuses {
                 () -> { return ArmorSets.slayer.armorSet().pieceIds(); },
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
-                                EntityAttributes.GENERIC_ATTACK_DAMAGE,
+                                EntityAttributes.ATTACK_DAMAGE,
                                 0.05,
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
