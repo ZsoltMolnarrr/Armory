@@ -8,12 +8,8 @@
     }
   ],
   "type": "minecraft:smithing_transform",
-  "addition": {
-    "item": "armory_rpgs:champion_upgrade_crystal"
-  },
-  "base": {
-    "item": "rogues:assassin_armor_head"
-  },
+  "addition": "armory_rpgs:champion_upgrade_crystal",
+  "base": "rogues:assassin_armor_head",
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
@@ -24,7 +20,5 @@
     "count": 1,
     "id": "armory_rpgs:deathmantle_armor_head"
   },
-  "template": {
-    "item": "armory_rpgs:epic_armor_upgrade"
-  }
+  "template": "armory_rpgs:epic_armor_upgrade"
 }

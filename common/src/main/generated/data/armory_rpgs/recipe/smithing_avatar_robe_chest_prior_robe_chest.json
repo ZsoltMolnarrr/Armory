@@ -8,12 +8,8 @@
     }
   ],
   "type": "minecraft:smithing_transform",
-  "addition": {
-    "item": "armory_rpgs:redeemer_upgrade_crystal"
-  },
-  "base": {
-    "item": "paladins:prior_robe_chest"
-  },
+  "addition": "armory_rpgs:redeemer_upgrade_crystal",
+  "base": "paladins:prior_robe_chest",
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
@@ -24,7 +20,5 @@
     "count": 1,
     "id": "armory_rpgs:avatar_robe_chest"
   },
-  "template": {
-    "item": "armory_rpgs:epic_armor_upgrade"
-  }
+  "template": "armory_rpgs:epic_armor_upgrade"
 }

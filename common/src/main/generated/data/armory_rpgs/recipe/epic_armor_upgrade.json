@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:diamond"
-    },
-    "C": {
-      "item": "minecraft:diamond"
-    },
-    "S": {
-      "item": "armory_rpgs:epic_armor_upgrade"
-    }
+    "#": "minecraft:diamond",
+    "C": "minecraft:diamond",
+    "S": "armory_rpgs:epic_armor_upgrade"
   },
   "pattern": [
     "#S#",

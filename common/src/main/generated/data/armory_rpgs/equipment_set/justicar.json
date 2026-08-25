@@ -1,17 +1,15 @@
 {
   "bonuses": [
     {
-      "attributes": {
-        "modifiers": [
-          {
-            "type": "spell_power:healing",
-            "amount": 2.0,
-            "id": "armory_rpgs:set_bonus",
-            "operation": "add_value",
-            "slot": "armor"
-          }
-        ]
-      },
+      "attributes": [
+        {
+          "type": "spell_power:healing",
+          "amount": 2.0,
+          "id": "armory_rpgs:set_bonus",
+          "operation": "add_value",
+          "slot": "armor"
+        }
+      ],
       "required_piece_count": 2
     },
     {
