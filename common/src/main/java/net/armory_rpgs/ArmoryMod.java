@@ -40,12 +40,12 @@ public class ArmoryMod {
         // Creative-tab order: item-group modify callbacks run in registration order on both loaders
         // (Fabric `ItemGroupEvents`, SpellEngine's NeoForge dispatcher), so this callback must be
         // registered BEFORE `ArmorSets.register`, whose `Armor.register(..., Group.KEY)` appends the sets.
-        // Resulting order: upgrade crystals, smithing templates, then armor sets in registration order.
+        // Resulting order: smithing templates, upgrade crystals, then armor sets in registration order.
         PlatformEvents.onItemGroupModify(Group.KEY, (content, context) -> {
-            for (var entry : SmithingIngredients.ENTRIES) {
+            for (var entry : SmithingTemplates.ENTRIES) {
                 content.add(entry.item().get());
             }
-            for (var entry : SmithingTemplates.ENTRIES) {
+            for (var entry : SmithingIngredients.ENTRIES) {
                 content.add(entry.item().get());
             }
         });
