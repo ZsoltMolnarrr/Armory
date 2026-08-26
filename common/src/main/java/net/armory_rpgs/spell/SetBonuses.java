@@ -2,7 +2,7 @@ package net.armory_rpgs.spell;
 
 import net.armory_rpgs.ArmoryMod;
 import net.armory_rpgs.item.ArmorSets;
-import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
+import net.rpg_foundation.ranged_weapon.api.EntityAttributes_RangedWeapon;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.attribute.EntityAttribute;

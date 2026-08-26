@@ -3,7 +3,7 @@ package net.armory_rpgs.item;
 import net.armory_rpgs.ArmoryMod;
 import net.armory_rpgs.spell.ArmorySounds;
 import net.armory_rpgs.spell.SetBonuses;
-import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
+import net.rpg_foundation.ranged_weapon.api.EntityAttributes_RangedWeapon;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
