@@ -3,22 +3,21 @@ package net.armory.fabric.datagen;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.minecraft.data.DataOutput;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.DataWriter;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.data.PackOutput;
+import net.minecraft.resources.Identifier;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public abstract class WeaponAttributeGenerator implements DataProvider {
-    private final CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup;
+    private final CompletableFuture<HolderLookup.Provider> registryLookup;
     protected final FabricDataOutput dataOutput;
 
-    public WeaponAttributeGenerator(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+    public WeaponAttributeGenerator(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
         this.dataOutput = dataOutput;
         this.registryLookup = registryLookup;
     }
@@ -38,7 +37,7 @@ public abstract class WeaponAttributeGenerator implements DataProvider {
     }
 
     @Override
-    public CompletableFuture<?> run(DataWriter writer) {
+    public CompletableFuture<?> run(CachedOutput writer) {
         var builder = new Builder();
         generateWeaponAttributes(builder);
         var entries = builder.entries;
@@ -48,7 +47,7 @@ public abstract class WeaponAttributeGenerator implements DataProvider {
             var content = createFileContent(entry.preset);
             var json = gson.toJsonTree(content);
             var path = getFilePath(entry.id());
-            writes.add(DataProvider.writeToPath(writer, json, path));
+            writes.add(DataProvider.saveStable(writer, json, path));
         }
 
         return CompletableFuture.allOf(writes.toArray(new CompletableFuture[0]));
@@ -60,7 +59,7 @@ public abstract class WeaponAttributeGenerator implements DataProvider {
     }
 
     private Path getFilePath(Identifier id) {
-        return this.dataOutput.getResolver(DataOutput.OutputType.DATA_PACK, "weapon_attributes").resolveJson(id);
+        return this.dataOutput.createPathProvider(PackOutput.Target.DATA_PACK, "weapon_attributes").json(id);
     }
 
 }

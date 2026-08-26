@@ -43,10 +43,10 @@ public class ArmoryMod {
         // Resulting order: smithing templates, upgrade crystals, then armor sets in registration order.
         PlatformEvents.onItemGroupModify(Group.KEY, (content, context) -> {
             for (var entry : SmithingTemplates.ENTRIES) {
-                content.add(entry.item().get());
+                content.accept(entry.item().get());
             }
             for (var entry : SmithingIngredients.ENTRIES) {
-                content.add(entry.item().get());
+                content.accept(entry.item().get());
             }
         });
         ArmorSets.register(itemConfig.value.armor_sets);

@@ -2,21 +2,20 @@ package net.armory_rpgs.item;
 
 import com.google.common.base.Suppliers;
 import net.armory_rpgs.ArmoryMod;
-import net.minecraft.component.type.TooltipDisplayComponent;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.screen.ScreenTexts;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Util;
-
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -24,27 +23,27 @@ import java.util.function.Supplier;
 
 public class SmithingIngredients {
     public static class UpgradeCrystal extends Item {
-        public static final Text APPLIES_TO_TEXT = Text.translatable(
-                Util.createTranslationKey("item", Identifier.ofVanilla("smithing_template.applies_to")))
-                .formatted(Formatting.GRAY);
-        public static final String HINT_TRANSLATION_KEY = Util.createTranslationKey("item", Identifier.of(ArmoryMod.NAMESPACE, "smithing_template.hint"));
-        public static final Text HINT_TEXT = Text.translatable(HINT_TRANSLATION_KEY)
-                .formatted(Formatting.GRAY);
+        public static final Component APPLIES_TO_TEXT = Component.translatable(
+                Util.makeDescriptionId("item", Identifier.withDefaultNamespace("smithing_template.applies_to")))
+                .withStyle(ChatFormatting.GRAY);
+        public static final String HINT_TRANSLATION_KEY = Util.makeDescriptionId("item", Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "smithing_template.hint"));
+        public static final Component HINT_TEXT = Component.translatable(HINT_TRANSLATION_KEY)
+                .withStyle(ChatFormatting.GRAY);
 
         private final String appliesToTranslationKey;
-        public UpgradeCrystal(Item.Settings settings, String appliesToTranslationKey) {
+        public UpgradeCrystal(Item.Properties settings, String appliesToTranslationKey) {
             super(settings);
             this.appliesToTranslationKey = appliesToTranslationKey;
         }
 
         @Override
-        public void appendTooltip(ItemStack stack, Item.TooltipContext context, TooltipDisplayComponent displayComponent,
-                                  Consumer<Text> textConsumer, TooltipType type) {
-            super.appendTooltip(stack, context, displayComponent, textConsumer, type);
+        public void appendHoverText(ItemStack stack, Item.TooltipContext context, TooltipDisplay displayComponent,
+                                  Consumer<Component> textConsumer, TooltipFlag type) {
+            super.appendHoverText(stack, context, displayComponent, textConsumer, type);
             textConsumer.accept(HINT_TEXT);
-            textConsumer.accept(ScreenTexts.EMPTY);
+            textConsumer.accept(CommonComponents.EMPTY);
             textConsumer.accept(APPLIES_TO_TEXT);
-            textConsumer.accept(ScreenTexts.space().append(Text.translatable(appliesToTranslationKey)).formatted(Formatting.BLUE));
+            textConsumer.accept(CommonComponents.space().append(Component.translatable(appliesToTranslationKey)).withStyle(ChatFormatting.BLUE));
         }
     }
 
@@ -52,23 +51,23 @@ public class SmithingIngredients {
     public record Entry(String name, List<FightClass> classes, Translations translations, Supplier<UpgradeCrystal> item) {
         public static Entry of(String name, List<FightClass> classes, Translations translations) {
             Supplier<UpgradeCrystal> factory = Suppliers.memoize(() ->
-                    new UpgradeCrystal(new Item.Settings()
+                    new UpgradeCrystal(new Item.Properties()
                             // Every `Item.Settings` built in a factory needs its registry key since 1.21.2
-                            .registryKey(RegistryKey.of(RegistryKeys.ITEM, idOf(name)))
+                            .setId(ResourceKey.create(Registries.ITEM, idOf(name)))
                             .rarity(Rarity.EPIC)
-                            .fireproof(),
+                            .fireResistant(),
                             appliesToTranslationKey(name)
             ))::get;
             return new Entry(name, classes, translations, factory);
         }
         public static Identifier idOf(String name) {
-            return Identifier.of(ArmoryMod.NAMESPACE, name + "_upgrade_crystal");
+            return Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, name + "_upgrade_crystal");
         }
         public Identifier id() {
             return idOf(name);
         }
         public static String appliesToTranslationKey(String name) {
-            return Util.createTranslationKey("item", Identifier.of(ArmoryMod.NAMESPACE, "upgrade_crystal." + name + ".applies_to"));
+            return Util.makeDescriptionId("item", Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "upgrade_crystal." + name + ".applies_to"));
         }
         public String appliesToTranslationKey() {
             return appliesToTranslationKey(name);
@@ -123,7 +122,7 @@ public class SmithingIngredients {
     ));
     public static void register() {
         for (var entry : ENTRIES) {
-            Registry.register(Registries.ITEM, entry.id(), entry.item().get());
+            Registry.register(BuiltInRegistries.ITEM, entry.id(), entry.item().get());
         }
         // Creative-tab placement: see ArmoryMod.registerItems (single ordered callback).
     }

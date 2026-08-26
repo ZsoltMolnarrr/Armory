@@ -1,7 +1,7 @@
 package net.armory_rpgs.spell;
 
 import net.armory_rpgs.ArmoryMod;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 import net.spell_engine.fx.SpellEngineSounds;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class ArmorySounds {
         return entry;
     }
     private static SpellEngineSounds.Entry entry(String name) {
-        return new SpellEngineSounds.Entry(Identifier.of(ArmoryMod.NAMESPACE, name));
+        return new SpellEngineSounds.Entry(Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, name));
     }
 
     public static final SpellEngineSounds.Entry cloth_equip = add(entry("cloth_equip").variants(3));

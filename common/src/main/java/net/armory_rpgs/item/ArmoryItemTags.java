@@ -1,11 +1,11 @@
 package net.armory_rpgs.item;
 
-import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
 import net.armory_rpgs.ArmoryMod;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 
 public class ArmoryItemTags {
-    public static final TagKey<Item> ALL = TagKey.of(RegistryKeys.ITEM, Identifier.of(ArmoryMod.NAMESPACE, "all"));
+    public static final TagKey<Item> ALL = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "all"));
 }

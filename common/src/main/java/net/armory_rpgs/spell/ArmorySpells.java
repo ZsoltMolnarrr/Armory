@@ -1,8 +1,8 @@
 package net.armory_rpgs.spell;
 
 import net.armory_rpgs.ArmoryMod;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
+import net.minecraft.ChatFormatting;
+import net.minecraft.resources.Identifier;
 import net.spell_engine.api.datagen.SpellBuilder;
 import net.spell_engine.api.spell.ExternalSpellSchools;
 import net.spell_engine.api.spell.Spell;
@@ -64,7 +64,7 @@ public class ArmorySpells {
 
         spell.tooltip = new Spell.Tooltip();
         spell.tooltip.name = new Spell.Tooltip.LineOptions(false, true);
-        spell.tooltip.description.color = Formatting.GRAY.asString();
+        spell.tooltip.description.color = ChatFormatting.GRAY.getSerializedName();
         spell.tooltip.description.show_in_compact = true;
         spell.tooltip.name.show_in_compact = false;
         spell.tooltip.name.show_in_details = false;
@@ -77,7 +77,7 @@ public class ArmorySpells {
 
     public static Entry improved_arcane_beam = add(improved_arcane_beam());
     private static Entry improved_arcane_beam() {
-        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_arcane_beam");
+        var id = Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "improved_arcane_beam");
         var title = "Improved Arcane Beam";
         var description = "Arcane Beam releases {channel_ticks_add} additional times";
         var spell = modifierSpellBase();
@@ -94,7 +94,7 @@ public class ArmorySpells {
 
     public static Entry improved_arcane_barrage = add(improved_arcane_barrage());
     private static Entry improved_arcane_barrage() {
-        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_arcane_barrage");
+        var id = Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "improved_arcane_barrage");
         var title = "Improved Arcane Barrage";
         var seconds = 5;
         // No auto-token exists for a modifier's summon lifespan, so the number is baked in.
@@ -114,7 +114,7 @@ public class ArmorySpells {
 
     public static Entry improved_meteor = add(improved_meteor());
     private static Entry improved_meteor() {
-        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_meteor");
+        var id = Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "improved_meteor");
         var title = "Improved Meteor";
         var description = "Increases critical chance of Meteor by {critical_chance_bonus}";
         var spell = modifierSpellBase();
@@ -131,7 +131,7 @@ public class ArmorySpells {
 
     public static Entry improved_firestorm = add(improved_firestorm());
     private static Entry improved_firestorm() {
-        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_firestorm");
+        var id = Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "improved_firestorm");
         var title = "Improved Firestorm";
         var description = "Increases radius of Firestorm by {range_add} blocks";
         var spell = modifierSpellBase();
@@ -150,7 +150,7 @@ public class ArmorySpells {
 
     public static Entry improved_frost_shield = add(improved_frost_shield());
     private static Entry improved_frost_shield() {
-        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_frost_shield");
+        var id = Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "improved_frost_shield");
         var title = "Improved Frost Shield";
         var description = "Frost Shield also dispels a harmful effect from you";
         var spell = modifierSpellBase();
@@ -169,7 +169,7 @@ public class ArmorySpells {
 
     public static Entry improved_ice_lance = add(improved_ice_lance());
     private static Entry improved_ice_lance() {
-        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_ice_lance");
+        var id = Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "improved_ice_lance");
         var title = "Improved Ice Lance";
         var description = "Increases critical damage of Ice Lance by {critical_damage_bonus}";
         var spell = modifierSpellBase();
@@ -188,7 +188,7 @@ public class ArmorySpells {
 
     public static Entry improved_circle_of_healing = add(improved_circle_of_healing());
     private static Entry improved_circle_of_healing() {
-        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_circle_of_healing");
+        var id = Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "improved_circle_of_healing");
         var title = "Improved Circle of Healing";
         var description = "Increases power of Circle of Healing by {power_multiplier}";
         var spell = modifierSpellBase();
@@ -205,7 +205,7 @@ public class ArmorySpells {
 
     public static Entry improved_penance = add(improved_penance());
     private static Entry improved_penance() {
-        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_penance");
+        var id = Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "improved_penance");
         var title = "Improved Penance";
         var description = "Increases critical chance of Penance by {critical_chance_bonus}";
         var spell = modifierSpellBase();
@@ -224,7 +224,7 @@ public class ArmorySpells {
 
     public static Entry improved_divine_protection = add(improved_divine_protection());
     private static Entry improved_divine_protection() {
-        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_divine_protection");
+        var id = Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "improved_divine_protection");
         var title = "Improved Divine Protection";
         var description = "Reduces cooldown of Divine Protection by {cooldown_duration_deduct} sec";
         var spell = modifierSpellBase();
@@ -240,7 +240,7 @@ public class ArmorySpells {
 
     public static Entry improved_judgement = add(improved_judgement());
     private static Entry improved_judgement() {
-        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_judgement");
+        var id = Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "improved_judgement");
         var title = "Improved Judgement";
         var description = "Reduces cooldown of Judgement by {cooldown_duration_deduct} sec";
         var spell = modifierSpellBase();
@@ -258,7 +258,7 @@ public class ArmorySpells {
 
     public static Entry improved_shadow_step = add(improved_shadow_step());
     private static Entry improved_shadow_step() {
-        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_shadow_step");
+        var id = Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "improved_shadow_step");
         var title = "Improved Shadowstep";
         var description = "Reduces cooldown of Shadowstep by {cooldown_duration_deduct} sec";
         var spell = modifierSpellBase();
@@ -274,7 +274,7 @@ public class ArmorySpells {
 
     public static Entry improved_bear_trap = add(improved_bear_trap());
     private static Entry improved_bear_trap() {
-        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_bear_trap");
+        var id = Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "improved_bear_trap");
         var title = "Improved Bear Trap";
         var description = "Increases power of Bear Trap by {power_multiplier}";
         var spell = modifierSpellBase();
@@ -293,7 +293,7 @@ public class ArmorySpells {
 
     public static Entry improved_charge = add(improved_charge());
     private static Entry improved_charge() {
-        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_charge");
+        var id = Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "improved_charge");
         var title = "Improved Charge";
         var description = "Reduces cooldown of Charge by {cooldown_duration_deduct} sec";
         var spell = modifierSpellBase();
@@ -309,7 +309,7 @@ public class ArmorySpells {
 
     public static Entry improved_shout = add(improved_shout());
     private static Entry improved_shout() {
-        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_shout");
+        var id = Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "improved_shout");
         var title = "Improved Shout";
         // The {power_multiplier} token would render "400%", which reads absurd next to what is still
         // a small absolute number, so the effect is described in words instead.
@@ -337,7 +337,7 @@ public class ArmorySpells {
 
     public static Entry improved_barrage = add(improved_barrage());
     private static Entry improved_barrage() {
-        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_barrage");
+        var id = Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "improved_barrage");
         var title = "Improved Barrage";
         // No auto-token exists for arrow perks, so the number is baked in.
         var description = "Barrage arrows pierce 1 additional enemy";
@@ -357,7 +357,7 @@ public class ArmorySpells {
 
     public static Entry improved_spirit_wolf = add(improved_spirit_wolf());
     private static Entry improved_spirit_wolf() {
-        var id = Identifier.of(ArmoryMod.NAMESPACE, "improved_spirit_wolf");
+        var id = Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "improved_spirit_wolf");
         var title = "Improved Spirit Wolf";
         var description = "Reduces cooldown of Spirit Wolf by {cooldown_duration_deduct} sec";
         var spell = modifierSpellBase();

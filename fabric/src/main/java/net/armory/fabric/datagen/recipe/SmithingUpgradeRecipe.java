@@ -1,12 +1,10 @@
 package net.armory.fabric.datagen.recipe;
 
 import com.google.gson.annotations.SerializedName;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.registry.Registries;
-import net.minecraft.util.Identifier;
-
 import java.util.List;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 
 /**
  * Simple data structure for smithing transform recipes that can serialize to JSON.
@@ -75,7 +73,7 @@ public record SmithingUpgradeRecipe(
 
     /// Ingredients are plain item-id strings since 1.21.2
     private static String ingredientOf(Item item) {
-        return Registries.ITEM.getId(item).toString();
+        return BuiltInRegistries.ITEM.getKey(item).toString();
     }
 
     /**
@@ -83,10 +81,10 @@ public record SmithingUpgradeRecipe(
      */
     public record ItemResult(String id, int count) {
         public static ItemResult of(Item item, int count) {
-            return new ItemResult(Registries.ITEM.getId(item).toString(), count);
+            return new ItemResult(BuiltInRegistries.ITEM.getKey(item).toString(), count);
         }
 
-        public static ItemResult of(ItemConvertible item, int count) {
+        public static ItemResult of(ItemLike item, int count) {
             return of(item.asItem(), count);
         }
 
@@ -94,7 +92,7 @@ public record SmithingUpgradeRecipe(
             return of(item, 1);
         }
 
-        public static ItemResult of(ItemConvertible item) {
+        public static ItemResult of(ItemLike item) {
             return of(item.asItem(), 1);
         }
     }
@@ -117,7 +115,7 @@ public record SmithingUpgradeRecipe(
     /**
      * Create a smithing upgrade recipe with all parameters as ItemConvertible
      */
-    public static SmithingUpgradeRecipe of(ItemConvertible template, ItemConvertible base, ItemConvertible addition, ItemConvertible result) {
+    public static SmithingUpgradeRecipe of(ItemLike template, ItemLike base, ItemLike addition, ItemLike result) {
         return of(template.asItem(), base.asItem(), addition.asItem(), result.asItem());
     }
 

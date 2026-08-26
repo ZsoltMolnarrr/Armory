@@ -3,13 +3,12 @@ package net.armory.fabric.datagen.recipe;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.minecraft.data.DataOutput;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.DataWriter;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.data.PackOutput;
+import net.minecraft.resources.Identifier;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +21,14 @@ import java.util.concurrent.CompletableFuture;
 public abstract class SmithingRecipeProvider implements DataProvider {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
-    private final CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup;
+    private final CompletableFuture<HolderLookup.Provider> registryLookup;
     protected final FabricDataOutput dataOutput;
-    private final DataOutput.PathResolver recipePathResolver;
+    private final PackOutput.PathProvider recipePathResolver;
 
-    public SmithingRecipeProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+    public SmithingRecipeProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
         this.dataOutput = dataOutput;
         this.registryLookup = registryLookup;
-        this.recipePathResolver = dataOutput.getResolver(RegistryKeys.RECIPE);
+        this.recipePathResolver = dataOutput.createRegistryElementsPathProvider(Registries.RECIPE);
     }
 
     /**
@@ -50,7 +49,7 @@ public abstract class SmithingRecipeProvider implements DataProvider {
          * Add a smithing recipe with namespace and path
          */
         public Builder add(String namespace, String path, SmithingUpgradeRecipe recipe) {
-            return add(Identifier.of(namespace, path), recipe);
+            return add(Identifier.fromNamespaceAndPath(namespace, path), recipe);
         }
     }
 
@@ -62,7 +61,7 @@ public abstract class SmithingRecipeProvider implements DataProvider {
     public abstract void generateRecipes(Builder builder);
 
     @Override
-    public CompletableFuture<?> run(DataWriter writer) {
+    public CompletableFuture<?> run(CachedOutput writer) {
         var builder = new Builder();
         generateRecipes(builder);
         var entries = builder.entries;
@@ -70,8 +69,8 @@ public abstract class SmithingRecipeProvider implements DataProvider {
         List<CompletableFuture<?>> writes = new ArrayList<>();
         for (var entry : entries) {
             var json = GSON.toJsonTree(entry.recipe);
-            var path = recipePathResolver.resolveJson(entry.id);
-            writes.add(DataProvider.writeToPath(writer, json, path));
+            var path = recipePathResolver.json(entry.id);
+            writes.add(DataProvider.saveStable(writer, json, path));
         }
 
         return CompletableFuture.allOf(writes.toArray(new CompletableFuture[0]));

@@ -9,20 +9,20 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
-import net.minecraft.client.data.BlockStateModelGenerator;
-import net.minecraft.client.data.ItemModelGenerator;
-import net.minecraft.client.data.Models;
-import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.registry.RegistryEntryLookup;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.entry.RegistryEntryList;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.armory_rpgs.ArmoryMod;
 import net.armory_rpgs.spell.ArmoryEffects;
 import net.armory_rpgs.spell.ArmorySounds;
@@ -66,12 +66,12 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
     }
 
     public static class ItemTagGenerator extends RPGSeriesDataGen.ItemTagGenerator {
-        public ItemTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        public ItemTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, registriesFuture);
         }
 
         @Override
-        protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+        protected void addTags(HolderLookup.Provider wrapperLookup) {
             var armorTagOptions = new ArmorOptions(false, true);
             generateArmorTags(
                     List.of(ArmorSets.strider, ArmorSets.riftstalker),
@@ -101,8 +101,8 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
 
             // Loot-filtering tags splitting the two crystal batches, so a boss can drop one batch each.
             // The upgrade template belongs in both, since either batch needs it to craft.
-            var epicArmorA = TagKey.of(RegistryKeys.ITEM, Identifier.of(ArmoryMod.NAMESPACE, "loot/epic_armor_a"));
-            var epicArmorB = TagKey.of(RegistryKeys.ITEM, Identifier.of(ArmoryMod.NAMESPACE, "loot/epic_armor_b"));
+            var epicArmorA = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "loot/epic_armor_a"));
+            var epicArmorB = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, "loot/epic_armor_b"));
             SmithingTemplates.ENTRIES.forEach(entry -> {
                 builder(epicArmorA).addOptional(itemKey(entry.id()));
                 builder(epicArmorB).addOptional(itemKey(entry.id()));
@@ -115,44 +115,44 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         }
 
         /// Tag builders take a `RegistryKey` since 1.21.6, not an `Identifier`.
-        private static RegistryKey<Item> itemKey(Identifier id) {
-            return RegistryKey.of(RegistryKeys.ITEM, id);
+        private static ResourceKey<Item> itemKey(Identifier id) {
+            return ResourceKey.create(Registries.ITEM, id);
         }
     }
 
     public static class SpellTagGenerator extends FabricTagProvider<Spell> {
-        public SpellTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        public SpellTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, SpellRegistry.KEY, registriesFuture);
         }
 
         @Override
-        protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+        protected void addTags(HolderLookup.Provider wrapperLookup) {
             ArmorySpells.all.forEach(entry -> {
                 for (var category: entry.categories()) {
-                    var tagKey = TagKey.of(SpellRegistry.KEY, Identifier.of(ArmoryMod.NAMESPACE, category.toString().toLowerCase()));
+                    var tagKey = TagKey.create(SpellRegistry.KEY, Identifier.fromNamespaceAndPath(ArmoryMod.NAMESPACE, category.toString().toLowerCase()));
                     var tag = builder(tagKey);
-                    tag.addOptional(RegistryKey.of(SpellRegistry.KEY, entry.id()));
+                    tag.addOptional(ResourceKey.create(SpellRegistry.KEY, entry.id()));
                 }
             });
         }
     }
 
     public static class LangGenerator extends FabricLanguageProvider {
-        protected LangGenerator(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+        protected LangGenerator(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
             super(dataOutput, "en_us", registryLookup);
         }
 
         @Override
-        public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
+        public void generateTranslations(HolderLookup.Provider wrapperLookup, TranslationBuilder translationBuilder) {
             translationBuilder.add(Group.translationKey, "Armory");
 
             translationBuilder.add(SmithingIngredients.UpgradeCrystal.HINT_TRANSLATION_KEY, "Armor upgrade crystal");
             SmithingIngredients.ENTRIES.forEach(entry -> {
-                translationBuilder.add(entry.item().get().getTranslationKey(), entry.translations().itemName());
+                translationBuilder.add(entry.item().get().getDescriptionId(), entry.translations().itemName());
                 translationBuilder.add(entry.appliesToTranslationKey(), entry.appliesToClassesTranslation());
             });
             SmithingTemplates.ENTRIES.forEach(entry -> {
-                translationBuilder.add(entry.item().get().getTranslationKey(), entry.translations().itemName());
+                translationBuilder.add(entry.item().get().getDescriptionId(), entry.translations().itemName());
                 translationBuilder.add(entry.upgradeTranslationKey(), entry.translations().upgradeName());
                 translationBuilder.add(entry.baseSlotDescriptionTranslationKey(), entry.translations().baseSlotDescription());
                 translationBuilder.add(entry.additionsSlotDescriptionTranslationKey(), entry.translations().additionsSlotDescription());
@@ -161,10 +161,10 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
             });
             ArmorSets.entries.forEach(entry -> {
                 var translations = new LinkedHashMap<String, String>();
-                translations.put(((Item)entry.armorSet().head).getTranslationKey(), entry.armorSet().headTranslation);
-                translations.put(((Item)entry.armorSet().chest).getTranslationKey(), entry.armorSet().chestTranslation);
-                translations.put(((Item)entry.armorSet().legs).getTranslationKey(), entry.armorSet().legsTranslation);
-                translations.put(((Item)entry.armorSet().feet).getTranslationKey(), entry.armorSet().feetTranslation);
+                translations.put(((Item)entry.armorSet().head).getDescriptionId(), entry.armorSet().headTranslation);
+                translations.put(((Item)entry.armorSet().chest).getDescriptionId(), entry.armorSet().chestTranslation);
+                translations.put(((Item)entry.armorSet().legs).getDescriptionId(), entry.armorSet().legsTranslation);
+                translations.put(((Item)entry.armorSet().feet).getDescriptionId(), entry.armorSet().feetTranslation);
                 for (var armorEntry: translations.entrySet()) {
                     translationBuilder.add(armorEntry.getKey(), armorEntry.getValue());
                 }
@@ -178,8 +178,8 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
                 translationBuilder.add("spell." + id.getNamespace() + "." + id.getPath() + ".description" , entry.description());
             });
             ArmoryEffects.entries.forEach(entry -> {
-                translationBuilder.add(entry.effect.getTranslationKey(), entry.title);
-                translationBuilder.add(entry.effect.getTranslationKey() + ".description", entry.description);
+                translationBuilder.add(entry.effect.getDescriptionId(), entry.title);
+                translationBuilder.add(entry.effect.getDescriptionId() + ".description", entry.description);
             });
         }
     }
@@ -190,28 +190,28 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         }
 
         @Override
-        public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+        public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
 
         }
 
         @Override
-        public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+        public void generateItemModels(ItemModelGenerators itemModelGenerator) {
             SmithingIngredients.ENTRIES.forEach(entry -> {
-                itemModelGenerator.register(entry.item().get(), Models.GENERATED);
+                itemModelGenerator.generateFlatItem(entry.item().get(), ModelTemplates.FLAT_ITEM);
             });
             SmithingTemplates.ENTRIES.forEach(entry -> {
-                itemModelGenerator.register(entry.item().get(), Models.GENERATED);
+                itemModelGenerator.generateFlatItem(entry.item().get(), ModelTemplates.FLAT_ITEM);
             });
             ArmorSets.entries.forEach(entry -> {
                 for (var piece: entry.armorSet().pieces()) {
-                    itemModelGenerator.register((Item) piece, Models.GENERATED);
+                    itemModelGenerator.generateFlatItem((Item) piece, ModelTemplates.FLAT_ITEM);
                 }
             });
         }
     }
 
     public static class SpellGen extends SpellGenerator {
-        public SpellGen(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+        public SpellGen(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
             super(dataOutput, registryLookup);
         }
 
@@ -224,7 +224,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
     }
 
     public static class SoundGen extends SimpleSoundGeneratorV2 {
-        public SoundGen(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+        public SoundGen(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
             super(dataOutput, registryLookup);
         }
 
@@ -241,21 +241,21 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
 
     public static class EquipmentSetGenerator extends FabricDynamicRegistryProvider {
 
-        public EquipmentSetGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        public EquipmentSetGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, registriesFuture);
         }
 
         @Override
-        protected void configure(RegistryWrapper.WrapperLookup registries, Entries entries) {
-            RegistryEntryLookup<Item> itemLookup = registries.getOrThrow(RegistryKeys.ITEM);
+        protected void configure(HolderLookup.Provider registries, Entries entries) {
+            HolderGetter<Item> itemLookup = registries.lookupOrThrow(Registries.ITEM);
             for (var set: SetBonuses.all) {
-                var items = RegistryEntryList.of(
+                var items = HolderSet.direct(
                         set.itemSupplier().get().stream()
-                        .map(id -> itemLookup.getOrThrow(RegistryKey.of(RegistryKeys.ITEM, id)))
+                        .map(id -> itemLookup.getOrThrow(ResourceKey.create(Registries.ITEM, id)))
                         .toList()
                 );
                 entries.add(
-                        RegistryKey.of(EquipmentSetRegistry.KEY, set.id()),
+                        ResourceKey.create(EquipmentSetRegistry.KEY, set.id()),
                         new EquipmentSet.Definition(
                                 set.id().getPath(),
                                 items,
@@ -274,7 +274,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
     /// 1.21.11 moved the recipe helpers off the provider onto `net.minecraft.data.recipe.RecipeGenerator`,
     /// which the provider now returns from `getRecipeGenerator`.
     public static class TemplateRecipeGenerator extends FabricRecipeProvider {
-        public TemplateRecipeGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        public TemplateRecipeGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, registriesFuture);
         }
 
@@ -284,12 +284,12 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         }
 
         @Override
-        protected net.minecraft.data.recipe.RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
-            return new net.minecraft.data.recipe.RecipeGenerator(registries, exporter) {
+        protected net.minecraft.data.recipes.RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput exporter) {
+            return new net.minecraft.data.recipes.RecipeProvider(registries, exporter) {
                 @Override
-                public void generate() {
+                public void buildRecipes() {
                     SmithingTemplates.ENTRIES.forEach(entry -> {
-                        offerSmithingTemplateCopyingRecipe(entry.item().get(), Items.DIAMOND);
+                        copySmithingTemplate(entry.item().get(), Items.DIAMOND);
                     });
                 }
             };
@@ -298,22 +298,22 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
 
     public static class SmithGen extends SmithingRecipeProvider {
 
-        public SmithGen(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+        public SmithGen(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
             super(dataOutput, registryLookup);
         }
 
         public record ArmorIdSet(String namespace, String name) {
             public Identifier headId() {
-                return Identifier.of(namespace, name + "_" + EquipmentSlot.HEAD.asString().toLowerCase());
+                return Identifier.fromNamespaceAndPath(namespace, name + "_" + EquipmentSlot.HEAD.getSerializedName().toLowerCase());
             }
             public Identifier chestId() {
-                return Identifier.of(namespace, name + "_" + EquipmentSlot.CHEST.asString().toLowerCase());
+                return Identifier.fromNamespaceAndPath(namespace, name + "_" + EquipmentSlot.CHEST.getSerializedName().toLowerCase());
             }
             public Identifier legsId() {
-                return Identifier.of(namespace, name + "_" + EquipmentSlot.LEGS.asString().toLowerCase());
+                return Identifier.fromNamespaceAndPath(namespace, name + "_" + EquipmentSlot.LEGS.getSerializedName().toLowerCase());
             }
             public Identifier feetId() {
-                return Identifier.of(namespace, name + "_" + EquipmentSlot.FEET.asString().toLowerCase());
+                return Identifier.fromNamespaceAndPath(namespace, name + "_" + EquipmentSlot.FEET.getSerializedName().toLowerCase());
             }
         }
 
@@ -457,7 +457,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
                                     resultId.toString(),
                                     upgrade.from.namespace()
                             );
-                            var id = Identifier.of(resultId.getNamespace(),
+                            var id = Identifier.fromNamespaceAndPath(resultId.getNamespace(),
                                     "smithing_" + resultId.getPath() + "_" + baseId.getPath());
                             builder.entries.add(new Entry(id, recipe));
                         }
