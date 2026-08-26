@@ -1,9 +1,11 @@
 package net.armory_rpgs;
 
 import net.armory_rpgs.item.ArmorSets;
+import net.armory_rpgs.item.Group;
 import net.armory_rpgs.item.SmithingTemplates;
 import net.armory_rpgs.item.SmithingIngredients;
 import net.armory_rpgs.spell.ArmorySounds;
+import net.spell_engine.PlatformEvents;
 import net.spell_engine.rpg_series.config.ConfigFile;
 import net.tiny_config.ConfigManager;
 
@@ -35,6 +37,18 @@ public class ArmoryMod {
     public static void registerItems() {
         SmithingTemplates.register();
         SmithingIngredients.register();
+        // Creative-tab order: item-group modify callbacks run in registration order on both loaders
+        // (Fabric `ItemGroupEvents`, SpellEngine's NeoForge dispatcher), so this callback must be
+        // registered BEFORE `ArmorSets.register`, whose `Armor.register(..., Group.KEY)` appends the sets.
+        // Resulting order: upgrade crystals, smithing templates, then armor sets in registration order.
+        PlatformEvents.onItemGroupModify(Group.KEY, (content, context) -> {
+            for (var entry : SmithingIngredients.ENTRIES) {
+                content.add(entry.item().get());
+            }
+            for (var entry : SmithingTemplates.ENTRIES) {
+                content.add(entry.item().get());
+            }
+        });
         ArmorSets.register(itemConfig.value.armor_sets);
         itemConfig.save();
     }

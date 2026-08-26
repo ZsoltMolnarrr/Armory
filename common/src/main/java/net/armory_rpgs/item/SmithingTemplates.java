@@ -156,7 +156,6 @@ public class SmithingTemplates {
         for (var entry : ENTRIES) {
             Registry.register(Registries.ITEM, entry.id(), entry.item().get());
         }
-        // Creative-tab placement is wired per-platform from each loader's entrypoint
-        // (Fabric ItemGroupEvents / NeoForge BuildCreativeModeTabContentsEvent), iterating ENTRIES.
+        // Creative-tab placement: see ArmoryMod.registerItems (single ordered callback).
     }
 }
