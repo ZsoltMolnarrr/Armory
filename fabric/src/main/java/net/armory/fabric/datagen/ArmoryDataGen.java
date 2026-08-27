@@ -6,7 +6,7 @@ import net.armory_rpgs.item.*;
 import net.armory_rpgs.spell.SetBonuses;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -66,7 +66,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
     }
 
     public static class ItemTagGenerator extends RPGSeriesDataGen.ItemTagGenerator {
-        public ItemTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        public ItemTagGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, registriesFuture);
         }
 
@@ -120,8 +120,8 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         }
     }
 
-    public static class SpellTagGenerator extends FabricTagProvider<Spell> {
-        public SpellTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public static class SpellTagGenerator extends FabricTagsProvider<Spell> {
+        public SpellTagGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, SpellRegistry.KEY, registriesFuture);
         }
 
@@ -138,7 +138,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
     }
 
     public static class LangGenerator extends FabricLanguageProvider {
-        protected LangGenerator(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        protected LangGenerator(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
             super(dataOutput, "en_us", registryLookup);
         }
 
@@ -185,7 +185,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
     }
 
     public static class ModelProvider extends FabricModelProvider {
-        public ModelProvider(FabricDataOutput output) {
+        public ModelProvider(FabricPackOutput output) {
             super(output);
         }
 
@@ -211,7 +211,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
     }
 
     public static class SpellGen extends SpellGenerator {
-        public SpellGen(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        public SpellGen(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
             super(dataOutput, registryLookup);
         }
 
@@ -224,7 +224,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
     }
 
     public static class SoundGen extends SimpleSoundGeneratorV2 {
-        public SoundGen(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        public SoundGen(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
             super(dataOutput, registryLookup);
         }
 
@@ -241,7 +241,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
 
     public static class EquipmentSetGenerator extends FabricDynamicRegistryProvider {
 
-        public EquipmentSetGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        public EquipmentSetGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, registriesFuture);
         }
 
@@ -274,7 +274,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
     /// 1.21.11 moved the recipe helpers off the provider onto `net.minecraft.data.recipe.RecipeGenerator`,
     /// which the provider now returns from `getRecipeGenerator`.
     public static class TemplateRecipeGenerator extends FabricRecipeProvider {
-        public TemplateRecipeGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        public TemplateRecipeGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, registriesFuture);
         }
 
@@ -298,7 +298,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
 
     public static class SmithGen extends SmithingRecipeProvider {
 
-        public SmithGen(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        public SmithGen(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
             super(dataOutput, registryLookup);
         }
 

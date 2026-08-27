@@ -2,7 +2,7 @@ package net.armory.fabric.datagen.recipe;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.CachedOutput;
@@ -22,10 +22,10 @@ public abstract class SmithingRecipeProvider implements DataProvider {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     private final CompletableFuture<HolderLookup.Provider> registryLookup;
-    protected final FabricDataOutput dataOutput;
+    protected final FabricPackOutput dataOutput;
     private final PackOutput.PathProvider recipePathResolver;
 
-    public SmithingRecipeProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+    public SmithingRecipeProvider(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
         this.dataOutput = dataOutput;
         this.registryLookup = registryLookup;
         this.recipePathResolver = dataOutput.createRegistryElementsPathProvider(Registries.RECIPE);
