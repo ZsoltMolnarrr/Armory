@@ -272,7 +272,7 @@ public class SetBonuses {
                 List.of(
                         EquipmentSet.Bonus.withAttributes(2, attribute(
                                 EntityAttributes.GENERIC_ATTACK_DAMAGE,
-                                0.1,
+                                0.05,
                                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE,
                                 id.withPath(SET_BONUS))
                         ),
