@@ -1,3 +1,7 @@
+# 1.5.2
+
+- Lightbringer Regalia 2-piece set bonus reduced from +10% to +5% attack damage, matching the other melee sets
+
 # 1.5.1
 
 - Replaced armor rendering dependency AzureLibArmor with ArmorModelAPI
