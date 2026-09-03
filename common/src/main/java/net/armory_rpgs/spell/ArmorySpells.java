@@ -64,7 +64,8 @@ public class ArmorySpells {
 
         spell.tooltip = new Spell.Tooltip();
         spell.tooltip.name = new Spell.Tooltip.LineOptions(false, true);
-        spell.tooltip.description.color = ChatFormatting.GRAY.getSerializedName();
+        // 26.2: `ChatFormatting` is no longer `StringRepresentable` and lost `getName()`/`getSerializedName()`.
+        spell.tooltip.description.color = ChatFormatting.GRAY.name().toLowerCase(java.util.Locale.ROOT);
         spell.tooltip.description.show_in_compact = true;
         spell.tooltip.name.show_in_compact = false;
         spell.tooltip.name.show_in_details = false;
