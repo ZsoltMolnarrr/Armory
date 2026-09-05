@@ -1,5 +1,6 @@
 # 1.5.2
 
+- Updated for Minecraft 26.2
 - Updated for Minecraft 26.1.2 (Java 25)
 - Lightbringer Regalia 2-piece set bonus reduced from +10% to +5% attack damage, matching the other melee sets
 
