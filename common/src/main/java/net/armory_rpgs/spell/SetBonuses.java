@@ -14,7 +14,6 @@ import net.spell_engine.api.spell.container.SpellContainers;
 import net.spell_engine.utils.AttributeModifierUtil;
 import net.spell_power.api.SpellPowerMechanics;
 import net.spell_power.api.SpellSchools;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,31 +45,31 @@ public class SetBonuses {
 
     // MARK: - RangedWeaponAPI attributes
     //
-    // RWA has no two-platform 1.20.1 artifact, so Armory does not compile against it: `ranged_weapon:damage`
-    // and `ranged_weapon:haste` are resolved through the attribute registry by id, and the attribute half of
-    // the bonus is simply omitted when they are absent (the 4-piece spell bonus is unaffected).
+    // Armory does not compile against RangedWeaponAPI (a two-platform 1.20.1 artifact exists now, but
+    // these two attributes are only ever *written into data*): `ranged_weapon:damage` and
+    // `ranged_weapon:haste` are named by id only.
     private static final String RANGED_WEAPON_MOD_ID = "ranged_weapon";
     private static final Identifier RANGED_DAMAGE_ID = new Identifier(RANGED_WEAPON_MOD_ID, "damage");
     private static final Identifier RANGED_HASTE_ID = new Identifier(RANGED_WEAPON_MOD_ID, "haste");
 
-    @Nullable
+    /// The id-only escape hatch of SpellEngine 1.10.5.004 (`spellengine-port-notes.md` §9.2):
+    /// `ItemAttributeModifiers.Entry` stores an `Identifier`, so the modifier is **encoded whether or not
+    /// the attribute is registered on the datagen runtime** — which is what let Armory drop its
+    /// RangedWeaponAPI datagen pin. It decodes back to itself and is skipped by
+    /// `ItemAttributeModifiers#forSlot` only while the attribute is unregistered, so a pack that adds RWA
+    /// later picks the bonus up without regenerating data.
     private static ItemAttributeModifiers attributeById(Identifier attributeId, double value, EntityAttributeModifier.Operation operation, Identifier id) {
-        var entry = AttributeModifierUtil.attributeEntry(attributeId).orElse(null);
-        if (entry == null) {
-            return null;
-        }
-        return attribute(entry, value, operation, id);
+        return ItemAttributeModifiers.builder()
+                .add(attributeId,
+                        AttributeModifierUtil.modifier(id, value, operation),
+                        ItemAttributeModifiers.Slot.ARMOR)
+                .build();
     }
 
-    /// `[attribute bonus (when the attribute resolves), spell bonus]`
-    private static List<EquipmentSet.Bonus> optionalAttributeBonus(int requiredPieceCount, @Nullable ItemAttributeModifiers attributes,
+    /// `[attribute bonus, spell bonus]`
+    private static List<EquipmentSet.Bonus> attributeAndSpellBonus(int requiredPieceCount, ItemAttributeModifiers attributes,
                                                                    EquipmentSet.Bonus spellBonus) {
-        var bonuses = new ArrayList<EquipmentSet.Bonus>();
-        if (attributes != null) {
-            bonuses.add(EquipmentSet.Bonus.withAttributes(requiredPieceCount, attributes));
-        }
-        bonuses.add(spellBonus);
-        return List.copyOf(bonuses);
+        return List.of(EquipmentSet.Bonus.withAttributes(requiredPieceCount, attributes), spellBonus);
     }
 
     public static Entry justicar = add(justicar());
@@ -151,7 +150,7 @@ public class SetBonuses {
         return new Entry(id,
                 "Strider Armor",
                 () -> { return ArmorSets.strider.armorSet().pieceIds(); },
-                optionalAttributeBonus(2,
+                attributeAndSpellBonus(2,
                         attributeById(RANGED_DAMAGE_ID, 0.05, EntityAttributeModifier.Operation.MULTIPLY_BASE, id.withPath(SET_BONUS)),
                         EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_barrage.id()))
                 )
@@ -346,7 +345,7 @@ public class SetBonuses {
         return new Entry(id,
                 "Riftstalker Armor",
                 () -> { return ArmorSets.riftstalker.armorSet().pieceIds(); },
-                optionalAttributeBonus(2,
+                attributeAndSpellBonus(2,
                         attributeById(RANGED_HASTE_ID, 0.05, EntityAttributeModifier.Operation.MULTIPLY_BASE, id.withPath(SET_BONUS)),
                         EquipmentSet.Bonus.withSpells(4, SpellContainers.forModifier(ArmorySpells.improved_spirit_wolf.id()))
                 )

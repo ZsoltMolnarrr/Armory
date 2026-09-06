@@ -75,10 +75,11 @@ dependencies {
     modLocalRuntime("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${rootProject.cardinal_components_version}")
     modLocalRuntime("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${rootProject.cardinal_components_version}")
 
-    // RangedWeaponAPI: legacy Fabric-only artifact, dev runtime ONLY (Armory does not compile against it —
-    // its two attributes are resolved by registry id). Pinned so `runDatagen` can encode the
-    // `ranged_weapon:*` set-bonus modifiers and the dev server exercises them.
-    modLocalRuntime("maven.modrinth:ranged-weapon-api:${rootProject.ranged_weapon_api_version}")
+    // RangedWeaponAPI is intentionally NOT pinned here. It used to be a datagen-only `modLocalRuntime`
+    // so the `ranged_weapon:*` set-bonus modifiers could be *encoded*; since SpellEngine 1.10.5.004
+    // `ItemAttributeModifiers.Entry` carries an `Identifier` and encodes unregistered attributes too
+    // (spellengine-port-notes.md §9.2 / §9.5 item 4), so the pin is dead weight. Armory names the two
+    // attributes by id only and declares RWA optional in both loader metadata files.
 }
 
 processResources {

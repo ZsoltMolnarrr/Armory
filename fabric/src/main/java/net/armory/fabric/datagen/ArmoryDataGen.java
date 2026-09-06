@@ -57,10 +57,13 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
     /// *runtime* `RegistryLoader`, not data generation. Without the spell registry `FabricTagProvider<Spell>` dies
     /// with "Registry spell_engine:spell not found"; without the equipment-set registry the dynamic-registry
     /// provider has nothing to write into.
+    ///
+    /// Since SpellEngine 1.10.5.004 `RPGSeriesDataGen.buildRegistry` contributes **both** keys
+    /// (`SpellRegistry.KEY` and `EquipmentSetRegistry.KEY`). Adding `EquipmentSetRegistry.KEY` here as
+    /// well makes `RegistryBuilder` throw on the duplicate — do not put it back.
     @Override
     public void buildRegistry(RegistryBuilder registryBuilder) {
         RPGSeriesDataGen.buildRegistry(registryBuilder);
-        registryBuilder.addRegistry(EquipmentSetRegistry.KEY, context -> { });
     }
 
     private static List<Item> allArmorPieces() {

@@ -115,9 +115,10 @@ public class ArmorSets {
                 EntityAttributeModifier.Operation.ADDITION);
     }
 
-    // RangedWeaponAPI has no two-platform 1.20.1 artifact, so its attributes are referenced by registry id
-    // only (this is exactly what `AttributeModifier` stores anyway). SpellEngine's `Armor.attributesFrom`
-    // resolves the id at registration and skips the modifier when RWA is absent.
+    // RangedWeaponAPI attributes are referenced by registry id only — that is exactly what
+    // `AttributeModifier` stores anyway, so there is nothing to gain from a compile dependency (a
+    // two-platform 1.20.1 artifact does exist now). SpellEngine's `Armor.attributesFrom` resolves the id
+    // at registration and skips the modifier when RWA is absent.
     private static final String RANGED_WEAPON_MOD_ID = "ranged_weapon";
     private static final Identifier RANGED_DAMAGE_ID = new Identifier(RANGED_WEAPON_MOD_ID, "damage");
     private static final Identifier RANGED_HASTE_ID = new Identifier(RANGED_WEAPON_MOD_ID, "haste");
