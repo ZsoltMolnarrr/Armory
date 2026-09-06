@@ -18,9 +18,9 @@ import java.util.List;
  *       "values": ["betternether"]
  *     }
  *   ],
- *   "neoforge:conditions": [
+ *   "conditions": [
  *     {
- *       "type": "neoforge:mod_loaded",
+ *       "type": "forge:mod_loaded",
  *       "modid": "betternether"
  *     }
  *   ],
@@ -28,12 +28,15 @@ import java.util.List;
  *   "template": { "item": "minecraft:netherite_upgrade_smithing_template" },
  *   "base": { "item": "minecraft:diamond_helmet" },
  *   "addition": { "item": "minecraft:netherite_ingot" },
- *   "result": { "id": "minecraft:netherite_helmet", "count": 1 }
+ *   "result": { "item": "minecraft:netherite_helmet", "count": 1 }
  * }
+ *
+ * 1.20.1 notes: Forge 47 reads a plain top-level `conditions` array (there is no `forge:conditions` key),
+ * and the recipe result is an item stack (`item`), not the 1.21 `id`.
  */
 public record SmithingUpgradeRecipe(
         @SerializedName("fabric:load_conditions") List<FabricLoadCondition> fabricLoadConditions,
-        @SerializedName("neoforge:conditions") List<NeoForgeCondition> neoforgeConditions,
+        @SerializedName("conditions") List<ForgeCondition> forgeConditions,
         String type,
         ItemIngredient template,
         ItemIngredient base,
@@ -59,14 +62,14 @@ public record SmithingUpgradeRecipe(
     }
 
     /**
-     * NeoForge load condition for mod dependencies
+     * Forge load condition for mod dependencies. Forge 47 reads a plain top-level `conditions` array.
      */
-    public record NeoForgeCondition(
+    public record ForgeCondition(
             String type,
             String modid
     ) {
-        public static NeoForgeCondition modLoaded(String modId) {
-            return new NeoForgeCondition("neoforge:mod_loaded", modId);
+        public static ForgeCondition modLoaded(String modId) {
+            return new ForgeCondition("forge:mod_loaded", modId);
         }
     }
 
@@ -88,9 +91,9 @@ public record SmithingUpgradeRecipe(
     }
 
     /**
-     * Represents the result item with count
+     * Represents the result item with count. 1.20.1 recipe results are item stacks keyed by `item`.
      */
-    public record ItemResult(String id, int count) {
+    public record ItemResult(String item, int count) {
         public static ItemResult of(Item item, int count) {
             return new ItemResult(Registries.ITEM.getId(item).toString(), count);
         }
@@ -152,18 +155,18 @@ public record SmithingUpgradeRecipe(
             String resultId,
             String... requiredModIds) {
         List<FabricLoadCondition> fabricConditions = null;
-        List<NeoForgeCondition> neoforgeConditions = null;
+        List<ForgeCondition> forgeConditions = null;
 
         if (requiredModIds != null && requiredModIds.length > 0) {
             fabricConditions = List.of(FabricLoadCondition.allModsLoaded(requiredModIds));
-            neoforgeConditions = List.of(requiredModIds).stream()
-                    .map(NeoForgeCondition::modLoaded)
+            forgeConditions = List.of(requiredModIds).stream()
+                    .map(ForgeCondition::modLoaded)
                     .toList();
         }
 
         return new SmithingUpgradeRecipe(
                 fabricConditions,
-                neoforgeConditions,
+                forgeConditions,
                 TYPE,
                 new ItemIngredient(templateId),
                 new ItemIngredient(baseId),
@@ -181,10 +184,10 @@ public record SmithingUpgradeRecipe(
             Item addition,
             Item result,
             List<FabricLoadCondition> fabricConditions,
-            List<NeoForgeCondition> neoforgeConditions) {
+            List<ForgeCondition> forgeConditions) {
         return new SmithingUpgradeRecipe(
                 fabricConditions,
-                neoforgeConditions,
+                forgeConditions,
                 TYPE,
                 ItemIngredient.of(template),
                 ItemIngredient.of(base),

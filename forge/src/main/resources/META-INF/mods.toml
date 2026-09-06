@@ -1,0 +1,54 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+license = "All Rights Reserved"
+
+[[mods]]
+modId = "armory_rpgs"
+version = "${version}"
+displayName = "Armory (RPG Series)"
+authors = "Daedelus"
+description = '''
+Epic armor sets, with unique designs and set bonuses.
+'''
+logoFile = "icon.png"
+
+[[dependencies.armory_rpgs]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.armory_rpgs]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.armory_rpgs]]
+modId = "spell_engine"
+mandatory = true
+versionRange = "[1.10.5,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.armory_rpgs]]
+modId = "armor_model_api"
+mandatory = true
+versionRange = "[1.0.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+# RangedWeaponAPI has no two-platform 1.20.1 artifact yet. Armory does not compile against it — the
+# `ranged_weapon:damage` / `ranged_weapon:haste` armor-set and set-bonus modifiers are resolved by
+# registry id and are simply skipped when it is absent.
+[[dependencies.armory_rpgs]]
+modId = "ranged_weapon_api"
+mandatory = false
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"
+
+# Mixin configs are declared in the jar MANIFEST (`MixinConfigs:`) by Loom (`loom.forge.mixinConfig`),
+# not in this file — the `[[mixins]]` table is NeoForge-only.

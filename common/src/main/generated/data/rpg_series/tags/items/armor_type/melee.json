@@ -1,0 +1,101 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "armory_rpgs:destroyer_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:destroyer_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:destroyer_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:destroyer_armor_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:deathmantle_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:deathmantle_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:deathmantle_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:deathmantle_armor_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:justicar_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:justicar_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:justicar_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:justicar_armor_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:onslaught_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:onslaught_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:onslaught_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:onslaught_armor_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:slayer_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:slayer_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:slayer_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:slayer_armor_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:lightbringer_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:lightbringer_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:lightbringer_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:lightbringer_armor_feet",
+      "required": false
+    }
+  ]
+}

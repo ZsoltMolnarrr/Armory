@@ -2,9 +2,9 @@ package net.armory_rpgs.item;
 
 import com.google.common.base.Suppliers;
 import net.armory_rpgs.ArmoryMod;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.screen.ScreenTexts;
@@ -13,6 +13,8 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.Util;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +23,9 @@ import java.util.function.Supplier;
 public class SmithingIngredients {
     public static class UpgradeCrystal extends Item {
         public static final Text APPLIES_TO_TEXT = Text.translatable(
-                Util.createTranslationKey("item", Identifier.ofVanilla("smithing_template.applies_to")))
+                Util.createTranslationKey("item", new Identifier("minecraft", "smithing_template.applies_to")))
                 .formatted(Formatting.GRAY);
-        public static final String HINT_TRANSLATION_KEY = Util.createTranslationKey("item", Identifier.of(ArmoryMod.NAMESPACE, "smithing_template.hint"));
+        public static final String HINT_TRANSLATION_KEY = Util.createTranslationKey("item", new Identifier(ArmoryMod.NAMESPACE, "smithing_template.hint"));
         public static final Text HINT_TEXT = Text.translatable(HINT_TRANSLATION_KEY)
                 .formatted(Formatting.GRAY);
 
@@ -33,8 +35,9 @@ public class SmithingIngredients {
             this.appliesToTranslationKey = appliesToTranslationKey;
         }
 
-        public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType type) {
-            super.appendTooltip(stack, context, tooltip, type);
+        @Override
+        public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+            super.appendTooltip(stack, world, tooltip, context);
             tooltip.add(HINT_TEXT);
             tooltip.add(ScreenTexts.EMPTY);
             tooltip.add(APPLIES_TO_TEXT);
@@ -54,10 +57,10 @@ public class SmithingIngredients {
             return new Entry(name, classes, translations, factory);
         }
         public Identifier id() {
-            return Identifier.of(ArmoryMod.NAMESPACE, name + "_upgrade_crystal");
+            return new Identifier(ArmoryMod.NAMESPACE, name + "_upgrade_crystal");
         }
         public static String appliesToTranslationKey(String name) {
-            return Util.createTranslationKey("item", Identifier.of(ArmoryMod.NAMESPACE, "upgrade_crystal." + name + ".applies_to"));
+            return Util.createTranslationKey("item", new Identifier(ArmoryMod.NAMESPACE, "upgrade_crystal." + name + ".applies_to"));
         }
         public String appliesToTranslationKey() {
             return appliesToTranslationKey(name);
@@ -114,7 +117,7 @@ public class SmithingIngredients {
         for (var entry : ENTRIES) {
             Registry.register(Registries.ITEM, entry.id(), entry.item().get());
         }
-        // Creative-tab placement is wired per-platform from each loader's entrypoint
-        // (Fabric ItemGroupEvents / NeoForge BuildCreativeModeTabContentsEvent), iterating ENTRIES.
+        // Creative-tab placement is loader-neutral, dispatched by SpellEngine's
+        // `PlatformEvents.onItemGroupModify` from `ArmoryMod.registerItems()`.
     }
 }

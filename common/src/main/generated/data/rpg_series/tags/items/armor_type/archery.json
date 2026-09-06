@@ -1,0 +1,37 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "armory_rpgs:strider_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:strider_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:strider_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:strider_armor_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:riftstalker_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:riftstalker_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:riftstalker_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:riftstalker_armor_feet",
+      "required": false
+    }
+  ]
+}

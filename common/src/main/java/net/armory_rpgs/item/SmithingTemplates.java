@@ -5,7 +5,6 @@ import net.armory_rpgs.ArmoryMod;
 import net.minecraft.item.SmithingTemplateItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.resource.featuretoggle.FeatureFlag;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -18,10 +17,10 @@ import java.util.function.Supplier;
 public class SmithingTemplates {
     private static final Formatting TITLE_FORMATTING = Formatting.GRAY;
     private static final Formatting DESCRIPTION_FORMATTING = Formatting.BLUE;
-    private static final Identifier EMPTY_ARMOR_SLOT_HELMET_TEXTURE = Identifier.ofVanilla("item/empty_armor_slot_helmet");
-    private static final Identifier EMPTY_ARMOR_SLOT_CHESTPLATE_TEXTURE = Identifier.ofVanilla("item/empty_armor_slot_chestplate");
-    private static final Identifier EMPTY_ARMOR_SLOT_LEGGINGS_TEXTURE = Identifier.ofVanilla("item/empty_armor_slot_leggings");
-    private static final Identifier EMPTY_ARMOR_SLOT_BOOTS_TEXTURE = Identifier.ofVanilla("item/empty_armor_slot_boots");
+    private static final Identifier EMPTY_ARMOR_SLOT_HELMET_TEXTURE = new Identifier("minecraft", "item/empty_armor_slot_helmet");
+    private static final Identifier EMPTY_ARMOR_SLOT_CHESTPLATE_TEXTURE = new Identifier("minecraft", "item/empty_armor_slot_chestplate");
+    private static final Identifier EMPTY_ARMOR_SLOT_LEGGINGS_TEXTURE = new Identifier("minecraft", "item/empty_armor_slot_leggings");
+    private static final Identifier EMPTY_ARMOR_SLOT_BOOTS_TEXTURE = new Identifier("minecraft", "item/empty_armor_slot_boots");
 
     public record Translations(String itemName, String upgradeName, String appliesTo, String ingredients, String baseSlotDescription, String additionsSlotDescription) { }
     public record Entry(String name, List<FightClass> classes, Translations translations, Supplier<SmithingTemplateItem> item) {
@@ -34,31 +33,31 @@ public class SmithingTemplates {
                     entry.baseSlotDescriptionText(),
                     entry.additionsSlotDescriptionText(),
                     baseSlotTextures(),
-                    additionsTextures(), new FeatureFlag[0]
+                    additionsTextures()
             ));
             return new Entry(name, classes, translations, factory);
         }
 
         public Identifier id() {
-            return Identifier.of(ArmoryMod.NAMESPACE, name + "_upgrade");
+            return new Identifier(ArmoryMod.NAMESPACE, name + "_upgrade");
         }
 
         public String upgradeTranslationKey() {
-            return Util.createTranslationKey("upgrade", Identifier.of(ArmoryMod.NAMESPACE, name + "_upgrade"));
+            return Util.createTranslationKey("upgrade", new Identifier(ArmoryMod.NAMESPACE, name + "_upgrade"));
         }
         public Text upgradeText() {
             return Text.translatable(upgradeTranslationKey()).formatted(TITLE_FORMATTING);
         }
 
         public String appliesToTranslationKey() {
-            return Util.createTranslationKey("item", Identifier.of(ArmoryMod.NAMESPACE, "smithing_template." + name + "_upgrade.applies_to"));
+            return Util.createTranslationKey("item", new Identifier(ArmoryMod.NAMESPACE, "smithing_template." + name + "_upgrade.applies_to"));
         }
         public Text appliesToText() {
             return Text.translatable(appliesToTranslationKey()).formatted(DESCRIPTION_FORMATTING);
         }
 
         public String ingredientsTranslationKey() {
-            return Util.createTranslationKey("item", Identifier.of(ArmoryMod.NAMESPACE, "smithing_template." + name + "_upgrade.ingredients"));
+            return Util.createTranslationKey("item", new Identifier(ArmoryMod.NAMESPACE, "smithing_template." + name + "_upgrade.ingredients"));
         }
         public Text ingredientsText() {
             var key = ingredientsTranslationKey();
@@ -66,14 +65,14 @@ public class SmithingTemplates {
         }
 
         public String baseSlotDescriptionTranslationKey() {
-            return Util.createTranslationKey("item", Identifier.of(ArmoryMod.NAMESPACE, "smithing_template." + name + "_upgrade.base_slot_description"));
+            return Util.createTranslationKey("item", new Identifier(ArmoryMod.NAMESPACE, "smithing_template." + name + "_upgrade.base_slot_description"));
         }
         public Text baseSlotDescriptionText() {
             return Text.translatable(baseSlotDescriptionTranslationKey());
         }
 
         public String additionsSlotDescriptionTranslationKey() {
-            return Util.createTranslationKey("item", Identifier.of(ArmoryMod.NAMESPACE, "smithing_template." + name + "_upgrade.additions_slot_description"));
+            return Util.createTranslationKey("item", new Identifier(ArmoryMod.NAMESPACE, "smithing_template." + name + "_upgrade.additions_slot_description"));
         }
         public Text additionsSlotDescriptionText() {
             return Text.translatable(additionsSlotDescriptionTranslationKey());
@@ -111,7 +110,7 @@ public class SmithingTemplates {
         for (var entry : ENTRIES) {
             Registry.register(Registries.ITEM, entry.id(), entry.item().get());
         }
-        // Creative-tab placement is wired per-platform from each loader's entrypoint
-        // (Fabric ItemGroupEvents / NeoForge BuildCreativeModeTabContentsEvent), iterating ENTRIES.
+        // Creative-tab placement is loader-neutral, dispatched by SpellEngine's
+        // `PlatformEvents.onItemGroupModify` from `ArmoryMod.registerItems()`.
     }
 }

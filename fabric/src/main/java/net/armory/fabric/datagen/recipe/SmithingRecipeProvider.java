@@ -6,7 +6,6 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.data.DataOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.DataWriter;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 
@@ -29,7 +28,8 @@ public abstract class SmithingRecipeProvider implements DataProvider {
     public SmithingRecipeProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
         this.dataOutput = dataOutput;
         this.registryLookup = registryLookup;
-        this.recipePathResolver = dataOutput.getResolver(RegistryKeys.RECIPE);
+        // 1.20.1 has no `getResolver(RegistryKey)` overload, and the recipe directory is plural on this line.
+        this.recipePathResolver = dataOutput.getResolver(DataOutput.OutputType.DATA_PACK, "recipes");
     }
 
     /**
@@ -50,7 +50,7 @@ public abstract class SmithingRecipeProvider implements DataProvider {
          * Add a smithing recipe with namespace and path
          */
         public Builder add(String namespace, String path, SmithingUpgradeRecipe recipe) {
-            return add(Identifier.of(namespace, path), recipe);
+            return add(new Identifier(namespace, path), recipe);
         }
     }
 

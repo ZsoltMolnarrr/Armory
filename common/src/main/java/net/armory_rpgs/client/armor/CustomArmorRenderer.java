@@ -97,11 +97,11 @@ public final class CustomArmorRenderer {
 
     private static GeoArmorRenderer of(String modelName, String textureName) {
         return GeoArmorRenderer.of(
-                Identifier.of(ArmoryMod.NAMESPACE, "geo/" + modelName + ".geo.json"),
-                Identifier.of(ArmoryMod.NAMESPACE, "textures/armor/" + textureName + ".png"));
+                new Identifier(ArmoryMod.NAMESPACE, "geo/" + modelName + ".geo.json"),
+                new Identifier(ArmoryMod.NAMESPACE, "textures/armor/" + textureName + ".png"));
     }
 
     private static Identifier trim(String trimTexture) {
-        return Identifier.of(ArmoryMod.NAMESPACE, "armor/trim/" + trimTexture);
+        return new Identifier(ArmoryMod.NAMESPACE, "armor/trim/" + trimTexture);
     }
 }

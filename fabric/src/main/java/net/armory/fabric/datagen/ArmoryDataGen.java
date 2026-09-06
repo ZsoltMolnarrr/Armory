@@ -11,7 +11,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
-import net.minecraft.data.server.recipe.RecipeExporter;
+import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -35,6 +35,7 @@ import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 public class ArmoryDataGen implements DataGeneratorEntrypoint {
     @Override
@@ -49,6 +50,17 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         pack.addProvider(EquipmentSetGenerator::new);
         pack.addProvider(RecipeGenerator::new);
         pack.addProvider(SmithGen::new);
+    }
+
+    /// 1.20.1 / Fabric API 0.92: the datagen `WrapperLookup` is assembled from `BuiltinRegistries.REGISTRY_BUILDER`
+    /// plus whatever each entrypoint contributes here — Fabric's `DynamicRegistries.registerSynced` only feeds the
+    /// *runtime* `RegistryLoader`, not data generation. Without the spell registry `FabricTagProvider<Spell>` dies
+    /// with "Registry spell_engine:spell not found"; without the equipment-set registry the dynamic-registry
+    /// provider has nothing to write into.
+    @Override
+    public void buildRegistry(RegistryBuilder registryBuilder) {
+        RPGSeriesDataGen.buildRegistry(registryBuilder);
+        registryBuilder.addRegistry(EquipmentSetRegistry.KEY, context -> { });
     }
 
     private static List<Item> allArmorPieces() {
@@ -97,8 +109,8 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
 
             // Loot-filtering tags splitting the two crystal batches, so a boss can drop one batch each.
             // The upgrade template belongs in both, since either batch needs it to craft.
-            var epicArmorA = TagKey.of(RegistryKeys.ITEM, Identifier.of(ArmoryMod.NAMESPACE, "loot/epic_armor_a"));
-            var epicArmorB = TagKey.of(RegistryKeys.ITEM, Identifier.of(ArmoryMod.NAMESPACE, "loot/epic_armor_b"));
+            var epicArmorA = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmoryMod.NAMESPACE, "loot/epic_armor_a"));
+            var epicArmorB = TagKey.of(RegistryKeys.ITEM, new Identifier(ArmoryMod.NAMESPACE, "loot/epic_armor_b"));
             SmithingTemplates.ENTRIES.forEach(entry -> {
                 getOrCreateTagBuilder(epicArmorA).addOptional(entry.id());
                 getOrCreateTagBuilder(epicArmorB).addOptional(entry.id());
@@ -120,7 +132,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
             ArmorySpells.all.forEach(entry -> {
                 for (var category: entry.categories()) {
-                    var tagKey = TagKey.of(SpellRegistry.KEY, Identifier.of(ArmoryMod.NAMESPACE, category.toString().toLowerCase()));
+                    var tagKey = TagKey.of(SpellRegistry.KEY, new Identifier(ArmoryMod.NAMESPACE, category.toString().toLowerCase()));
                     var tag = getOrCreateTagBuilder(tagKey);
                     tag.addOptional(entry.id());
                 }
@@ -130,11 +142,13 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
 
     public static class LangGenerator extends FabricLanguageProvider {
         protected LangGenerator(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
-            super(dataOutput, "en_us", registryLookup);
+            // Fabric API 0.92's language provider is registry-independent; the future is accepted only so
+            // `pack.addProvider(LangGenerator::new)` keeps binding to the `RegistryDependentFactory` shape.
+            super(dataOutput, "en_us");
         }
 
         @Override
-        public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
+        public void generateTranslations(TranslationBuilder translationBuilder) {
             translationBuilder.add(Group.translationKey, "Armory");
 
             translationBuilder.add(SmithingIngredients.UpgradeCrystal.HINT_TRANSLATION_KEY, "Armor upgrade crystal");
@@ -263,13 +277,13 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
     }
 
     public static class RecipeGenerator extends FabricRecipeProvider {
-        public RecipeGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-            super(output, registriesFuture);
+        public RecipeGenerator(FabricDataOutput output) {
+            super(output);
         }
         @Override
-        public void generate(RecipeExporter recipeExporter) {
+        public void generate(Consumer<RecipeJsonProvider> exporter) {
             SmithingTemplates.ENTRIES.forEach(entry -> {
-                FabricRecipeProvider.offerSmithingTemplateCopyingRecipe(recipeExporter, entry.item().get(), Items.DIAMOND);
+                FabricRecipeProvider.offerSmithingTemplateCopyingRecipe(exporter, entry.item().get(), Items.DIAMOND);
             });
         }
     }
@@ -282,16 +296,16 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
 
         public record ArmorIdSet(String namespace, String name) {
             public Identifier headId() {
-                return Identifier.of(namespace, name + "_" + EquipmentSlot.HEAD.asString().toLowerCase());
+                return new Identifier(namespace, name + "_" + EquipmentSlot.HEAD.getName().toLowerCase());
             }
             public Identifier chestId() {
-                return Identifier.of(namespace, name + "_" + EquipmentSlot.CHEST.asString().toLowerCase());
+                return new Identifier(namespace, name + "_" + EquipmentSlot.CHEST.getName().toLowerCase());
             }
             public Identifier legsId() {
-                return Identifier.of(namespace, name + "_" + EquipmentSlot.LEGS.asString().toLowerCase());
+                return new Identifier(namespace, name + "_" + EquipmentSlot.LEGS.getName().toLowerCase());
             }
             public Identifier feetId() {
-                return Identifier.of(namespace, name + "_" + EquipmentSlot.FEET.asString().toLowerCase());
+                return new Identifier(namespace, name + "_" + EquipmentSlot.FEET.getName().toLowerCase());
             }
         }
 
@@ -435,7 +449,7 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
                                     resultId.toString(),
                                     upgrade.from.namespace()
                             );
-                            var id = Identifier.of(resultId.getNamespace(),
+                            var id = new Identifier(resultId.getNamespace(),
                                     "smithing_" + resultId.getPath() + "_" + baseId.getPath());
                             builder.entries.add(new Entry(id, recipe));
                         }

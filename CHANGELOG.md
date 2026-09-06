@@ -1,3 +1,7 @@
+# 1.5.2.001
+
+- Ported to Minecraft 1.20.1 (Fabric + Forge 47)
+
 # 1.5.2
 
 - Lightbringer Regalia 2-piece set bonus reduced from +10% to +5% attack damage, matching the other melee sets
