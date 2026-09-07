@@ -48,14 +48,14 @@ public class ArmoryMod {
                 .build();
         Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.GROUP);
 
-        SmithingTemplates.register();
-        SmithingIngredients.register();
-        ArmorSets.register(itemConfig.value.armor_sets);
-        itemConfig.save();
-
         // Smithing templates + ingredients into the Armory creative tab. Dispatched by SpellEngine on both
         // loaders (Fabric `ItemGroupEvents` / Forge `BuildCreativeModeTabContentsEvent`); the armor sets
         // are placed by SpellEngine's own `Armor.register(..., Group.KEY)`.
+        //
+        // ORDER MATTERS: on both loaders the group modifiers run in *registration* order, so this listener
+        // has to be installed BEFORE `ArmorSets.register(...)` installs SpellEngine's armor-set listeners —
+        // that is what puts the templates + crystals at the front of the tab, ahead of the armor sets.
+        // The lambda only reads the ENTRIES lists when the tab is built, long after `register()` filled them.
         PlatformEvents.onItemGroupModify(Group.KEY, (content, context) -> {
             for (var entry : SmithingTemplates.ENTRIES) {
                 content.add(entry.item().get());
@@ -64,6 +64,11 @@ public class ArmoryMod {
                 content.add(entry.item().get());
             }
         });
+
+        SmithingTemplates.register();
+        SmithingIngredients.register();
+        ArmorSets.register(itemConfig.value.armor_sets);
+        itemConfig.save();
     }
 
     public static void registerEffects() {
