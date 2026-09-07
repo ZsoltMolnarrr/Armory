@@ -1,0 +1,261 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "armory_rpgs:strider_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:strider_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:strider_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:strider_armor_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:riftstalker_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:riftstalker_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:riftstalker_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:riftstalker_armor_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:destroyer_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:destroyer_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:destroyer_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:destroyer_armor_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:deathmantle_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:deathmantle_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:deathmantle_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:deathmantle_armor_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:justicar_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:justicar_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:justicar_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:justicar_armor_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:onslaught_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:onslaught_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:onslaught_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:onslaught_armor_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:slayer_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:slayer_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:slayer_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:slayer_armor_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:lightbringer_armor_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:lightbringer_armor_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:lightbringer_armor_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:lightbringer_armor_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:astral_robe_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:astral_robe_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:astral_robe_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:astral_robe_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:scarlet_robe_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:scarlet_robe_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:scarlet_robe_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:scarlet_robe_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:glacier_robe_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:glacier_robe_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:glacier_robe_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:glacier_robe_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:avatar_robe_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:avatar_robe_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:avatar_robe_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:avatar_robe_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:tempest_robe_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:tempest_robe_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:tempest_robe_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:tempest_robe_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:smouldering_robe_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:smouldering_robe_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:smouldering_robe_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:smouldering_robe_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:rimeweave_robe_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:rimeweave_robe_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:rimeweave_robe_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:rimeweave_robe_feet",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:absolution_robe_head",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:absolution_robe_chest",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:absolution_robe_legs",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:absolution_robe_feet",
+      "required": false
+    }
+  ]
+}
