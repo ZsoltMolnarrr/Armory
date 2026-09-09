@@ -6,6 +6,7 @@ import net.armory_rpgs.spell.SetBonuses;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -606,5 +607,13 @@ public class ArmorSets {
 //                    +  "\"},{id:\"" + entry.armorSet().idStrings().get(0) +  "\"}]}");
 //        }
         Armor.register(configs, entries, Group.KEY);
+    }
+
+    /// Every armor piece keyed by the id it registers under, configured and with its creative-tab callbacks
+    /// installed. Creation only — nothing is written into the ITEM registry here, so a loader that registers
+    /// items itself (Forge) iterates this instead of calling {@link #register}.
+    /// **Must run inside the ITEM registration window.**
+    public static Map<Identifier, Item> itemsToRegister(Map<String, ArmorSetConfig> configs) {
+        return Armor.itemsToRegister(configs, entries, Group.KEY);
     }
 }

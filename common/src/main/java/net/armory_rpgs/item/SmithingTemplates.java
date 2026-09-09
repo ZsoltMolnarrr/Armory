@@ -2,6 +2,7 @@ package net.armory_rpgs.item;
 
 import com.google.common.base.Suppliers;
 import net.armory_rpgs.ArmoryMod;
+import net.minecraft.item.Item;
 import net.minecraft.item.SmithingTemplateItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -11,7 +12,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class SmithingTemplates {
@@ -107,10 +110,20 @@ public class SmithingTemplates {
     );
 
     public static void register() {
+        itemsToRegister().forEach((id, item) -> Registry.register(Registries.ITEM, id, item));
+    }
+
+    /// The template items keyed by the id they register under. Creation only — nothing is written into the
+    /// ITEM registry here, so a loader that registers items itself (Forge) iterates this instead of calling
+    /// {@link #register()}. **Must run inside the ITEM registration window.**
+    ///
+    /// Creative-tab placement is loader-neutral, dispatched by SpellEngine's
+    /// `PlatformEvents.onItemGroupModify` from `ArmoryMod.itemsToRegister()`.
+    public static Map<Identifier, Item> itemsToRegister() {
+        var items = new LinkedHashMap<Identifier, Item>();
         for (var entry : ENTRIES) {
-            Registry.register(Registries.ITEM, entry.id(), entry.item().get());
+            items.put(entry.id(), entry.item().get());
         }
-        // Creative-tab placement is loader-neutral, dispatched by SpellEngine's
-        // `PlatformEvents.onItemGroupModify` from `ArmoryMod.registerItems()`.
+        return items;
     }
 }
