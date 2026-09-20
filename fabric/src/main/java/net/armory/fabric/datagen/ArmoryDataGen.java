@@ -15,8 +15,10 @@ import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
@@ -283,9 +285,12 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
             return "Armory Smithing Template Copying Recipes";
         }
 
+        /// 26.3: the generator is fed two `BootstrapContext`s (recipes, advancements) instead of a `RecipeOutput`.
         @Override
-        protected net.minecraft.data.recipes.RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput exporter) {
-            return new net.minecraft.data.recipes.RecipeProvider(registries, exporter) {
+        protected net.minecraft.data.recipes.RecipeProvider createRecipeProvider(HolderLookup.Provider registries,
+                                                                                 BootstrapContext<Recipe<?>> recipeOutput,
+                                                                                 BootstrapContext<Advancement> advancementOutput) {
+            return new net.minecraft.data.recipes.RecipeProvider(recipeOutput, advancementOutput) {
                 @Override
                 public void buildRecipes() {
                     SmithingTemplates.ENTRIES.forEach(entry -> {

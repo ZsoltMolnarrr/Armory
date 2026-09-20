@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "armory_rpgs:epic_armor_upgrade"
+        "recipes": "armory_rpgs:epic_armor_upgrade"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
