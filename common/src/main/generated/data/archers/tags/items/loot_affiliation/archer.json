@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "armory_rpgs:vanquisher_upgrade_crystal",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:vanquisher_forgotten_upgrade_crystal",
+      "required": false
+    }
+  ]
+}
