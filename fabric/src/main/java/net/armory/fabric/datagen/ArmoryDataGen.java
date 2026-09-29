@@ -114,6 +114,29 @@ public class ArmoryDataGen implements DataGeneratorEntrypoint {
                 var tag = entry.name().contains("forgotten") ? epicArmorB : epicArmorA;
                 builder(tag).addOptional(itemKey(entry.id()));
             });
+
+            // Loot affiliation: upgrade crystals drop more often for the classes they apply to
+            // (extending the `<namespace>:loot_affiliation/<book>` tags of the class mods)
+            SmithingIngredients.ENTRIES.forEach(entry -> {
+                for (var fightClass: entry.classes()) {
+                    var tag = TagKey.create(Registries.ITEM, lootAffiliation(fightClass));
+                    builder(tag).addOptional(itemKey(entry.id()));
+                }
+            });
+        }
+
+        private static Identifier lootAffiliation(FightClass fightClass) {
+            var folder = "loot_affiliation/";
+            return switch (fightClass) {
+                case ARCANE_WIZARD -> Identifier.fromNamespaceAndPath("wizards", folder + "arcane");
+                case FIRE_WIZARD -> Identifier.fromNamespaceAndPath("wizards", folder + "fire");
+                case FROST_WIZARD -> Identifier.fromNamespaceAndPath("wizards", folder + "frost");
+                case PRIEST -> Identifier.fromNamespaceAndPath("paladins", folder + "priest");
+                case PALADIN -> Identifier.fromNamespaceAndPath("paladins", folder + "paladin");
+                case ROGUE -> Identifier.fromNamespaceAndPath("rogues", folder + "rogue");
+                case WARRIOR -> Identifier.fromNamespaceAndPath("rogues", folder + "warrior");
+                case ARCHER -> Identifier.fromNamespaceAndPath("archers", folder + "archer");
+            };
         }
 
         /// Tag builders take a `RegistryKey` since 1.21.6, not an `Identifier`.

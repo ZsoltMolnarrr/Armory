@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "armory_rpgs:champion_upgrade_crystal",
+      "required": false
+    },
+    {
+      "id": "armory_rpgs:champion_forgotten_upgrade_crystal",
+      "required": false
+    }
+  ]
+}

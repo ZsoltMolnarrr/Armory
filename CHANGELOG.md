@@ -1,3 +1,7 @@
+# 1.5.3
+
+- Upgrade crystals are now affiliated loot: they drop more often for players carrying a spell book of a class they apply to
+
 # 1.5.2
 
 - Updated for Minecraft 26.2
